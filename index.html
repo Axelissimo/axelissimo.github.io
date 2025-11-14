@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmaa sivu logolla, signetillä ja EU-merkillä</title>
+    <title>Harmaa sivu kaikilla logoilla</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,23 +48,42 @@
             z-index: 10;        
         }
 
-        /* --- LISÄTTY UUSI LUOKKA EU-MERKKIÄ VARTEN TÄHÄN --- */
-        .eu-badge {
-            position: absolute; /* Absoluuttinen asemointi */
-            top: 20px;          /* Sama ylämarginaali kuin signetissä */
-            right: 20px;        /* 20px oikeasta reunasta */
-            width: 120px;       /* <-- Hieman suurempi kuin signet (80px), voit säätää */
-            height: auto;       /* Säilyttää kuvasuhteen */
-            z-index: 10;        
+        /* --- LISÄTTY UUSI SÄILIÖ OIKEALLE YLÄKULMALLE --- */
+        .top-right-badges {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;      /* Asettaa merkit vierekkäin */
+            align-items: center;/* Keskittää ne pystysuunnassa toisiinsa nähden */
+            gap: 15px;          /* Lisää ilmavälin merkkien väliin */
+            z-index: 10;
         }
-        /* --- LISÄYKSEN LOPPU --- */
+
+        /* --- MUOKATTU .EU-BADGE SOPIVAAN SÄILIÖÖN --- */
+        .eu-badge {
+            /* Poistettu position, top, right, z-index */
+            height: 90px;       /* Asetetaan kiinteä korkeus */
+            width: auto;        /* Leveys skaalautuu automaattisesti */
+        }
+        
+        /* --- LISÄTTY UUSI LUOKKA NATO-MERKILLE --- */
+        .nato-badge {
+            height: 90px;       /* Sama korkeus kuin EU-merkissä */
+            width: auto;        /* Leveys skaalautuu automaattisesti */
+        }
+        /* --- LISÄYSTEN LOPPU --- */
 
     </style>
 </head>
 <body>
     
     <img src="signet.png" alt="Signet" class="signet"> 
-    <img src="badge-eu.png" alt="EU VAT" class="eu-badge"> <img src="logo-main.png" alt="Logosi" class="logo">
+
+    <div class="top-right-badges">
+        <img src="badge-nato.png" alt="NATO Badge" class="nato-badge">
+        <img src="badge-eu.png" alt="EU VAT" class="eu-badge">
+    </div>
+    <img src="logo-main.png" alt="Logosi" class="logo">
     
     <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
     
