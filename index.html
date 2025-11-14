@@ -21,7 +21,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center; 
-            align: center;     
+            align-items: center; /* <-- KORJATTU TÄMÄ (oli 'align: center;') */
         }
 
         .logo {
@@ -33,7 +33,7 @@
 
         .email-address {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600; /* Tämä on Semi-bold */
+            font-weight: 600; 
             color: black;
             text-decoration: none; 
             margin-top: 20px; 
@@ -68,34 +68,32 @@
             width: auto;        
         }
 
-        /* --- LISÄTTY UUDET LUOKAT ALATUNNISTEELLE TÄHÄN --- */
         .footer-left {
             position: absolute;
-            bottom: 20px; /* Etäisyys alareunasta */
-            left: 20px;   /* Etäisyys vasemmasta reunasta */
+            bottom: 20px; 
+            left: 20px;   
             
             font-family: 'Montserrat', sans-serif;
-            font-weight: 400; /* Normaali paksuus */
-            font-size: 11px;  /* Pieni fonttikoko */
-            color: #ffffff; /* Valkoinen teksti näkyy tummalla pohjalla */
+            font-weight: 400; 
+            font-size: 11px;  
+            color: #000000; /* <-- MUUTETTU MUSTAKSI */
             z-index: 10;
         }
 
         .footer-right {
             position: absolute;
-            bottom: 20px; /* Etäisyys alareunasta */
-            right: 20px;  /* Etäisyys oikeasta reunasta */
+            bottom: 20px; 
+            right: 20px;  
             
             font-family: 'Montserrat', sans-serif;
-            font-weight: 400; /* Normaali paksuus */
-            font-size: 11px;  /* Pieni fonttikoko */
-            color: #ffffff; /* Valkoinen teksti */
+            font-weight: 400; 
+            font-size: 11px;  
+            color: #000000; /* <-- MUUTETTU MUSTAKSI */
             
-            text-align: right; /* Tasaus oikeaan reunaan */
-            max-width: 350px;  /* Rajoitetaan leveyttä, jotta teksti rivittyy nätisti */
+            text-align: right; 
+            max-width: 350px;  
             z-index: 10;
         }
-        /* --- LISÄYSTEN LOPPU --- */
 
     </style>
 </head>
