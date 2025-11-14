@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simplified vector signet derived from your signet image -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Industria Nordica signet">
+  <title>Industria Nordica signet</title>
+  <!-- black circular background -->
+  <circle cx="100" cy="100" r="100" fill="#000000"/>
+  <!-- left wing stripes -->
+  <rect x="18" y="76" width="72" height="10" fill="#ffffff"/>
+  <rect x="18" y="100" width="58" height="10" fill="#ffffff"/>
+  <rect x="18" y="124" width="44" height="10" fill="#ffffff"/>
+  <!-- central arrow shaft -->
+  <rect x="96" y="36" width="8" height="128" fill="#ffffff"/>
+  <!-- arrow head -->
+  <polygon points="100,16 116,44 84,44" fill="#ffffff"/>
+  <!-- stylized "N" to the right of the shaft -->
+  <path d="M112 160 L112 56 L148 140 L148 56 L166 56 L166 160 L150 160 L150 92 L114 56" fill="#ffffff"/>
+</svg>
