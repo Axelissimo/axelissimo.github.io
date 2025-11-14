@@ -40,17 +40,14 @@
             margin-top: 20px; 
         }
 
-        /* --- MUUTETUT SÄÄNNÖT ALKAVAT TÄSTÄ --- */
         .signet {
             position: absolute; 
             z-index: 10;        
             
-            /* Muutettu px -> vw skaalautuvuutta varten */
-            top: 1.5vw;         /* Oli 20px */
-            left: 1.5vw;        /* Oli 20px */
-            width: 6.5vw;       /* Oli 80px */
+            top: 1.5vw;         
+            left: 1.5vw;        
+            width: 6.5vw;       
             
-            /* Lisätty maksimikoko, jotta ne eivät kasva liian suuriksi */
             max-width: 80px; 
             
             height: auto;       
@@ -62,32 +59,22 @@
             display: flex;      
             align-items: center;
             
-            /* Muutettu px -> vw skaalautuvuutta varten */
-            top: 1.5vw;         /* Oli 20px */
-            right: 1.5vw;       /* Oli 20px */
-            gap: 1vw;           /* Oli 15px */
+            top: 1.5vw;         
+            right: 1.5vw;       
+            gap: 1vw;           
         }
 
         .eu-badge {
-            /* Muutettu px -> vw skaalautuvuutta varten */
-            height: 9vw;        /* Oli 110px */
-            
-            /* Lisätty maksimikoko */
+            height: 9vw;        
             max-height: 110px;
-            
             width: auto;        
         }
         
         .nato-badge {
-            /* Muutettu px -> vw skaalautuvuutta varten */
-            height: 9vw;        /* Oli 110px */
-
-            /* Lisätty maksimikoko */
+            height: 9vw;        
             max-height: 110px;
-            
             width: auto;        
         }
-        /* --- MUUTETUT SÄÄNNÖT LOPPUVAT TÄHÄN --- */
 
 
         .footer-left {
@@ -118,7 +105,7 @@
         }
 
 
-        /* --- MOBIILIVERSIO (EI MUUTOKSIA) --- */
+        /* --- MOBIILIVERSIO --- */
         
         @media (max-width: 768px) {
             html, body {
@@ -180,7 +167,11 @@
     <img src="signet.png" alt="Signet" class="signet"> 
 
     <div class="top-right-badges">
-        <img src="badge-nato.png" alt="NATO Badge" class="nato-badge">
+        
+        <a href="https://eportal.nspa.nato.int/Codification/CageTool/cage-view/a0q4g" target="_blank" rel="noopener noreferrer">
+            <img src="badge-nato.png" alt="NATO Badge" class="nato-badge">
+        </a>
+        
         <img src="badge-eu.png" alt="EU VAT" class="eu-badge">
     </div>
     
