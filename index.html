@@ -97,37 +97,48 @@
         }
 
 
-        /* --- RESPONSIIVISUUSOSIO (PALAUTETTU EDELLISEEN) --- */
+        /* --- RESPONSIIVISUUSOSIO ON MUOKATTU TÄSTÄ ALKAEN --- */
         
         @media (max-width: 768px) {
             html, body {
                 height: auto; 
                 min-height: 100vh;
                 justify-content: flex-start; 
-                /* Lisätty yläreunaan tilaa, jotta sisältö alkaa kulma-logojen alapuolelta */
                 padding-top: 100px; 
                 padding-bottom: 40px; 
                 box-sizing: border-box; 
             }
 
-            /* 1. Pienennetään yläkulmat ja siirretään ne lähemmäs reunaa */
+            /* 1. Piilotetaan Signet mobiilissa */
             .signet {
-                top: 10px;
-                left: 10px;
-                width: 50px; /* Pienennetty (oli 80px) */
+                display: none;
             }
 
+            /* 2. Neutralisoidaan vanha säiliö */
             .top-right-badges {
-                top: 10px;
-                right: 10px;
-                gap: 8px; /* Pienennetty (oli 15px) */
-            }
-
-            .eu-badge, .nato-badge { 
-                height: 70px; /* Pienennetty (oli 110px) */
+                position: static;
+                gap: 0;
             }
             
-            /* 2. Keskisisältö (logo ja email) pysyy ennallaan */
+            /* 3. Asetetaan NATO vasempaan yläkulmaan */
+            .nato-badge { 
+                position: absolute; /* Uusi sääntö */
+                top: 10px;
+                left: 10px;
+                height: 70px; /* Pienennetty koko */
+                width: auto;
+            }
+                
+            /* 4. Asetetaan EU oikeaan yläkulmaan */
+            .eu-badge { 
+                position: absolute; /* Uusi sääntö */
+                top: 10px;
+                right: 10px;
+                height: 70px; /* Pienennetty koko */
+                width: auto;
+            }
+            
+            /* 5. Keskisisältö (logo ja email) pysyy ennallaan */
             .logo {
                 margin-bottom: 20px;
             }
@@ -135,14 +146,14 @@
                 margin-bottom: 30px;
             }
 
-            /* 3. Muutetaan ALATUNNISTEET staattisiksi, jotta ne pinoutuvat sivun loppuun */
+            /* 6. Muutetaan ALATUNNISTEET staattisiksi (kuten aiemmin) */
             .footer-left, 
             .footer-right {
-                position: static;      /* Vain nämä muuttuvat staattisiksi */
+                position: static;      
                 width: auto;           
                 max-width: 90%;        
-                margin-bottom: 20px;   /* Väliä elementtien väliin */
-                text-align: center;    /* Keskitetään teksti mobiilissa */
+                margin-bottom: 20px;   
+                text-align: center;    
             }
         }
         /* --- Responsiivisuusosion loppu --- */
