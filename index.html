@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmaa sivu logolla ja signetillä</title>
+    <title>Harmaa sivu logolla, signetillä ja EU-merkillä</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,11 +47,24 @@
             height: auto;       
             z-index: 10;        
         }
+
+        /* --- LISÄTTY UUSI LUOKKA EU-MERKKIÄ VARTEN TÄHÄN --- */
+        .eu-badge {
+            position: absolute; /* Absoluuttinen asemointi */
+            top: 20px;          /* Sama ylämarginaali kuin signetissä */
+            right: 20px;        /* 20px oikeasta reunasta */
+            width: 120px;       /* <-- Hieman suurempi kuin signet (80px), voit säätää */
+            height: auto;       /* Säilyttää kuvasuhteen */
+            z-index: 10;        
+        }
+        /* --- LISÄYKSEN LOPPU --- */
+
     </style>
 </head>
 <body>
     
-    <img src="signet.png" alt="Signet" class="signet"> <img src="logo-main.png" alt="Logosi" class="logo">
+    <img src="signet.png" alt="Signet" class="signet"> 
+    <img src="badge-eu.png" alt="EU VAT" class="eu-badge"> <img src="logo-main.png" alt="Logosi" class="logo">
     
     <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
     
