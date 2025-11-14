@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmaa sivu (Korjattu)</title>
+    <title>Harmaa sivu logolla</title>
     
     <style>
         html, body {
-            /* Nollataan oletusmarginaalit */
             margin: 0;
             padding: 0;
-            
-            /* Varmistetaan, että sivu täyttää koko korkeuden */
             height: 100%;
-            
-            /* Asetetaan taustaväriksi pyydetty harmaa */
             background-color: rgb(50, 50, 50);
+            
+            /* Keskittää sisällön */
+            display: flex;
+            justify-content: center; /* Vaakakeskitys */
+            align-items: center;     /* Pystysuuntainen keskitys */
+        }
+
+        .logo {
+            max-width: 80%; 
+            max-height: 80%;
+            height: auto;   
+            display: block; 
         }
     </style>
 </head>
 <body>
-    </body>
+    <img src="logo-main.png" alt="Logosi" class="logo">
+</body>
 </html>
