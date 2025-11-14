@@ -1,90 +1,11 @@
-/* Yleiset nollaukset */
-* {
+html, body {
+    /* Nollataan oletusmarginaalit ja -täytteet */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: rgb(50, 50, 50); /* Tummanharmaa tausta */
-    color: white; /* Tekstin oletusväri, vaikka useimmat tekstit ovatkin tummia */
-    font-family: Arial, sans-serif;
-    display: flex; /* Käytetään flexboxia asettelun hallintaan */
-    flex-direction: column; /* Jotta elementit (header, main, footer) ovat allekkain */
-    min-height: 100vh; /* Sivu vähintään näytön korkuinen */
-    position: relative; /* Jotta absoluuttisesti sijoitetut elementit toimivat suhteessa bodyyn */
-}
-
-/* Yläosan elementit */
-.header {
-    display: flex;
-    justify-content: space-between; /* Toinen vasemmalle, toinen oikealle */
-    align-items: flex-start; /* Elementit yläreunaan */
-    padding: 20px 40px; /* Sisäylitys reunoille */
-    width: 100%;
-    position: absolute; /* Kiinnitetään yläreunaan */
-    top: 0;
-    left: 0;
-}
-
-.header-logo {
-    height: 30px; /* Pienen logon koko */
-    filter: brightness(0.6); /* Tummennetaan logoa, jotta se vastaa kuvaa */
-}
-
-.header-badges {
-    display: flex;
-    gap: 10px; /* Väliä merkkien välille */
-}
-
-.small-badge {
-    height: 40px; /* Merkkien koko */
-    filter: brightness(0.6); /* Tummennetaan merkkejä kuvan mukaisesti */
-}
-
-/* Keski-osan sisältö */
-.main-content {
-    flex-grow: 1; /* Ottaa kaiken jäljellä olevan tilan headerin ja footerin välissä */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Keskittää pystysuunnassa */
-    align-items: center; /* Keskittää vaakasuunnassa */
-    text-align: center;
-    padding: 20px;
-}
-
-.main-logo {
-    max-width: 60%; /* Logon maksimileveys */
-    height: auto;
-    filter: brightness(0.6); /* Tummennetaan logoa kuvan mukaisesti */
-    margin-bottom: 20px; /* Väliä logon ja sähköpostin välille */
-}
-
-.email-address {
-    color: rgb(150, 150, 150); /* Tumma harmaa teksti, vastaa kuvaa */
-    font-size: 1.2em;
-    text-decoration: none; /* Poista alleviivaus jos teet linkiksi */
-}
-
-/* Ala-osan elementit */
-.footer {
-    display: flex;
-    justify-content: space-between; /* Toinen vasemmalle, toinen oikealle */
-    align-items: flex-end; /* Tekstit alareunaan */
-    padding: 20px 40px;
-    width: 100%;
-    position: absolute; /* Kiinnitetään alareunaan */
-    bottom: 0;
-    left: 0;
-    font-size: 0.8em; /* Pienempi fonttikoko */
-    color: rgb(100, 100, 100); /* Entistä tummempi harmaa teksti */
-}
-
-.copyright, .disclaimer {
-    max-width: 45%; /* Tekstit eivät mene liian pitkälle */
-    text-align: left; /* Oikea teksti on oikeassa reunassa */
-}
-
-.disclaimer {
-    text-align: right;
+    
+    /* Varmistetaan, että sivu täyttää koko korkeuden */
+    height: 100%;
+    
+    /* Asetetaan taustaväriksi pyydetty harmaa */
+    background-color: rgb(50, 50, 50);
 }
