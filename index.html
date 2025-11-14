@@ -31,13 +31,11 @@
             height: auto;   
             display: block; 
         }
-        
-        /* Poistettu .logo-inverted -luokka */
 
         .email-address {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600; 
-            color: #000000; /* Musta */
+            color: #000000; 
             text-decoration: none; 
             margin-top: 20px; 
         }
@@ -79,7 +77,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 400; 
             font-size: 11px;  
-            color: #000000; /* Musta */
+            color: #000000; 
             z-index: 10;
         }
 
@@ -91,7 +89,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 400; 
             font-size: 11px;  
-            color: #000000; /* Musta */
+            color: #000000; 
             
             text-align: right; 
             max-width: 350px;  
@@ -99,52 +97,52 @@
         }
 
 
-        /* --- Responsiivisuusosio --- */
+        /* --- RESPONSIIVISUUSOSIO ON MUOKATTU TÄSTÄ ALKAEN --- */
         
         @media (max-width: 768px) {
             html, body {
                 height: auto; 
                 min-height: 100vh;
                 justify-content: flex-start; 
-                padding: 40px 0; 
+                /* Lisätty yläreunaan tilaa, jotta sisältö alkaa kulma-logojen alapuolelta */
+                padding-top: 100px; 
+                padding-bottom: 40px; 
                 box-sizing: border-box; 
             }
 
-            .signet, 
-            .top-right-badges, 
-            .footer-left, 
-            .footer-right {
-                position: static;      
-                width: auto;           
-                max-width: 90%;        
-                margin-bottom: 30px;   
-            }
-
-            .logo {
-                margin-bottom: 20px;
-                order: 0; 
-            }
-            
-            .email-address {
-                margin-bottom: 30px;
-                order: 0; 
+            /* 1. Pienennetään yläkulmat ja siirretään ne lähemmäs reunaa */
+            .signet {
+                top: 10px;
+                left: 10px;
+                width: 50px; /* Pienennetty (oli 80px) */
             }
 
             .top-right-badges {
-                flex-direction: column; 
-                gap: 30px;              
+                top: 10px;
+                right: 10px;
+                gap: 8px; /* Pienennetty (oli 15px) */
             }
 
-            .signet {
-                 width: 80px; 
-            }
             .eu-badge, .nato-badge { 
-                height: 90px; 
+                height: 70px; /* Pienennetty (oli 110px) */
+            }
+            
+            /* 2. Keskisisältö (logo ja email) pysyy ennallaan (ne keskitetään bodyn flex-säännöillä) */
+            .logo {
+                margin-bottom: 20px;
+            }
+            .email-address {
+                margin-bottom: 30px;
             }
 
-            .footer-left, .footer-right {
-                text-align: center;
-                max-width: 90%; 
+            /* 3. Muutetaan ALATUNNISTEET staattisiksi, jotta ne pinoutuvat sivun loppuun */
+            .footer-left, 
+            .footer-right {
+                position: static;      /* Vain nämä muuttuvat staattisiksi */
+                width: auto;           
+                max-width: 90%;        
+                margin-bottom: 20px;   /* Väliä elementtien väliin */
+                text-align: center;    /* Keskitetään teksti mobiilissa */
             }
         }
         /* --- Responsiivisuusosion loppu --- */
