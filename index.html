@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industria Nordica</title>
+    <title>Harmaa sivu (Skaalautuva)</title>
     
     <link rel="icon" type="image/png" href="signet.png">
     
@@ -108,9 +108,10 @@
         }
 
 
-        /* --- MOBIILIVERSIO (MUOKATTU) --- */
+        /* --- MOBIILIVERSIO (MUOKATTU TÄTÄ RIVIÄ) --- */
         
-        @media (max-width: 768px) {
+        /* Aktivoituu, jos leveys on pieni TAI jos korkeus on pieni (landscape) */
+        @media (max-width: 768px), (max-height: 500px) {
             html, body {
                 height: auto; 
                 min-height: 100vh;
@@ -159,8 +160,6 @@
                 max-width: 90%;        
                 margin-bottom: 20px;   
                 text-align: center;
-                
-                /* LISÄTTY NÄMÄ SÄÄNNÖT TEKEMÄÄN RIVITYKSESTÄ VARMEMMAN */
                 overflow-wrap: break-word;
                 word-break: break-word;
             }
