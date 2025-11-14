@@ -97,38 +97,37 @@
         }
 
 
-        /* --- RESPONSIIVISUUSOSIO ON MUOKATTU TÄSTÄ ALKAEN --- */
+        /* --- RESPONSIIVISUUSOSIO (PALAUTETTU EDELLISEEN) --- */
         
         @media (max-width: 768px) {
             html, body {
                 height: auto; 
                 min-height: 100vh;
                 justify-content: flex-start; 
-                
-                /* Varmistetaan, että keskisisällölle on tilaa ylä- ja alareunan elementtien välissä */
-                padding-top: 100px;  /* Tilaa ylälogoille */
-                padding-bottom: 100px; /* Tilaa alateksteille */
+                /* Lisätty yläreunaan tilaa, jotta sisältö alkaa kulma-logojen alapuolelta */
+                padding-top: 100px; 
+                padding-bottom: 40px; 
                 box-sizing: border-box; 
             }
 
-            /* 1. Yläkulmat (kuten pyysit) */
+            /* 1. Pienennetään yläkulmat ja siirretään ne lähemmäs reunaa */
             .signet {
                 top: 10px;
                 left: 10px;
-                width: 50px; /* Pienennetty */
+                width: 50px; /* Pienennetty (oli 80px) */
             }
 
             .top-right-badges {
                 top: 10px;
                 right: 10px;
-                gap: 8px; /* Pienempi väli */
+                gap: 8px; /* Pienennetty (oli 15px) */
             }
 
             .eu-badge, .nato-badge { 
-                height: 70px; /* Pienennetty */
+                height: 70px; /* Pienennetty (oli 110px) */
             }
             
-            /* 2. Keskiosa (kuten pyysit) */
+            /* 2. Keskisisältö (logo ja email) pysyy ennallaan */
             .logo {
                 margin-bottom: 20px;
             }
@@ -136,19 +135,14 @@
                 margin-bottom: 30px;
             }
 
-            /* 3. Alareuna (kuten pyysit) */
-            .footer-left {
-                bottom: 10px; /* Lähemmäs reunaa */
-                left: 10px;
-                font-size: 9px;  /* Pienempi fontti */
-                max-width: 45%;  /* Estää tekstien menemisen päällekkäin */
-            }
-            
+            /* 3. Muutetaan ALATUNNISTEET staattisiksi, jotta ne pinoutuvat sivun loppuun */
+            .footer-left, 
             .footer-right {
-                bottom: 10px; /* Lähemmäs reunaa */
-                right: 10px;
-                font-size: 9px;  /* Pienempi fontti */
-                max-width: 45%;  /* Estää tekstien menemisen päällekkäin */
+                position: static;      /* Vain nämä muuttuvat staattisiksi */
+                width: auto;           
+                max-width: 90%;        
+                margin-bottom: 20px;   /* Väliä elementtien väliin */
+                text-align: center;    /* Keskitetään teksti mobiilissa */
             }
         }
         /* --- Responsiivisuusosion loppu --- */
