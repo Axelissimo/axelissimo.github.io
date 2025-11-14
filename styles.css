@@ -8,6 +8,18 @@
   font-family: "Helvetica Neue", Arial, system-ui, -apple-system;
 }
 
+/* visually hidden helper for accessibility */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{
@@ -79,8 +91,9 @@ body{
 
 /* Email link */
 .contact{ margin-top:28px; text-align:center; }
+/* improved contrast: use light text on dark button */
 .email{
-  color: #111;
+  color: #fff;
   background: var(--email-bg);
   padding: 12px 20px;
   border-radius: 10px;
