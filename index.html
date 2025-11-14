@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmaa sivu (Responsiivinen)</title>
+    <title>Harmaa sivu (Skaalautuva)</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,34 +40,55 @@
             margin-top: 20px; 
         }
 
+        /* --- MUUTETUT SÄÄNNÖT ALKAVAT TÄSTÄ --- */
         .signet {
             position: absolute; 
-            top: 20px;          
-            left: 20px;         
-            width: 80px;        
-            height: auto;       
             z-index: 10;        
+            
+            /* Muutettu px -> vw skaalautuvuutta varten */
+            top: 1.5vw;         /* Oli 20px */
+            left: 1.5vw;        /* Oli 20px */
+            width: 6.5vw;       /* Oli 80px */
+            
+            /* Lisätty maksimikoko, jotta ne eivät kasva liian suuriksi */
+            max-width: 80px; 
+            
+            height: auto;       
         }
 
         .top-right-badges {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            z-index: 10;
             display: flex;      
             align-items: center;
-            gap: 15px;          
-            z-index: 10;
+            
+            /* Muutettu px -> vw skaalautuvuutta varten */
+            top: 1.5vw;         /* Oli 20px */
+            right: 1.5vw;       /* Oli 20px */
+            gap: 1vw;           /* Oli 15px */
         }
 
         .eu-badge {
-            height: 110px;      
+            /* Muutettu px -> vw skaalautuvuutta varten */
+            height: 9vw;        /* Oli 110px */
+            
+            /* Lisätty maksimikoko */
+            max-height: 110px;
+            
             width: auto;        
         }
         
         .nato-badge {
-            height: 110px;      
+            /* Muutettu px -> vw skaalautuvuutta varten */
+            height: 9vw;        /* Oli 110px */
+
+            /* Lisätty maksimikoko */
+            max-height: 110px;
+            
             width: auto;        
         }
+        /* --- MUUTETUT SÄÄNNÖT LOPPUVAT TÄHÄN --- */
+
 
         .footer-left {
             position: absolute;
@@ -97,7 +118,7 @@
         }
 
 
-        /* --- RESPONSIIVISUUSOSIO ON MUOKATTU TÄSTÄ ALKAEN --- */
+        /* --- MOBIILIVERSIO (EI MUUTOKSIA) --- */
         
         @media (max-width: 768px) {
             html, body {
@@ -109,36 +130,31 @@
                 box-sizing: border-box; 
             }
 
-            /* 1. Piilotetaan Signet mobiilissa */
             .signet {
                 display: none;
             }
 
-            /* 2. Neutralisoidaan vanha säiliö */
             .top-right-badges {
                 position: static;
                 gap: 0;
             }
             
-            /* 3. Asetetaan NATO vasempaan yläkulmaan */
             .nato-badge { 
-                position: absolute; /* Uusi sääntö */
+                position: absolute;
                 top: 10px;
                 left: 10px;
-                height: 70px; /* Pienennetty koko */
+                height: 70px;
                 width: auto;
             }
                 
-            /* 4. Asetetaan EU oikeaan yläkulmaan */
             .eu-badge { 
-                position: absolute; /* Uusi sääntö */
+                position: absolute;
                 top: 10px;
                 right: 10px;
-                height: 70px; /* Pienennetty koko */
+                height: 70px;
                 width: auto;
             }
             
-            /* 5. Keskisisältö (logo ja email) pysyy ennallaan */
             .logo {
                 margin-bottom: 20px;
             }
@@ -146,7 +162,6 @@
                 margin-bottom: 30px;
             }
 
-            /* 6. Muutetaan ALATUNNISTEET staattisiksi (kuten aiemmin) */
             .footer-left, 
             .footer-right {
                 position: static;      
