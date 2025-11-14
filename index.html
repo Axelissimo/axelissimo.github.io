@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harmaa sivu logolla</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    
     <style>
         html, body {
             margin: 0;
@@ -12,10 +16,11 @@
             height: 100%;
             background-color: rgb(50, 50, 50);
             
-            /* Keskittää sisällön */
+            /* Keskittää sisällön ja pinoaa elementit pystysuoraan */
             display: flex;
-            justify-content: center; /* Vaakakeskitys */
-            align-items: center;     /* Pystysuuntainen keskitys */
+            flex-direction: column;  /* <-- MUUTETTU: Lisätty tämä rivi */
+            justify-content: center; /* Pystysuuntainen keskitys */
+            align-items: center;     /* Vaakakeskitys */
         }
 
         .logo {
@@ -24,9 +29,24 @@
             height: auto;   
             display: block; 
         }
+
+        /* --- LISÄTTY UUSI LUOKKA TÄHÄN --- */
+        .email-address {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600; /* Semi-bold */
+            color: black;
+            text-decoration: none; /* Poistaa linkin alleviivauksen */
+            margin-top: 20px; /* Lisää ilmaa logon ja tekstin väliin */
+        }
+        /* --- LISÄYKSEN LOPPU --- */
+
     </style>
 </head>
 <body>
+    
     <img src="logo-main.png" alt="Logosi" class="logo">
+    
+    <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
+    
 </body>
 </html>
