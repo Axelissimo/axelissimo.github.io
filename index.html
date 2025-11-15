@@ -73,7 +73,7 @@
             position: absolute;
             z-index: 10;
             display: flex;      
-            align-items: flex-start; /* <-- MUUTETTU TÄMÄ (oli 'center') */
+            align-items: flex-start; /* Tasattu yläreunaan */
             
             top: 1.5vw;         
             right: 1.5vw;       
@@ -82,7 +82,7 @@
 
         .eu-badge {
             height: 9vw;        
-            max-height: 108px;
+            max-height: 110px;
             width: auto;        
         }
         
@@ -121,14 +121,14 @@
         }
 
 
-        /* --- MOBIILIVERSIO --- */
+        /* --- MOBIILIVERSIO (MUOKATTU) --- */
         
         @media (max-width: 768px), (max-height: 500px) {
             html, body {
                 height: auto; 
                 min-height: 100vh;
                 justify-content: flex-start; 
-                padding-top: 100px; 
+                padding-top: 80px; /* Pienennetty yläreunaa, koska liput ovat pienempiä */
                 padding-bottom: 40px; 
                 box-sizing: border-box; 
             }
@@ -146,7 +146,7 @@
                 position: absolute;
                 top: 5px; 
                 left: 10px;
-                height: 70px;
+                height: 50px; /* <-- MUUTETTU (oli 70px) */
                 width: auto;
             }
                 
@@ -154,7 +154,7 @@
                 position: absolute;
                 top: 5px; 
                 right: 10px;
-                height: 70px;
+                height: 50px; /* <-- MUUTETTU (oli 70px) */
                 width: auto;
             }
             
