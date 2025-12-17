@@ -66,8 +66,7 @@
         /* 1. SIGNET (LOGO) */
         .signet-btn {
             position: absolute; 
-            /* KORJATTU: Korkeampi z-index kuin valikolla (joka on 1200) */
-            z-index: 1500; 
+            z-index: 2001; 
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -80,7 +79,7 @@
         /* 2. HAMBURGER MENU */
         .hamburger-icon {
             position: absolute;
-            z-index: 1100;
+            z-index: 2000;
             left: 1.5vw; 
             
             /* Sijoitus logon alapuolelle */
@@ -146,7 +145,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1200; 
+            z-index: 1500;
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -174,7 +173,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 1150;
+            z-index: 1400;
             display: none;
         }
         .overlay.active { display: block; }
@@ -183,7 +182,11 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            padding-top: 100px; 
+            
+            /* KORJATTU DESKTOP PADDING: 100px -> 180px */
+            /* Tämä varmistaa, että teksti alkaa selvästi hampurilaisikonin alapuolelta */
+            padding-top: 180px; 
+            
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -201,11 +204,11 @@
 
         .shop-layout { display: flex; gap: 40px; }
         
-        /* KORJATTU: Sidebarin yläosaan tilaa, jotta hampurilainen ei mene tekstin päälle */
         .sidebar { 
             width: 220px; 
             flex-shrink: 0; 
-            padding-top: 50px; /* Tyhjää tilaa ikonille */
+            /* Poistettu ylimääräinen sidebar-padding desktopilta, koska koko viewissä on nyt tilaa */
+            padding-top: 0; 
         }
         
         .filter-group { margin-bottom: 30px; }
@@ -254,13 +257,10 @@
         @media (max-width: 768px), (max-height: 500px) {
             html, body { height: auto; min-height: 100vh; box-sizing: border-box; }
             
-            /* Lisätty hieman enemmän tilaa mobiilin kauppanäkymään */
-            #shop-view { padding-top: 130px; padding-left: 20px; padding-right: 20px; }
+            /* Mobiilissa padding 160px on edelleen hyvä */
+            #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
-            /* Logo: Kiinteä sijainti vasen yläkulma */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
-            
-            /* Hampurilainen: Suoraan logon alapuolella, sama vasen linjaus */
             .hamburger-icon { position: fixed; top: 75px; left: 15px; }
 
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
@@ -274,8 +274,6 @@
             .footer-left { margin-top: 40px; }
 
             .shop-layout { flex-direction: column; }
-            
-            /* Mobiilissa sidebarin padding voi olla pienempi, koska koko viewissä on jo padding-top */
             .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; padding-top: 0; }
         }
     </style>
@@ -366,23 +364,19 @@
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
                 filter_material: "Filter by Material",
                 filter_operation: "Filter by Operation",
-                
                 iso_p: "Steel (ISO P)",
                 iso_m: "Stainless (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
                 iso_h: "Hardened (ISO H)",
                 iso_s: "Titanium / Superalloys (ISO S)",
                 iso_n: "Aluminum (ISO N)",
-                
                 op_roughing: "Roughing",
                 op_medium: "Medium / General",
                 op_finishing: "Finishing",
                 op_interrupted: "Interrupted Cut",
-                
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
-
                 cat_turning: "Turning",
                 cat_milling: "Milling",
                 cat_solid: "Solid Carbide",
@@ -391,7 +385,6 @@
                 cat_titanium: "Titanium & Superalloys",
                 cat_aluminum: "Aluminum",
                 cat_deephole: "Deep Hole Drilling",
-                
                 type_neg: "Negative Inserts",
                 type_pos: "Positive Inserts",
                 type_part: "Parting & Grooving",
@@ -403,7 +396,6 @@
                 type_hard: "Hard Part Turning",
                 type_aero: "Aerospace Turning",
                 type_troch: "Trochoidal Milling",
-                
                 desc_cnmg: "Best Seller for General Purpose.",
                 desc_wnmg: "Economy Choice. 6 cutting edges.",
                 desc_dnmg: "Excellent for Profiling.",
@@ -661,126 +653,4 @@
 
         function openShop(brand) {
             currentBrand = brand;
-            landingView.classList.add('hidden');
-            shopView.classList.add('active');
-            
-            checkboxes.forEach(cb => cb.checked = false);
-
-            updateBrandHeader();
-            filterProducts();
-            toggleMenu();
-        }
-
-        function closeShop() {
-            shopView.classList.remove('active');
-            landingView.classList.remove('hidden');
-            // If menu was open, ensure it's closed (though signet doesn't open menu anymore)
-            sideMenu.classList.remove('active');
-            overlay.classList.remove('active');
-        }
-
-        function updateBrandHeader() {
-            if (currentBrand === 'ARCTOS') {
-                brandTitle.innerText = "ARCTOS Precision Tooling";
-                brandTagline.innerText = t('arctos_tagline');
-            } else {
-                brandTitle.innerText = "FENRIS Aerospace & Defence";
-                brandTagline.innerText = t('fenris_tagline');
-            }
-        }
-
-        function filterProducts() {
-            productGrid.innerHTML = '';
-            
-            const selectedIsos = Array.from(document.querySelectorAll('input[value="P"]:checked, input[value="M"]:checked, input[value="K"]:checked, input[value="H"]:checked, input[value="S"]:checked, input[value="N"]:checked')).map(cb => cb.value);
-            const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
-
-            const forceFenris = selectedIsos.includes('H') || selectedIsos.includes('S') || selectedIsos.includes('N');
-
-            const filtered = products.filter(p => {
-                let brandMatch = false;
-                if (forceFenris) {
-                    if (p.brand === 'FENRIS') brandMatch = true;
-                } else {
-                    if (p.brand === currentBrand) brandMatch = true;
-                }
-
-                let isoMatch = true;
-                if (selectedIsos.length > 0 && p.iso.length > 0) {
-                    isoMatch = p.iso.some(code => selectedIsos.includes(code));
-                }
-
-                let opMatch = true;
-                if (selectedOps.length > 0 && p.op) {
-                    opMatch = p.op.some(opKey => selectedOps.includes(opKey));
-                }
-
-                return brandMatch && isoMatch && opMatch;
-            });
-
-            if (filtered.length === 0) {
-                productGrid.innerHTML = '<div style="color:#888; grid-column:1/-1;">No products found.</div>';
-                return;
-            }
-
-            filtered.forEach(p => {
-                let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
-                
-                const translatedOps = p.op.map(opKey => t(opKey)).join(', ');
-
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="prod-brand">${p.brand}</div>
-                    <div class="prod-name">${p.name}</div>
-                    <div class="prod-desc">${t(p.desc)}</div>
-                    <ul class="prod-specs">
-                        <li>${t(p.category)}</li>
-                        ${p.type ? `<li>${t(p.type)}</li>` : ''}
-                        ${translatedOps ? `<li>${translatedOps}</li>` : ''}
-                    </ul>
-                    <div style="margin-top:10px;">${isoDots}</div>
-                `;
-                productGrid.appendChild(card);
-            });
-
-            if (forceFenris && currentBrand === 'ARCTOS') {
-                brandTitle.innerText = "FENRIS " + t('filtered_result');
-            } else if (!forceFenris) {
-                 if (currentBrand === 'ARCTOS') brandTitle.innerText = "ARCTOS Precision Tooling";
-                 else brandTitle.innerText = "FENRIS Aerospace & Defence";
-            }
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = t(key);
-            });
-            
-            document.querySelectorAll('.lang-option').forEach(opt => {
-                opt.classList.remove('active');
-                if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
-            });
-            document.documentElement.lang = lang;
-
-            if (shopView.classList.contains('active')) {
-                updateBrandHeader();
-                filterProducts();
-            }
-        }
-        
-        document.querySelectorAll('.op-filter').forEach(cb => {
-            if(cb.value === "Roughing") cb.value = "op_roughing";
-            if(cb.value === "Medium") cb.value = "op_medium";
-            if(cb.value === "Finishing") cb.value = "op_finishing";
-            if(cb.value === "Interrupted") cb.value = "op_interrupted";
-        });
-
-        setLanguage('en');
-    </script>
-</body>
-</html>
+            landingView
