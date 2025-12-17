@@ -35,7 +35,6 @@
             align-items: center;
             position: relative;
             transition: opacity 0.5s;
-            z-index: 1; 
         }
 
         #landing-view.hidden { display: none; }
@@ -59,14 +58,14 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #FFFFFF !important; 
+            color: #000000 !important; /* Musta teksti */
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) */
+        /* 1. SIGNET (LOGO) - Fixed = Lukittu ruutuun */
         .signet-btn {
-            position: absolute; 
+            position: fixed; /* LUKITTU YLÄKULMAAN */
             z-index: 2001; 
             top: 1.5vw;         
             left: 1.5vw;        
@@ -77,20 +76,25 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU */
+        /* 2. HAMBURGER MENU - Fixed = Lukittu ruutuun */
         .hamburger-icon {
-            position: absolute;
-            z-index: 1500;
+            position: fixed; /* LUKITTU YLÄKULMAAN */
+            z-index: 2000;
             left: 1.5vw; 
+            
+            /* Sijoitus logon alapuolelle */
             top: calc(1.5vw + 75px); 
+            
             width: 24px;  
             height: 24px; 
+            
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         
+        /* MUUTETTU MUSTAKSI */
         .hamburger-icon svg rect {
-            fill: #FFFFFF; 
+            fill: #000000; 
         }
 
         .hamburger-icon:hover {
@@ -123,12 +127,12 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET */
+        /* ALATUNNISTEET - MUUTETTU MUSTAKSI */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #FFFFFF; 
+            color: #000000; 
             z-index: 10;
         }
         .footer-left { left: 20px; }
@@ -142,7 +146,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1600;
+            z-index: 1600; /* Valikko liukuu ikonin päälle */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -150,19 +154,18 @@
         }
         .side-menu.active { left: 0; }
         
-        /* UUSI: Valikon otsikko */
         .menu-category {
             padding: 20px 30px 10px 30px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #888888; /* Erottuu linkeistä */
+            color: #888888;
         }
 
         .side-menu a {
             display: block;
-            padding: 15px 30px; /* Hieman tiivistetty */
+            padding: 15px 30px;
             border-bottom: 1px solid rgb(60, 60, 60);
             font-weight: 600;
             font-size: 14px;
@@ -190,7 +193,10 @@
         #shop-view {
             display: none;
             min-height: 100vh;
+            
+            /* TÄRKEÄ: Riittävä ylätäyte, jotta sisältö alkaa kiinteiden elementtien alta */
             padding-top: 180px; 
+            
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
