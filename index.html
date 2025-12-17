@@ -62,6 +62,8 @@
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
+        
+        /* 1. SIGNET (LOGO) - Palauttaa kotiin */
         .signet-btn {
             position: absolute; 
             z-index: 1100;
@@ -73,6 +75,28 @@
             transition: transform 0.3s ease;
         }
         .signet-btn:hover { transform: scale(1.05); }
+
+        /* 2. HAMBURGER MENU (UUSI) - Avaa valikon */
+        .hamburger-icon {
+            position: absolute;
+            z-index: 1100;
+            left: 1.5vw;
+            /* Sijoitetaan logon alapuolelle: 1.5vw (top) + n. 60px (logo) + väli */
+            top: calc(1.5vw + 70px); 
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        /* SVG-tyylit: Musta väri */
+        .hamburger-icon svg rect {
+            fill: #000000; 
+        }
+
+        .hamburger-icon:hover {
+            transform: scale(1.1);
+        }
 
         .top-right-badges {
             position: absolute;
@@ -100,7 +124,7 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET (ETUSIVU - MUSTAT) */
+        /* ALATUNNISTEET */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
@@ -119,7 +143,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1000;
+            z-index: 1200; /* Korkeampi kuin hamburger */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -147,7 +171,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 999;
+            z-index: 1150;
             display: none;
         }
         .overlay.active { display: block; }
@@ -173,7 +197,6 @@
         .shop-tagline { font-size: 14px; color: #cccccc; margin-top: 5px; font-style: italic; }
 
         .shop-layout { display: flex; gap: 40px; }
-        
         .sidebar { width: 220px; flex-shrink: 0; }
         .filter-group { margin-bottom: 30px; }
         .filter-title { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
@@ -208,15 +231,14 @@
         .prod-specs { font-size: 11px; color: #aaa; list-style: none; padding: 0; }
         .prod-specs li::before { content: "- "; }
 
-        /* --- ISO 513 VÄRIKOODIT (STANDARDI) --- */
+        /* ISO 513 VÄRIKOODIT */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        
-        .iso-p { background-color: #3498db; } /* Teräs: Sininen */
-        .iso-m { background-color: #f1c40f; } /* RST: Keltainen */
-        .iso-k { background-color: #e74c3c; } /* Valurauta: Punainen */
-        .iso-n { background-color: #2ecc71; } /* Alumiini: Vihreä (KORJATTU) */
-        .iso-s { background-color: #ba7f4d; } /* Titaani: Ruskea (KORJATTU) */
-        .iso-h { background-color: #95a5a6; } /* Karkaistu: Harmaa */
+        .iso-p { background-color: #3498db; } 
+        .iso-m { background-color: #f1c40f; } 
+        .iso-k { background-color: #e74c3c; } 
+        .iso-n { background-color: #2ecc71; } 
+        .iso-s { background-color: #ba7f4d; } 
+        .iso-h { background-color: #95a5a6; } 
 
         /* --- MOBIILIVERSIO --- */
         @media (max-width: 768px), (max-height: 500px) {
@@ -224,7 +246,12 @@
             
             #shop-view { padding-top: 120px; padding-left: 20px; padding-right: 20px; }
 
+            /* Mobiili: Kiinnitetty vasempaan yläkulmaan */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
+            
+            /* Mobiili: Hampurilainen signetin alapuolelle: 15px + 45px + 10px väli = 70px */
+            .hamburger-icon { position: fixed; top: 70px; left: 15px; }
+
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 45px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
@@ -265,7 +292,15 @@
         </a>
     </nav>
     
-    <img src="signet.png" alt="Menu" class="signet-btn" id="menuBtn">
+    <img src="signet.png" alt="Home" class="signet-btn" onclick="closeShop()">
+    
+    <div class="hamburger-icon" id="menuBtn">
+        <svg viewBox="0 0 100 80" width="100%" height="100%">
+            <rect width="100" height="15" rx="8"></rect>
+            <rect y="35" width="100" height="15" rx="8"></rect>
+            <rect y="70" width="100" height="15" rx="8"></rect>
+        </svg>
+    </div>
 
     <div id="landing-view">
         <div class="top-right-badges">
@@ -514,7 +549,7 @@
                 op_medium: "Keski / Yleis",
                 op_finishing: "Viimeistely",
                 op_interrupted: "Katkonainen lastuaminen",
-                arctos_tagline: "Pohjoinen standardi – Luotettavaa teollista suorituskykyä",
+                arctos_tagline: "Pohjoinen standardi – Luotettavaa teollista suorituskyä",
                 fenris_tagline: "Tinkimätöntä suorituskykyä – Koville ja eksoottisille materiaaleille",
                 filtered_result: "(Suodatettu tulos)",
                 cat_turning: "Sorvaus",
@@ -626,7 +661,9 @@
         function closeShop() {
             shopView.classList.remove('active');
             landingView.classList.remove('hidden');
-            toggleMenu();
+            // If menu was open, ensure it's closed (though signet doesn't open menu anymore)
+            sideMenu.classList.remove('active');
+            overlay.classList.remove('active');
         }
 
         function updateBrandHeader() {
@@ -723,12 +760,13 @@
             }
         }
         
-        // Initial setup for filter values
         document.querySelectorAll('.op-filter').forEach(cb => {
-            // No changes needed if HTML matches JS logic, assuming HTML values are correct keys
+            if(cb.value === "Roughing") cb.value = "op_roughing";
+            if(cb.value === "Medium") cb.value = "op_medium";
+            if(cb.value === "Finishing") cb.value = "op_finishing";
+            if(cb.value === "Interrupted") cb.value = "op_interrupted";
         });
 
-        // Init
         setLanguage('en');
     </script>
 </body>
