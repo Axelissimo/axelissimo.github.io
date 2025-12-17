@@ -35,6 +35,7 @@
             align-items: center;
             position: relative;
             transition: opacity 0.5s;
+            z-index: 1; 
         }
 
         #landing-view.hidden { display: none; }
@@ -58,15 +59,15 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; /* Musta teksti */
+            color: #FFFFFF !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - Taso 1 (Ylin) */
+        /* 1. SIGNET (LOGO) */
         .signet-btn {
             position: absolute; 
-            z-index: 2001; /* Korkein: Aina päällä */
+            z-index: 2001; 
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -76,10 +77,10 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU - Taso 3 (Alin näistä kolmesta) */
+        /* 2. HAMBURGER MENU */
         .hamburger-icon {
             position: absolute;
-            z-index: 1500; /* Valikon (1600) alapuolella */
+            z-index: 1500;
             left: 1.5vw; 
             top: calc(1.5vw + 75px); 
             width: 24px;  
@@ -89,7 +90,7 @@
         }
         
         .hamburger-icon svg rect {
-            fill: #000000; 
+            fill: #FFFFFF; 
         }
 
         .hamburger-icon:hover {
@@ -127,13 +128,13 @@
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #000000; 
+            color: #FFFFFF; 
             z-index: 10;
         }
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
-        /* --- SIVUVALIKKO - Taso 2 (Keskimmäinen) --- */
+        /* --- SIVUVALIKKO --- */
         .side-menu {
             position: fixed;
             top: 0;
@@ -141,16 +142,27 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1600; /* Ikonin (1500) yläpuolella, mutta logon (2001) alla */
+            z-index: 1600;
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
             box-sizing: border-box;
         }
         .side-menu.active { left: 0; }
+        
+        /* UUSI: Valikon otsikko */
+        .menu-category {
+            padding: 20px 30px 10px 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888888; /* Erottuu linkeistä */
+        }
+
         .side-menu a {
             display: block;
-            padding: 20px 30px;
+            padding: 15px 30px; /* Hieman tiivistetty */
             border-bottom: 1px solid rgb(60, 60, 60);
             font-weight: 600;
             font-size: 14px;
@@ -276,6 +288,8 @@
     </div>
 
     <nav class="side-menu" id="sideMenu">
+        <div class="menu-category" data-i18n="menu_tooling">Tooling</div>
+
         <a href="#" onclick="openShop('ARCTOS')">
             ARCTOS
             <span class="sub-text" data-i18n="arctos_desc">Precision tooling</span>
@@ -343,6 +357,7 @@
         /* --- KÄÄNNÖKSET (Dictionary) --- */
         const i18n = {
             en: {
+                menu_tooling: "Tooling",
                 arctos_desc: "Precision tooling",
                 fenris_desc: "Aerospace & defence tooling",
                 back_home: "← Back to Home",
@@ -403,6 +418,7 @@
                 desc_5xd: "High Performance, Through Coolant."
             },
             es: {
+                menu_tooling: "Herramientas",
                 arctos_desc: "Herramientas de precisión",
                 fenris_desc: "Herramientas aeroespaciales y defensa",
                 back_home: "← Volver al Inicio",
@@ -463,6 +479,7 @@
                 desc_5xd: "Alto rendimiento, refrigeración interna."
             },
             de: {
+                menu_tooling: "Werkzeuge",
                 arctos_desc: "Präzisionswerkzeuge",
                 fenris_desc: "Luft- und Raumfahrt & Verteidigung",
                 back_home: "← Zurück zur Startseite",
@@ -523,6 +540,7 @@
                 desc_5xd: "Hochleistung, Innenkühlung."
             },
             fi: {
+                menu_tooling: "Työkalut",
                 arctos_desc: "Tarkkuustyökalut",
                 fenris_desc: "Ilmailu- ja puolustusteollisuus",
                 back_home: "← Takaisin etusivulle",
