@@ -58,12 +58,12 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; /* Musta teksti */
+            color: #000000 !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - Palauttaa kotiin */
+        /* 1. SIGNET (LOGO) */
         .signet-btn {
             position: absolute; 
             z-index: 1100;
@@ -76,15 +76,19 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU (UUSI) - Avaa valikon */
+        /* 2. HAMBURGER MENU (PIENENNETTY) */
         .hamburger-icon {
             position: absolute;
             z-index: 1100;
-            left: 1.5vw;
-            /* Sijoitetaan logon alapuolelle: 1.5vw (top) + n. 60px (logo) + väli */
-            top: calc(1.5vw + 70px); 
-            width: 32px;
-            height: 32px;
+            left: 1.5vw; /* Sama linjaus kuin logolla */
+            
+            /* Sijoitetaan logon alapuolelle. Logo on max 60px. 
+               1.5vw (top) + 60px (logo) + 15px (väli) */
+            top: calc(1.5vw + 75px); 
+            
+            width: 24px;  /* Pienennetty (oli 32px) */
+            height: 24px; /* Pienennetty (oli 32px) */
+            
             cursor: pointer;
             transition: transform 0.2s ease;
         }
@@ -143,7 +147,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1200; /* Korkeampi kuin hamburger */
+            z-index: 1200; 
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -246,11 +250,12 @@
             
             #shop-view { padding-top: 120px; padding-left: 20px; padding-right: 20px; }
 
-            /* Mobiili: Kiinnitetty vasempaan yläkulmaan */
+            /* Logo: Kiinteä sijainti vasen yläkulma */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
             
-            /* Mobiili: Hampurilainen signetin alapuolelle: 15px + 45px + 10px väli = 70px */
-            .hamburger-icon { position: fixed; top: 70px; left: 15px; }
+            /* Hampurilainen: Suoraan logon alapuolella, sama vasen linjaus */
+            /* 15px (top) + 45px (logo korkeus) + 15px (väli) = 75px */
+            .hamburger-icon { position: fixed; top: 75px; left: 15px; }
 
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 45px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
@@ -296,9 +301,9 @@
     
     <div class="hamburger-icon" id="menuBtn">
         <svg viewBox="0 0 100 80" width="100%" height="100%">
-            <rect width="100" height="15" rx="8"></rect>
-            <rect y="35" width="100" height="15" rx="8"></rect>
-            <rect y="70" width="100" height="15" rx="8"></rect>
+            <rect width="100" height="12" rx="6"></rect>
+            <rect y="35" width="100" height="12" rx="6"></rect>
+            <rect y="70" width="100" height="12" rx="6"></rect>
         </svg>
     </div>
 
@@ -549,7 +554,7 @@
                 op_medium: "Keski / Yleis",
                 op_finishing: "Viimeistely",
                 op_interrupted: "Katkonainen lastuaminen",
-                arctos_tagline: "Pohjoinen standardi – Luotettavaa teollista suorituskyä",
+                arctos_tagline: "Pohjoinen standardi – Luotettavaa teollista suorituskykyä",
                 fenris_tagline: "Tinkimätöntä suorituskykyä – Koville ja eksoottisille materiaaleille",
                 filtered_result: "(Suodatettu tulos)",
                 cat_turning: "Sorvaus",
