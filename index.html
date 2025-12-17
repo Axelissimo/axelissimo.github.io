@@ -18,7 +18,7 @@
             padding: 0;
             height: 100%;
             background-color: rgb(50, 50, 50);
-            color: #FFFFFF; 
+            color: #FFFFFF; /* Varmistetaan valkoinen oletusteksti */
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -35,6 +35,7 @@
             align-items: center;
             position: relative;
             transition: opacity 0.5s;
+            z-index: 1; /* Varmistetaan näkyvyys */
         }
 
         #landing-view.hidden { display: none; }
@@ -58,7 +59,7 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; /* Musta teksti */
+            color: #FFFFFF !important; /* PALAUTETTU VALKOISEKSI */
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
@@ -81,19 +82,16 @@
             position: absolute;
             z-index: 2000;
             left: 1.5vw; 
-            
-            /* Sijoitus logon alapuolelle */
             top: calc(1.5vw + 75px); 
-            
             width: 24px;  
             height: 24px; 
-            
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         
+        /* PALAUTETTU VALKOISEKSI */
         .hamburger-icon svg rect {
-            fill: #000000; 
+            fill: #FFFFFF; 
         }
 
         .hamburger-icon:hover {
@@ -131,7 +129,7 @@
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #000000; 
+            color: #FFFFFF; /* PALAUTETTU VALKOISEKSI */
             z-index: 10;
         }
         .footer-left { left: 20px; }
@@ -182,11 +180,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            
-            /* KORJATTU DESKTOP PADDING: 100px -> 180px */
-            /* Tämä varmistaa, että teksti alkaa selvästi hampurilaisikonin alapuolelta */
-            padding-top: 180px; 
-            
+            padding-top: 180px; /* Tilaa työpöydällä */
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -204,12 +198,7 @@
 
         .shop-layout { display: flex; gap: 40px; }
         
-        .sidebar { 
-            width: 220px; 
-            flex-shrink: 0; 
-            /* Poistettu ylimääräinen sidebar-padding desktopilta, koska koko viewissä on nyt tilaa */
-            padding-top: 0; 
-        }
+        .sidebar { width: 220px; flex-shrink: 0; }
         
         .filter-group { margin-bottom: 30px; }
         .filter-title { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
@@ -257,7 +246,6 @@
         @media (max-width: 768px), (max-height: 500px) {
             html, body { height: auto; min-height: 100vh; box-sizing: border-box; }
             
-            /* Mobiilissa padding 160px on edelleen hyvä */
             #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
@@ -653,4 +641,126 @@
 
         function openShop(brand) {
             currentBrand = brand;
-            landingView
+            landingView.classList.add('hidden');
+            shopView.classList.add('active');
+            
+            checkboxes.forEach(cb => cb.checked = false);
+
+            updateBrandHeader();
+            filterProducts();
+            toggleMenu();
+        }
+
+        function closeShop() {
+            shopView.classList.remove('active');
+            landingView.classList.remove('hidden');
+            // If menu was open, ensure it's closed (though signet doesn't open menu anymore)
+            sideMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        function updateBrandHeader() {
+            if (currentBrand === 'ARCTOS') {
+                brandTitle.innerText = "ARCTOS Precision Tooling";
+                brandTagline.innerText = t('arctos_tagline');
+            } else {
+                brandTitle.innerText = "FENRIS Aerospace & Defence";
+                brandTagline.innerText = t('fenris_tagline');
+            }
+        }
+
+        function filterProducts() {
+            productGrid.innerHTML = '';
+            
+            const selectedIsos = Array.from(document.querySelectorAll('input[value="P"]:checked, input[value="M"]:checked, input[value="K"]:checked, input[value="H"]:checked, input[value="S"]:checked, input[value="N"]:checked')).map(cb => cb.value);
+            const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
+
+            const forceFenris = selectedIsos.includes('H') || selectedIsos.includes('S') || selectedIsos.includes('N');
+
+            const filtered = products.filter(p => {
+                let brandMatch = false;
+                if (forceFenris) {
+                    if (p.brand === 'FENRIS') brandMatch = true;
+                } else {
+                    if (p.brand === currentBrand) brandMatch = true;
+                }
+
+                let isoMatch = true;
+                if (selectedIsos.length > 0 && p.iso.length > 0) {
+                    isoMatch = p.iso.some(code => selectedIsos.includes(code));
+                }
+
+                let opMatch = true;
+                if (selectedOps.length > 0 && p.op) {
+                    opMatch = p.op.some(opKey => selectedOps.includes(opKey));
+                }
+
+                return brandMatch && isoMatch && opMatch;
+            });
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = '<div style="color:#888; grid-column:1/-1;">No products found.</div>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
+                
+                const translatedOps = p.op.map(opKey => t(opKey)).join(', ');
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="prod-brand">${p.brand}</div>
+                    <div class="prod-name">${p.name}</div>
+                    <div class="prod-desc">${t(p.desc)}</div>
+                    <ul class="prod-specs">
+                        <li>${t(p.category)}</li>
+                        ${p.type ? `<li>${t(p.type)}</li>` : ''}
+                        ${translatedOps ? `<li>${translatedOps}</li>` : ''}
+                    </ul>
+                    <div style="margin-top:10px;">${isoDots}</div>
+                `;
+                productGrid.appendChild(card);
+            });
+
+            if (forceFenris && currentBrand === 'ARCTOS') {
+                brandTitle.innerText = "FENRIS " + t('filtered_result');
+            } else if (!forceFenris) {
+                 if (currentBrand === 'ARCTOS') brandTitle.innerText = "ARCTOS Precision Tooling";
+                 else brandTitle.innerText = "FENRIS Aerospace & Defence";
+            }
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = t(key);
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
+            });
+            document.documentElement.lang = lang;
+
+            if (shopView.classList.contains('active')) {
+                updateBrandHeader();
+                filterProducts();
+            }
+        }
+        
+        document.querySelectorAll('.op-filter').forEach(cb => {
+            if(cb.value === "Roughing") cb.value = "op_roughing";
+            if(cb.value === "Medium") cb.value = "op_medium";
+            if(cb.value === "Finishing") cb.value = "op_finishing";
+            if(cb.value === "Interrupted") cb.value = "op_interrupted";
+        });
+
+        setLanguage('en');
+    </script>
+</body>
+</html>
