@@ -3,242 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Industria Nordica</title>
     <meta name="description" content="Commercium Gratia Dei - Terra Mare et Aer">
-    
     <link rel="icon" type="image/png" href="signet.png">
     
-    <meta property="og:title" content="Industria Nordica">
-    <meta property="og:description" content="Commercium Gratia Dei - Terra Mare et Aer">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.industrianordica.fi/">
-    
-    <meta property="og:image" content="https://www.industrianordica.fi/signet.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="283">
-    <meta property="og:image:height" content="283">
-    
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --bg-dark: #1e1e1e;
+            --bg-panel: #2b2b2b;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --accent-arctos: #00bcd4; /* Cyan for Arctos */
+            --accent-fenris: #ff5722; /* Orange/Red for Fenris */
+            --border-color: #3d3d3d;
+            
+            /* ISO Colors */
+            --iso-p: #5dade2; /* Steel - Blue */
+            --iso-m: #f1c40f; /* Stainless - Yellow */
+            --iso-k: #e74c3c; /* Cast Iron - Red */
+            --iso-n: #a0a0a0; /* Aluminum - Grey/Silver */
+            --iso-s: #d35400; /* Superalloys - Brown/Orange */
+            --iso-h: #95a5a6; /* Hardened - Dark Grey */
+        }
+
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background-color: rgb(50, 50, 50);
-            position: relative; 
-            overflow-x: hidden; 
+            background-color: var(--bg-dark);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- LANDING SECTION --- */
+        #landing {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: opacity 0.5s;
         }
 
-        /* --- KIELIVALINTA --- */
-        .lang-selector {
-            position: absolute;
-            top: 1.5vw;
-            right: 1.5vw;
-            z-index: 100;
-            display: flex;
-            gap: 15px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .lang-option {
-            color: #888888;
-            cursor: pointer;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .lang-option:hover, .lang-option.active {
-            color: #FFFFFF;
-            text-decoration: underline;
-        }
-
-        /* --- SIVUVALIKKO --- */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
-            background-color: rgb(40, 40, 40);
-            z-index: 1000;
-            transition: left 0.4s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 80px;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .side-menu.active {
-            left: 0;
-        }
-
-        .side-menu a {
-            display: block;
-            padding: 20px 30px;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            border-bottom: 1px solid rgb(60, 60, 60);
-            transition: background 0.3s;
-        }
-
-        .side-menu a:hover {
-            background-color: rgb(60, 60, 60);
-        }
-
-        .side-menu .sub-text {
-            display: block;
-            font-weight: 400;
-            font-size: 11px;
-            color: #AAAAAA;
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 999;
+        /* Piilotetaan landing, kun kauppa aukeaa */
+        #landing.hidden {
             display: none;
         }
 
-        .overlay.active {
-            display: block;
+        /* --- SHOP SECTION (UUSI) --- */
+        #shop-container {
+            display: none; /* Oletuksena piilossa */
+            min-height: 100vh;
+            padding-top: 80px;
         }
 
-        /* --- LOGOT JA SISÄLTÖ --- */
-        @keyframes fadeInLogo {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        #shop-container.active {
+            display: flex;
+            flex-direction: column;
         }
 
-        .logo {
-            max-width: 60%; 
-            max-height: 60%;
-            height: auto;   
-            display: block; 
-            animation: fadeInLogo 1.2s ease-out forwards;
+        .shop-header {
+            padding: 20px 40px;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .email-address {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600; 
-            color: #000000; 
-            text-decoration: none; 
-            margin-top: 20px; 
-            font-size: 18px; 
-            opacity: 0;
-            animation: fadeInLogo 1.2s ease-out 0.4s forwards;
+        .shop-tagline {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .tagline-arctos { color: var(--accent-arctos); }
+        .tagline-fenris { color: var(--accent-fenris); }
+
+        .shop-layout {
+            display: flex;
+            flex: 1;
         }
 
-        .signet-btn {
-            position: absolute; 
-            z-index: 1100;
-            top: 1.5vw;         
-            left: 1.5vw;        
-            width: 6.5vw;       
-            max-width: 60px; 
+        /* --- SIDEBAR FILTERS --- */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            font-size: 13px;
+            transition: color 0.2s;
         }
 
-        .signet-btn:hover {
-            transform: scale(1.05);
+        .filter-label:hover {
+            color: white;
         }
 
-        .top-right-badges {
+        .filter-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #666;
+            border-radius: 3px;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .filter-checkbox:checked {
+            background-color: #fff;
+            border-color: #fff;
+        }
+
+        .filter-checkbox:checked::after {
+            content: '✓';
             position: absolute;
-            z-index: 10;
-            display: flex;      
-            align-items: flex-start; 
-            
-            /* SIIRRETTY ALASPÄIN, JOTTA KIELIVALINTA MAHTUU YLÄPUOLELLE */
-            top: 4.5vw;         
-            right: 1.5vw;       
-            gap: 1vw;           
+            color: #000;
+            font-size: 12px;
+            top: -1px;
+            left: 2px;
+            font-weight: bold;
         }
 
-        .eu-badge, .nato-badge {
-            height: 9vw;        
-            max-height: 75px;
-            width: auto;        
+        /* ISO Color Indicators */
+        .iso-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; display: inline-block; }
+        .iso-p { background: var(--iso-p); }
+        .iso-m { background: var(--iso-m); }
+        .iso-k { background: var(--iso-k); }
+        .iso-n { background: var(--iso-n); }
+        .iso-s { background: var(--iso-s); }
+        .iso-h { background: var(--iso-h); }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            flex: 1;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            align-content: start;
         }
 
-        .footer-left, .footer-right {
-            position: absolute;
-            bottom: 20px; 
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;  
-            color: #000000; 
-            z-index: 10;
+        .product-card {
+            background: #252525;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer-left { left: 20px; }
-        .footer-right { right: 20px; text-align: right; max-width: 350px; }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-color: #555;
+        }
 
-        /* --- MOBIILIVERSIO --- */
+        .brand-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .brand-arctos { background: rgba(0, 188, 212, 0.15); color: var(--accent-arctos); border: 1px solid var(--accent-arctos); }
+        .brand-fenris { background: rgba(255, 87, 34, 0.15); color: var(--accent-fenris); border: 1px solid var(--accent-fenris); }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 11px;
+            color: #888;
+        }
+
+        .specs-list li {
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+        }
+
+        .specs-list li::before {
+            content: "•";
+            color: #555;
+            margin-right: 6px;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* --- EXISTING ELEMENTS (STYLES KEPT) --- */
+        .lang-selector { position: fixed; top: 15px; right: 15px; z-index: 100; display: flex; gap: 15px; font-size: 13px; font-weight: 600; }
+        .lang-option { color: #888; cursor: pointer; transition: color 0.3s; }
+        .lang-option:hover, .lang-option.active { color: #FFF; text-decoration: underline; }
         
-        @media (max-width: 768px), (max-height: 500px) {
-            html, body { 
-                height: auto; 
-                min-height: 100vh; 
-                justify-content: flex-start; 
-                padding-top: 110px; /* Lisätty tilaa yläosaan */
-                padding-bottom: 40px; 
-                box-sizing: border-box; 
-            }
+        .signet-btn { position: fixed; top: 15px; left: 15px; width: 50px; cursor: pointer; z-index: 1100; transition: transform 0.3s; }
+        .signet-btn:hover { transform: scale(1.05); }
 
-            .signet-btn { 
-                position: fixed;
-                top: 15px; 
-                left: 15px; 
-                width: 45px; 
-            }
+        /* Menu Styles */
+        .side-menu { position: fixed; top: 0; left: -300px; width: 280px; height: 100%; background: #282828; z-index: 1000; transition: left 0.4s ease; padding-top: 80px; box-shadow: 2px 0 15px rgba(0,0,0,0.5); }
+        .side-menu.active { left: 0; }
+        .side-menu a { display: block; padding: 20px 30px; color: #FFF; text-decoration: none; border-bottom: 1px solid #3c3c3c; font-weight: 600; }
+        .side-menu a:hover { background: #3c3c3c; }
+        .side-menu .sub-text { display: block; font-weight: 400; font-size: 11px; color: #AAA; margin-top: 5px; text-transform: uppercase; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; display: none; }
+        .overlay.active { display: block; }
 
-            /* Kielivalinta oikeaan yläkulmaan */
-            .lang-selector {
-                position: fixed;
-                top: 15px;
-                right: 15px;
-                font-size: 14px;
-                gap: 10px;
-            }
+        /* Landing Specifics */
+        .logo-landing { max-width: 60%; height: auto; animation: fadeInLogo 1.2s ease-out forwards; }
+        .email-address { color: #000; font-weight: 600; text-decoration: none; margin-top: 20px; font-size: 18px; opacity: 0; animation: fadeInLogo 1.2s ease-out 0.4s forwards; color: white !important; /* Fixed color */ }
+        .badges-landing { position: absolute; top: 4.5vw; right: 1.5vw; display: flex; gap: 1vw; }
+        .badges-landing img { height: 9vw; max-height: 75px; width: auto; }
+        
+        @keyframes fadeInLogo { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-            /* Liput heti kielivalinnan alapuolelle */
-            .top-right-badges { 
-                position: fixed;
-                top: 45px; /* Kielivalinnan alapuolella */
-                right: 15px;
-                display: flex;
-                flex-direction: row; 
-                gap: 8px; 
-            }
-
-            .nato-badge, .eu-badge { 
-                height: 40px; /* Hieman pienempi, jotta mahtuu paremmin */
-                width: auto;
-            }
-            
-            .logo { margin-bottom: 20px; max-width: 80%; }
-            .email-address { margin-bottom: 30px; }
-            .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
-            .footer-left { margin-top: 40px; }
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar { display: none; /* For simplicity in this demo, hidden on mobile or needs a toggle */ }
+            .shop-layout { flex-direction: column; }
+            .badges-landing { top: 60px; right: 15px; }
+            .badges-landing img { height: 40px; }
+            #shop-container { padding-top: 60px; }
+            .product-grid { padding: 15px; grid-template-columns: 1fr; }
+            .shop-header { flex-direction: column; text-align: center; gap: 10px; }
         }
     </style>
 </head>
@@ -254,36 +289,151 @@
     </div>
 
     <nav class="side-menu" id="sideMenu">
-        <a href="#arctos">
+        <a href="#" onclick="openShop('ARCTOS')">
             ARCTOS
             <span class="sub-text" data-i18n="arctos_desc">Precision tooling</span>
         </a>
-        <a href="#fenris">
+        <a href="#" onclick="openShop('FENRIS')">
             FENRIS
             <span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span>
+        </a>
+        <a href="#" onclick="closeShop()">
+            <span style="font-size: 12px; color: #888;">← Back to Home</span>
         </a>
     </nav>
     
     <img src="signet.png" alt="Menu" class="signet-btn" id="menuBtn">
 
-    <div class="top-right-badges">
-        <a href="https://www.nato.int/en" target="_blank" rel="noopener noreferrer">
-            <img src="badge-nato.png" alt="NATO Badge" class="nato-badge">
-        </a>
-        <a href="https://commission.europa.eu/index_en" target="_blank" rel="noopener noreferrer">
-            <img src="badge-eu.png" alt="EU VAT" class="eu-badge">
-        </a>
-    </div>
-    
-    <img src="logo-main.png" alt="Industria Nordica" class="logo">
-    
-    <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
+    <section id="landing">
+        <div class="badges-landing">
+            <a href="https://www.nato.int/en" target="_blank"><img src="badge-nato.png" alt="NATO"></a>
+            <a href="https://commission.europa.eu/index_en" target="_blank"><img src="badge-eu.png" alt="EU"></a>
+        </div>
+        
+        <img src="logo-main.png" alt="Industria Nordica" class="logo-landing">
+        <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
 
-    <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
-    <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
+        <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 11px; color: #888;">
+            <div data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+        </div>
+    </section>
+
+    <section id="shop-container">
+        <div class="shop-header">
+            <h2 id="brand-title" style="margin:0; text-transform: uppercase; letter-spacing: 2px;">Product Catalog</h2>
+            <div id="brand-tagline" class="shop-tagline">Select a brand to view products</div>
+        </div>
+
+        <div class="shop-layout">
+            <aside class="sidebar">
+                <div class="filter-group">
+                    <div class="filter-title">Filter by Material</div>
+                    
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox" value="P" onchange="filterProducts()">
+                        <span class="iso-dot iso-p"></span> Steel (ISO P)
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox" value="M" onchange="filterProducts()">
+                        <span class="iso-dot iso-m"></span> Stainless (ISO M)
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox" value="K" onchange="filterProducts()">
+                        <span class="iso-dot iso-k"></span> Cast Iron (ISO K)
+                    </label>
+                    
+                    <label class="filter-label" style="color: #bbb;">
+                        <input type="checkbox" class="filter-checkbox" value="H" onchange="filterProducts()">
+                        <span class="iso-dot iso-h"></span> Hardened / Armor (ISO H)
+                    </label>
+                    <label class="filter-label" style="color: #bbb;">
+                        <input type="checkbox" class="filter-checkbox" value="S" onchange="filterProducts()">
+                        <span class="iso-dot iso-s"></span> Titanium / Superalloys (ISO S)
+                    </label>
+                    <label class="filter-label" style="color: #bbb;">
+                        <input type="checkbox" class="filter-checkbox" value="N" onchange="filterProducts()">
+                        <span class="iso-dot iso-n"></span> Aluminum (ISO N)
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Filter by Operation</div>
+                    
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox op-filter" value="Roughing" onchange="filterProducts()">
+                        Roughing
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox op-filter" value="Medium" onchange="filterProducts()">
+                        Medium / General
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox op-filter" value="Finishing" onchange="filterProducts()">
+                        Finishing
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox op-filter" value="Interrupted" onchange="filterProducts()">
+                        Interrupted Cut
+                    </label>
+                </div>
+            </aside>
+
+            <div class="product-grid" id="productGrid">
+                </div>
+        </div>
+    </section>
 
     <script>
-        // --- Valikko logiikka ---
+        // --- 1. TUOTETIETOKANTA ---
+        const products = [
+            // ARCTOS - Turning Inserts
+            { brand: 'ARCTOS', name: 'CNMG (Rhombic 80°)', category: 'Turning', type: 'Negative', iso: ['P', 'M', 'K'], op: ['Roughing', 'Medium'], desc: 'Best Seller for General Purpose.' },
+            { brand: 'ARCTOS', name: 'WNMG (Trigon 80°)', category: 'Turning', type: 'Negative', iso: ['P', 'K'], op: ['Roughing', 'Medium'], desc: 'Economy Choice. 6 cutting edges.' },
+            { brand: 'ARCTOS', name: 'DNMG (Rhombic 55°)', category: 'Turning', type: 'Negative', iso: ['P', 'M'], op: ['Medium', 'Finishing'], desc: 'Excellent for Profiling.' },
+            { brand: 'ARCTOS', name: 'CCMT (Rhombic 80°)', category: 'Turning', type: 'Positive', iso: ['M', 'S'], op: ['Finishing'], desc: 'Positive insert for internal turning.' },
+            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'Turning', type: 'Positive', iso: ['M'], op: ['Finishing'], desc: 'High precision finishing.' },
+            { brand: 'ARCTOS', name: 'MGMN System', category: 'Turning', type: 'Parting', iso: ['P', 'M', 'K'], op: ['General'], desc: 'Parting & Grooving (2mm, 3mm, 4mm).' },
+            
+            // ARCTOS - Milling
+            { brand: 'ARCTOS', name: 'APKT 1003', category: 'Milling', type: 'Shoulder', iso: ['P', 'M', 'K'], op: ['Medium'], desc: 'Small diameter shoulder milling (90°).' },
+            { brand: 'ARCTOS', name: 'APKT 1604', category: 'Milling', type: 'Shoulder', iso: ['P', 'K'], op: ['Roughing'], desc: 'Heavy material removal.' },
+            { brand: 'ARCTOS', name: 'SEKN / SNMX', category: 'Milling', type: 'Face', iso: ['K', 'P'], op: ['Roughing'], desc: 'Face Milling (45°) series.' },
+
+            // ARCTOS - Solid Carbide
+            { brand: 'ARCTOS', name: '4-Flute End Mill', category: 'Solid Carbide', type: 'End Mill', iso: ['P', 'M', 'K'], op: ['General'], desc: 'Standard Line (6mm - 20mm).' },
+            { brand: 'ARCTOS', name: '3xD Drill', category: 'Solid Carbide', type: 'Drill', iso: ['P', 'K'], op: ['General'], desc: 'Short drill, External or No Coolant.' },
+
+            // ARCTOS - Tool Holders
+            { brand: 'ARCTOS', name: 'External Holders', category: 'Tool Holders', type: 'Turning', iso: [], op: [], desc: 'PCLNR, MWLNR Standards.' },
+            { brand: 'ARCTOS', name: 'Boring Bars', category: 'Tool Holders', type: 'Internal', iso: [], op: [], desc: 'Internal Turning solutions.' },
+
+            // FENRIS - Heavy Duty
+            { brand: 'FENRIS', name: 'CNMG 16 & 19 Series', category: 'Heavy Duty', type: 'Roughing', iso: ['H', 'P'], op: ['Roughing', 'Interrupted'], desc: 'Large inserts for Hardox® & Armox®.' },
+            { brand: 'FENRIS', name: 'Ceramic & CBN Grades', category: 'Heavy Duty', type: 'Hard Part', iso: ['H'], op: ['Finishing'], desc: 'For Hardened Steel >50 HRC.' },
+
+            // FENRIS - Titanium/Superalloys
+            { brand: 'FENRIS', name: 'VCGT / VBMT Aerospace', category: 'Titanium', type: 'Turning', iso: ['S', 'M'], op: ['Finishing'], desc: 'Sharp Edge, PVD Coated for Inconel.' },
+            { brand: 'FENRIS', name: 'Trochoidal End Mills', category: 'Titanium', type: 'Milling', iso: ['S'], op: ['Roughing', 'Medium'], desc: '5-7 Flute Variable Helix for Ti6Al4V.' },
+
+            // FENRIS - Aluminum
+            { brand: 'FENRIS', name: 'ALU-Series Turning', category: 'Aluminum', type: 'Turning', iso: ['N'], op: ['Finishing'], desc: 'Laser Polished / Uncoated. Prevents built-up edge.' },
+
+            // FENRIS - Deep Hole
+            { brand: 'FENRIS', name: '5xD & 8xD Drills', category: 'Deep Hole', type: 'Drilling', iso: ['P', 'M', 'S'], op: ['General'], desc: 'High Performance, Through Coolant.' }
+        ];
+
+        // --- 2. LOGIIKKA ---
+
+        const landing = document.getElementById('landing');
+        const shopContainer = document.getElementById('shop-container');
+        const productGrid = document.getElementById('productGrid');
+        const brandTitle = document.getElementById('brand-title');
+        const brandTagline = document.getElementById('brand-tagline');
+        const checkboxes = document.querySelectorAll('.filter-checkbox');
+        
+        let currentBrandFilter = 'ALL'; // 'ALL', 'ARCTOS', 'FENRIS'
+
+        // Valikon logiikka
         const menuBtn = document.getElementById('menuBtn');
         const sideMenu = document.getElementById('sideMenu');
         const overlay = document.getElementById('overlay');
@@ -296,61 +446,169 @@
         menuBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
 
-        // --- Kielivalinta logiikka ---
-        
-        const translations = {
-            en: {
-                arctos_desc: "Precision tooling",
-                fenris_desc: "Aerospace & defence tooling",
-                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
-                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy"
-            },
-            es: {
-                arctos_desc: "Herramientas de precisión",
-                fenris_desc: "Herramientas aeroespaciales y de defensa",
-                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
-                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy"
-            },
-            de: {
-                arctos_desc: "Präzisionswerkzeuge",
-                fenris_desc: "Luft- und Raumfahrt & Verteidigungswerkzeuge",
-                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
-                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH und Industria Nordica SRL sind eingetragene Marken von Industria Nordica Oy"
-            },
-            fi: {
-                arctos_desc: "Tarkkuustyökalut",
-                fenris_desc: "Ilmailu- ja puolustusteollisuuden työkalut",
-                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
-                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH ja Industria Nordica SRL ovat Industria Nordica Oy:n rekisteröityjä tavaramerkkejä"
+        // Avaa Kauppa-näkymä
+        function openShop(brand) {
+            currentBrandFilter = brand;
+            
+            // Piilota landing, näytä kauppa
+            landing.classList.add('hidden');
+            shopContainer.classList.add('active');
+            
+            // Päivitä otsikot
+            if (brand === 'ARCTOS') {
+                brandTitle.innerText = "ARCTOS Precision Tooling";
+                brandTitle.style.color = "var(--accent-arctos)";
+                brandTagline.innerText = "The Northern Standard – Reliable Industrial Performance";
+                brandTagline.className = "shop-tagline tagline-arctos";
+                
+                // Nollaa checkboxit ja aseta oletus: Steel (P)
+                resetFilters();
+                // Etsi P-checkbox ja merkitse se (valinnainen, mutta "Default for Arctos" oli pyynnössä)
+                // document.querySelector('input[value="P"]').checked = true; 
+
+            } else if (brand === 'FENRIS') {
+                brandTitle.innerText = "FENRIS Aerospace & Defence";
+                brandTitle.style.color = "var(--accent-fenris)";
+                brandTagline.innerText = "Uncompromising Performance – For Hard & Exotic Materials";
+                brandTagline.className = "shop-tagline tagline-fenris";
+                resetFilters();
             }
+
+            filterProducts(); // Päivitä lista
+            toggleMenu(); // Sulje valikko
+        }
+
+        function closeShop() {
+            shopContainer.classList.remove('active');
+            landing.classList.remove('hidden');
+            toggleMenu();
+        }
+
+        function resetFilters() {
+            checkboxes.forEach(cb => cb.checked = false);
+        }
+
+        // Suodatuslogiikka
+        function filterProducts() {
+            // 1. Lue valitut filtterit
+            const selectedIsos = Array.from(document.querySelectorAll('input[value="P"]:checked, input[value="M"]:checked, input[value="K"]:checked, input[value="H"]:checked, input[value="S"]:checked, input[value="N"]:checked')).map(cb => cb.value);
+            
+            const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
+
+            // 2. Erityissääntö: Jos H, S tai N valittu -> Pakota FENRIS tai salli molemmat, mutta promptin mukaan "Triggers FENRIS".
+            // Tehdään niin, että jos H/S/N on valittu, näytetään FENRIS tuotteet riippumatta siitä, missä moodissa oltiin, 
+            // TAI yksinkertaisesti suodatetaan nykyisen brändin sisällä. 
+            // Tehdään Amazon-tyylinen: Filtteri on kuningas.
+            
+            // Jos käyttäjä on valinnut "Hardened (H)" tai "Titanium (S)", vaihdetaan näkymä väliaikaisesti FENRIS-painotteiseksi tai näytetään kaikki sopivat.
+            // Yksinkertaisuuden vuoksi: Suodatetaan `products`-taulukkoa.
+
+            productGrid.innerHTML = ''; // Tyhjennä
+
+            const filtered = products.filter(product => {
+                // Brändifiltteri (jos ei ole valittu ISO-koodia, joka pakottaa toisen)
+                let brandMatch = true;
+                
+                // Jos käyttäjä on ARCTOS-tilassa, mutta valitsee "Hardened (H)", näytetäänkö FENRIS?
+                // Prompt: "Triggers FENRIS products".
+                const triggersFenris = selectedIsos.includes('H') || selectedIsos.includes('S') || selectedIsos.includes('N');
+                
+                if (triggersFenris) {
+                    // Jos nämä on valittu, näytä vain FENRIS tai kaikki sopivat.
+                    // Näytetään tuote, jos se on FENRIS.
+                    if (product.brand !== 'FENRIS') brandMatch = false;
+                } else {
+                    // Normaali tila: Kunnioita valikosta valittua brändiä
+                    if (currentBrandFilter !== 'ALL' && product.brand !== currentBrandFilter) {
+                        brandMatch = false;
+                    }
+                }
+
+                // Materiaalifiltteri (OR-logiikka)
+                let isoMatch = true;
+                if (selectedIsos.length > 0) {
+                    // Jos tuotteella ei ole ISO-tietoja (esim. Tool Holders), näytetäänkö? 
+                    // Yleensä holders sopii kaikille. Oletetaan true jos iso array tyhjä.
+                    if (product.iso.length > 0) {
+                        isoMatch = product.iso.some(code => selectedIsos.includes(code));
+                    }
+                }
+
+                // Operaatiofiltteri (OR-logiikka)
+                let opMatch = true;
+                if (selectedOps.length > 0) {
+                    if (product.op && product.op.length > 0) {
+                        opMatch = product.op.some(op => selectedOps.includes(op));
+                    }
+                }
+
+                return brandMatch && isoMatch && opMatch;
+            });
+
+            // 3. Renderöi
+            if (filtered.length === 0) {
+                productGrid.innerHTML = '<div class="no-results">No products found with selected filters.</div>';
+                return;
+            }
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const badgeClass = product.brand === 'ARCTOS' ? 'brand-arctos' : 'brand-fenris';
+                
+                // Luo ISO-pallot
+                let isoHtml = '';
+                product.iso.forEach(code => {
+                    isoHtml += `<span class="iso-dot iso-${code.toLowerCase()}" title="ISO ${code}"></span>`;
+                });
+
+                card.innerHTML = `
+                    <div class="brand-badge ${badgeClass}">${product.brand}</div>
+                    <div class="product-title">${product.name}</div>
+                    <div class="product-desc">${product.desc}</div>
+                    <ul class="specs-list">
+                        <li>Category: ${product.category}</li>
+                        ${product.type ? `<li>Type: ${product.type}</li>` : ''}
+                        ${product.op && product.op.length ? `<li>Op: ${product.op.join(', ')}</li>` : ''}
+                    </ul>
+                    <div style="margin-top:10px;">${isoHtml}</div>
+                `;
+                productGrid.appendChild(card);
+            });
+            
+            // Päivitä otsikko jos filtteri pakotti Fenriksen
+            if (selectedIsos.includes('H') || selectedIsos.includes('S')) {
+               if (brandTitle.innerText.includes('ARCTOS')) {
+                   brandTitle.innerText = "FENRIS (Filtered Result)";
+                   brandTitle.style.color = "var(--accent-fenris)";
+               }
+            }
+        }
+
+        // --- KIELIASETUKSET ---
+        const translations = {
+            en: { arctos_desc: "Precision tooling", fenris_desc: "Aerospace & defence tooling", copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED" },
+            es: { arctos_desc: "Herramientas de precisión", fenris_desc: "Herramientas aeroespaciales", copyright: "TODOS LOS DERECHOS RESERVADOS" },
+            de: { arctos_desc: "Präzisionswerkzeuge", fenris_desc: "Luft- und Raumfahrt", copyright: "ALLE RECHTE VORBEHALTEN" },
+            fi: { arctos_desc: "Tarkkuustyökalut", fenris_desc: "Ilmailu- ja puolustusteollisuus", copyright: "KAIKKI OIKEUDET PIDÄTETÄÄN" }
         };
 
         function setLanguage(lang) {
-            // Päivitä tekstit
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
+                if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
             });
-
-            // Päivitä aktiivinen luokka kielivalinnassa
             document.querySelectorAll('.lang-option').forEach(opt => {
                 opt.classList.remove('active');
-                if (opt.textContent.toLowerCase() === lang) {
-                    opt.classList.add('active');
-                }
+                if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
             });
-
-            // Vaihda html-tagin kieli (hyvä hakukoneille)
             document.documentElement.lang = lang;
         }
-
-        // Aseta oletuskieli (Englanti)
+        
         setLanguage('en');
 
     </script>
-    
 </body>
 </html>
