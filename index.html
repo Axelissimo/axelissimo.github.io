@@ -38,11 +38,11 @@
             align-items: center; 
         }
 
-        /* --- SIVUVALIKON TYYLIT --- */
+        /* --- SIVUVALIKKO --- */
         .side-menu {
             position: fixed;
             top: 0;
-            left: -300px; /* Piilossa vasemmalla */
+            left: -300px;
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
@@ -55,13 +55,13 @@
         }
 
         .side-menu.active {
-            left: 0; /* Liukuu esiin */
+            left: 0;
         }
 
         .side-menu a {
             display: block;
             padding: 20px 30px;
-            color: #FFFFFF; /* Muutettu valkoiseksi luettavuuden vuoksi */
+            color: #FFFFFF;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
@@ -82,7 +82,6 @@
             text-transform: uppercase;
         }
 
-        /* Taustan himmennys valikon ollessa auki */
         .overlay {
             position: fixed;
             top: 0;
@@ -98,7 +97,7 @@
             display: block;
         }
 
-        /* --- LOGOT JA MUU SISÄLTÖ --- */
+        /* --- LOGOT JA SISÄLTÖ --- */
         @keyframes fadeInLogo {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -123,20 +122,15 @@
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
         }
 
-        /* Signet toimii nyt valikon avaajana */
         .signet-btn {
             position: absolute; 
-            z-index: 1100; /* Valikon yläpuolella */
+            z-index: 1100;
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
             max-width: 60px; 
             cursor: pointer;
             transition: transform 0.3s ease;
-        }
-
-        .signet-btn:hover {
-            transform: scale(1.05);
         }
 
         .top-right-badges {
@@ -167,12 +161,42 @@
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
+        /* --- MOBIILIVERSIO --- */
+        
         @media (max-width: 768px), (max-height: 500px) {
-            html, body { height: auto; min-height: 100vh; justify-content: flex-start; padding-top: 80px; padding-bottom: 40px; box-sizing: border-box; }
-            .signet-btn { top: 5px; left: 10px; width: 45px; position: fixed; }
-            .top-right-badges { position: static; gap: 0; }
-            .nato-badge { position: absolute; top: 5px; left: 65px; height: 45px; }
-            .eu-badge { position: absolute; top: 5px; right: 10px; height: 45px; }
+            html, body { 
+                height: auto; 
+                min-height: 100vh; 
+                justify-content: flex-start; 
+                padding-top: 100px; 
+                padding-bottom: 40px; 
+                box-sizing: border-box; 
+            }
+
+            /* Signet pysyy vasemmalla ylhäällä */
+            .signet-btn { 
+                position: fixed;
+                top: 10px; 
+                left: 10px; 
+                width: 45px; 
+            }
+
+            /* NATO ja EU siirretty rinnakkain oikeaan yläkulmaan */
+            .top-right-badges { 
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                display: flex;
+                flex-direction: row; /* Rinnakkain */
+                gap: 8px; /* Väli merkkien välillä */
+            }
+
+            .nato-badge, .eu-badge { 
+                height: 45px; /* Pienennetty mobiiliin sopivaksi */
+                width: auto;
+                position: static; /* Poistetaan aiemmat absoluuttiset paikat */
+            }
+            
             .logo { margin-bottom: 20px; max-width: 80%; }
             .email-address { margin-bottom: 30px; }
             .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
