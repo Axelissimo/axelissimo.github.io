@@ -58,15 +58,15 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; /* Musta teksti */
+            color: #000000 !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - Fixed = Lukittu ruutuun */
+        /* 1. SIGNET (LOGO) - TASO 1 (YLIN) */
         .signet-btn {
-            position: fixed; /* LUKITTU YLÄKULMAAN */
-            z-index: 2001; 
+            position: fixed; 
+            z-index: 2001; /* Korkein: Aina kaiken päällä */
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -76,23 +76,42 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU - Fixed = Lukittu ruutuun */
+        /* 2. SIVUVALIKKO - TASO 2 (KESKIMMÄINEN) */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: rgb(40, 40, 40);
+            
+            /* KORJATTU: Taso 2000. 
+               Tämä on korkeampi kuin hamburger (1500), joten valikko peittää ikonin.
+               Tämä on matalampi kuin logo (2001), joten logo näkyy valikon päällä. */
+            z-index: 2000; 
+            
+            transition: left 0.4s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+        .side-menu.active { left: 0; }
+
+        /* 3. HAMBURGER MENU - TASO 3 (ALIN NÄISTÄ) */
         .hamburger-icon {
-            position: fixed; /* LUKITTU YLÄKULMAAN */
-            z-index: 2000;
+            position: fixed;
+            
+            /* KORJATTU: Taso 1500. Jää valikon (2000) alle piiloon. */
+            z-index: 1500; 
+            
             left: 1.5vw; 
-            
-            /* Sijoitus logon alapuolelle */
             top: calc(1.5vw + 75px); 
-            
             width: 24px;  
             height: 24px; 
-            
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         
-        /* MUUTETTU MUSTAKSI */
         .hamburger-icon svg rect {
             fill: #000000; 
         }
@@ -127,7 +146,7 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET - MUUTETTU MUSTAKSI */
+        /* ALATUNNISTEET */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
@@ -138,22 +157,6 @@
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
-        /* --- SIVUVALIKKO --- */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
-            background-color: rgb(40, 40, 40);
-            z-index: 1600; /* Valikko liukuu ikonin päälle */
-            transition: left 0.4s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 80px;
-            box-sizing: border-box;
-        }
-        .side-menu.active { left: 0; }
-        
         .menu-category {
             padding: 20px 30px 10px 30px;
             font-size: 11px;
@@ -180,11 +183,14 @@
             margin-top: 5px;
             text-transform: uppercase;
         }
+        
+        /* Overlay valikon alle */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 1400;
+            /* Overlay on ikonin (1500) päällä, mutta valikon (2000) alla */
+            z-index: 1900; 
             display: none;
         }
         .overlay.active { display: block; }
@@ -193,10 +199,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            
-            /* TÄRKEÄ: Riittävä ylätäyte, jotta sisältö alkaa kiinteiden elementtien alta */
             padding-top: 180px; 
-            
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
