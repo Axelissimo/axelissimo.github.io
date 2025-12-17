@@ -58,7 +58,7 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; 
+            color: #000000 !important; /* Musta teksti */
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
@@ -66,7 +66,8 @@
         /* 1. SIGNET (LOGO) */
         .signet-btn {
             position: absolute; 
-            z-index: 1100;
+            /* KORJATTU: Korkeampi z-index kuin valikolla (joka on 1200) */
+            z-index: 1500; 
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -76,24 +77,22 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU (PIENENNETTY) */
+        /* 2. HAMBURGER MENU */
         .hamburger-icon {
             position: absolute;
             z-index: 1100;
-            left: 1.5vw; /* Sama linjaus kuin logolla */
+            left: 1.5vw; 
             
-            /* Sijoitetaan logon alapuolelle. Logo on max 60px. 
-               1.5vw (top) + 60px (logo) + 15px (väli) */
+            /* Sijoitus logon alapuolelle */
             top: calc(1.5vw + 75px); 
             
-            width: 24px;  /* Pienennetty (oli 32px) */
-            height: 24px; /* Pienennetty (oli 32px) */
+            width: 24px;  
+            height: 24px; 
             
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         
-        /* SVG-tyylit: Musta väri */
         .hamburger-icon svg rect {
             fill: #000000; 
         }
@@ -201,7 +200,14 @@
         .shop-tagline { font-size: 14px; color: #cccccc; margin-top: 5px; font-style: italic; }
 
         .shop-layout { display: flex; gap: 40px; }
-        .sidebar { width: 220px; flex-shrink: 0; }
+        
+        /* KORJATTU: Sidebarin yläosaan tilaa, jotta hampurilainen ei mene tekstin päälle */
+        .sidebar { 
+            width: 220px; 
+            flex-shrink: 0; 
+            padding-top: 50px; /* Tyhjää tilaa ikonille */
+        }
+        
         .filter-group { margin-bottom: 30px; }
         .filter-title { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
         
@@ -248,13 +254,13 @@
         @media (max-width: 768px), (max-height: 500px) {
             html, body { height: auto; min-height: 100vh; box-sizing: border-box; }
             
-            #shop-view { padding-top: 120px; padding-left: 20px; padding-right: 20px; }
+            /* Lisätty hieman enemmän tilaa mobiilin kauppanäkymään */
+            #shop-view { padding-top: 130px; padding-left: 20px; padding-right: 20px; }
 
             /* Logo: Kiinteä sijainti vasen yläkulma */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
             
             /* Hampurilainen: Suoraan logon alapuolella, sama vasen linjaus */
-            /* 15px (top) + 45px (logo korkeus) + 15px (väli) = 75px */
             .hamburger-icon { position: fixed; top: 75px; left: 15px; }
 
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
@@ -268,7 +274,9 @@
             .footer-left { margin-top: 40px; }
 
             .shop-layout { flex-direction: column; }
-            .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+            
+            /* Mobiilissa sidebarin padding voi olla pienempi, koska koko viewissä on jo padding-top */
+            .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; padding-top: 0; }
         }
     </style>
 </head>
