@@ -63,10 +63,10 @@
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - TASO 1 (YLIN) */
+        /* 1. SIGNET (LOGO) */
         .signet-btn {
-            position: fixed; /* MUUTETTU: absolute -> fixed (Lukittu ruutuun) */
-            z-index: 2001; /* Korkein: Aina kaiken päällä */
+            position: absolute; /* MUUTETTU: Rullautuu pois */
+            z-index: 2001; 
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -76,34 +76,10 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. SIVUVALIKKO - TASO 2 (KESKIMMÄINEN) */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
-            background-color: rgb(40, 40, 40);
-            
-            /* KORJATTU: Taso 2000. 
-               Tämä on korkeampi kuin hamburger (1500), joten valikko peittää ikonin.
-               Tämä on matalampi kuin logo (2001), joten logo näkyy valikon päällä. */
-            z-index: 2000; 
-            
-            transition: left 0.4s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 80px;
-            box-sizing: border-box;
-        }
-        .side-menu.active { left: 0; }
-
-        /* 3. HAMBURGER MENU - TASO 3 (ALIN NÄISTÄ) */
+        /* 2. HAMBURGER MENU */
         .hamburger-icon {
-            position: fixed; /* MUUTETTU: absolute -> fixed (Lukittu ruutuun) */
-            
-            /* KORJATTU: Taso 1500. Jää valikon (2000) alle piiloon. */
+            position: absolute; /* MUUTETTU: Rullautuu pois */
             z-index: 1500; 
-            
             left: 1.5vw; 
             top: calc(1.5vw + 75px); 
             width: 24px;  
@@ -157,6 +133,22 @@
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
+        /* --- SIVUVALIKKO --- */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: rgb(40, 40, 40);
+            z-index: 2000; 
+            transition: left 0.4s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+        .side-menu.active { left: 0; }
+        
         .menu-category {
             padding: 20px 30px 10px 30px;
             font-size: 11px;
@@ -183,14 +175,11 @@
             margin-top: 5px;
             text-transform: uppercase;
         }
-        
-        /* Overlay valikon alle */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            /* Overlay on ikonin (1500) päällä, mutta valikon (2000) alla */
-            z-index: 1900; 
+            z-index: 1900;
             display: none;
         }
         .overlay.active { display: block; }
@@ -199,6 +188,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
+            /* Koska ikonit rullautuvat pois, voimme pitää runsaan välin alussa */
             padding-top: 180px; 
             padding-left: 40px;
             padding-right: 40px;
@@ -267,9 +257,13 @@
             
             #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
-            .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
-            .hamburger-icon { position: fixed; top: 75px; left: 15px; }
+            /* MUUTETTU: absolute myös mobiilissa, jotta ne rullautuvat pois */
+            .signet-btn { position: absolute; top: 15px; left: 15px; width: 45px; }
+            .hamburger-icon { position: absolute; top: 75px; left: 15px; }
 
+            /* Kielivalinta ja liput pidetään yleensä kiinteinä (fixed) mobiilissa helppokäyttöisyyden vuoksi, 
+               mutta jos haluat kaiken rullautuvan pois, nekin voi muuttaa absolute:ksi. 
+               Jätin nämä toistaiseksi fixed (kuten aiemmin oli tapana), mutta logon/hampurilaisen muutin. */
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 45px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
@@ -625,7 +619,7 @@
             { brand: 'ARCTOS', name: 'WNMG (Trigon 80°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_wnmg' },
             { brand: 'ARCTOS', name: 'DNMG (Rhombic 55°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'M'], op: ['op_medium', 'op_finishing'], desc: 'desc_dnmg' },
             { brand: 'ARCTOS', name: 'CCMT (Rhombic 80°)', category: 'cat_turning', type: 'type_pos', iso: ['M', 'S'], op: ['op_finishing'], desc: 'desc_ccmt' },
-            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'cat_turning', type: 'type_pos', iso: ['M'], op: ['op_finishing'], desc: 'desc_dcmt' },
+            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'cat_turning', type: 'type_pos', iso: ['M', 'S'], op: ['op_finishing'], desc: 'desc_dcmt' },
             { brand: 'ARCTOS', name: 'MGMN System', category: 'cat_turning', type: 'type_part', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_mgmn' },
             { brand: 'ARCTOS', name: 'APKT 1003', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_apkt10' },
             { brand: 'ARCTOS', name: 'APKT 1604', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'K'], op: ['op_roughing'], desc: 'desc_apkt16' },
