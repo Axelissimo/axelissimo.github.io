@@ -18,7 +18,7 @@
             padding: 0;
             height: 100%;
             background-color: rgb(50, 50, 50);
-            color: #FFFFFF; /* Oletusteksti valkoista (mm. kauppaa varten) */
+            color: #FFFFFF; 
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -28,11 +28,11 @@
 
         /* --- ETUSIVUN ELEMENTIT --- */
         #landing-view {
-            height: 100vh;
+            min-height: 100vh; /* Varmistaa täyden korkeuden */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Keskittää pystysuunnassa */
+            align-items: center;     /* Keskittää sivusuunnassa */
             position: relative;
             transition: opacity 0.5s;
         }
@@ -60,9 +60,7 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            
-            /* MUUTETTU: TÄMÄ ON NYT MUSTA */
-            color: #000000 !important; 
+            color: #000000 !important; /* Musta teksti */
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
@@ -94,7 +92,7 @@
             width: auto;        
         }
 
-        /* KIELIVALINTA (PIDETTY VAALEANA) */
+        /* KIELIVALINTA */
         .lang-selector {
             position: absolute;
             top: 1.5vw;
@@ -108,12 +106,12 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET (MUUTETTU MUSTIKSI) */
+        /* ALATUNNISTEET (ETUSIVU) */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #000000; /* MUUTETTU MUSTAKSI */
+            color: #000000; /* Musta teksti */
             z-index: 10;
         }
         .footer-left { left: 20px; }
@@ -140,7 +138,7 @@
             border-bottom: 1px solid rgb(60, 60, 60);
             font-weight: 600;
             font-size: 14px;
-            color: #FFFFFF; /* Valikon teksti valkoista */
+            color: #FFFFFF; 
         }
         .side-menu a:hover { background-color: rgb(60, 60, 60); }
         .side-menu .sub-text {
@@ -164,7 +162,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            padding-top: 100px;
+            padding-top: 100px; /* Työpöytäversio */
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -224,23 +222,48 @@
         .iso-s { background-color: #d35400; }
         .iso-n { background-color: #bdc3c7; }
 
-        /* --- MOBIILIVERSIO --- */
+        /* --- MOBIILIVERSIO (KORJATTU) --- */
         @media (max-width: 768px), (max-height: 500px) {
             html, body { 
-                height: auto; min-height: 100vh; justify-content: flex-start; 
-                padding-top: 110px; padding-bottom: 40px; box-sizing: border-box; 
+                /* Poistettu pakotettu padding-top tästä, jotta Landing View keskittyy oikein */
+                height: auto; 
+                min-height: 100vh; 
+                box-sizing: border-box; 
             }
+            
+            /* Lisätään ylätäyte VAIN kauppanäkymään, jotta valikko ei peitä tuotteita */
+            #shop-view {
+                padding-top: 120px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 45px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
             
-            .logo { margin-bottom: 20px; max-width: 80%; }
-            .email-address { margin-bottom: 30px; }
-            .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
-            .footer-left { margin-top: 40px; }
+            .logo { 
+                margin-bottom: 20px; 
+                max-width: 80%; 
+            }
+            .email-address { 
+                margin-bottom: 30px; 
+            }
+            
+            /* Palautetaan mobiilissa "static" footerit, mutta säädetään marginaalit */
+            .footer-left, .footer-right { 
+                position: static; 
+                width: auto; 
+                max-width: 90%; 
+                margin-bottom: 20px; 
+                text-align: center; 
+                overflow-wrap: break-word; 
+            }
+            .footer-left { 
+                margin-top: 40px; 
+            }
 
-            #shop-view { padding: 80px 20px 20px 20px; }
             .shop-layout { flex-direction: column; }
             .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
         }
