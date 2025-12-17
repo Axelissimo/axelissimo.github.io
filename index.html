@@ -12,13 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- PERUSTYYLIT (ALKUPERÄINEN ILME) --- */
+        /* --- PERUSTYYLIT --- */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: rgb(50, 50, 50); /* Alkuperäinen harmaa */
-            color: #FFFFFF; /* Kaikki teksti valkoista */
+            background-color: rgb(50, 50, 50);
+            color: #FFFFFF; /* Oletusteksti valkoista (mm. kauppaa varten) */
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -60,7 +60,9 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #FFFFFF;
+            
+            /* MUUTETTU: TÄMÄ ON NYT MUSTA */
+            color: #000000 !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
@@ -81,7 +83,7 @@
             z-index: 10;
             display: flex;      
             align-items: flex-start; 
-            top: 4.5vw; /* Tilaa kielivalinnalle */       
+            top: 4.5vw;      
             right: 1.5vw;       
             gap: 1vw;           
         }
@@ -92,6 +94,7 @@
             width: auto;        
         }
 
+        /* KIELIVALINTA (PIDETTY VAALEANA) */
         .lang-selector {
             position: absolute;
             top: 1.5vw;
@@ -105,11 +108,12 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
+        /* ALATUNNISTEET (MUUTETTU MUSTIKSI) */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #FFFFFF; /* Pakotettu valkoinen */
+            color: #000000; /* MUUTETTU MUSTAKSI */
             z-index: 10;
         }
         .footer-left { left: 20px; }
@@ -122,7 +126,7 @@
             left: -300px;
             width: 280px;
             height: 100%;
-            background-color: rgb(40, 40, 40); /* Hieman tummempi kuin tausta */
+            background-color: rgb(40, 40, 40);
             z-index: 1000;
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
@@ -136,6 +140,7 @@
             border-bottom: 1px solid rgb(60, 60, 60);
             font-weight: 600;
             font-size: 14px;
+            color: #FFFFFF; /* Valikon teksti valkoista */
         }
         .side-menu a:hover { background-color: rgb(60, 60, 60); }
         .side-menu .sub-text {
@@ -155,15 +160,15 @@
         }
         .overlay.active { display: block; }
 
-        /* --- TUOTEKATALOGI (MINIMALISTINEN) --- */
+        /* --- TUOTEKATALOGI --- */
         #shop-view {
-            display: none; /* Oletuksena piilossa */
+            display: none;
             min-height: 100vh;
             padding-top: 100px;
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
-            background-color: rgb(50, 50, 50); /* Sama tausta */
+            background-color: rgb(50, 50, 50);
         }
         #shop-view.active { display: flex; flex-direction: column; }
 
@@ -177,7 +182,6 @@
 
         .shop-layout { display: flex; gap: 40px; }
         
-        /* Suodattimet */
         .sidebar { width: 220px; flex-shrink: 0; }
         .filter-group { margin-bottom: 30px; }
         .filter-title { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
@@ -191,7 +195,6 @@
         }
         .filter-checkbox:checked { background: #fff; }
 
-        /* Tuoteruudukko */
         .product-grid {
             flex: 1;
             display: grid;
@@ -213,7 +216,6 @@
         .prod-specs { font-size: 11px; color: #aaa; list-style: none; padding: 0; }
         .prod-specs li::before { content: "- "; }
 
-        /* ISO Pallot (Pidetään hillittyinä, jotta tunnistaa materiaalin) */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
         .iso-p { background-color: #5dade2; }
         .iso-m { background-color: #f1c40f; }
@@ -238,7 +240,6 @@
             .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
             .footer-left { margin-top: 40px; }
 
-            /* Mobiili Kauppa */
             #shop-view { padding: 80px 20px 20px 20px; }
             .shop-layout { flex-direction: column; }
             .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
