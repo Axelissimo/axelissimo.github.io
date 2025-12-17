@@ -58,17 +58,15 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            
-            /* MUUTETTU TAKAISIN MUSTAKSI PYYNNÖSTÄ */
             color: #000000 !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - Lukittu (fixed) ja ylin (z-index 2001) */
+        /* 1. SIGNET (LOGO) - TASO 1 (YLIN) */
         .signet-btn {
-            position: fixed; /* Pysyy paikallaan rullatessa */
-            z-index: 2001;   /* Aina päällimmäisenä, myös valikon päällä */
+            position: fixed; /* MUUTETTU: absolute -> fixed (Lukittu ruutuun) */
+            z-index: 2001; /* Korkein: Aina kaiken päällä */
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -78,11 +76,32 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU - Lukittu (fixed) ja musta */
-        .hamburger-icon {
-            position: fixed; /* Pysyy paikallaan rullatessa */
+        /* 2. SIVUVALIKKO - TASO 2 (KESKIMMÄINEN) */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background-color: rgb(40, 40, 40);
             
-            /* Z-index 1500: Valikko (2000) peittää tämän avautuessaan */
+            /* KORJATTU: Taso 2000. 
+               Tämä on korkeampi kuin hamburger (1500), joten valikko peittää ikonin.
+               Tämä on matalampi kuin logo (2001), joten logo näkyy valikon päällä. */
+            z-index: 2000; 
+            
+            transition: left 0.4s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+        .side-menu.active { left: 0; }
+
+        /* 3. HAMBURGER MENU - TASO 3 (ALIN NÄISTÄ) */
+        .hamburger-icon {
+            position: fixed; /* MUUTETTU: absolute -> fixed (Lukittu ruutuun) */
+            
+            /* KORJATTU: Taso 1500. Jää valikon (2000) alle piiloon. */
             z-index: 1500; 
             
             left: 1.5vw; 
@@ -93,7 +112,6 @@
             transition: transform 0.2s ease;
         }
         
-        /* MUUTETTU MUSTAKSI PYYNNÖSTÄ */
         .hamburger-icon svg rect {
             fill: #000000; 
         }
@@ -128,36 +146,17 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET - MUUTETTU MUSTAKSI */
+        /* ALATUNNISTEET */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
             font-size: 11px;  
-            color: #000000; /* Musta */
+            color: #000000; 
             z-index: 10;
         }
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
-        /* --- SIVUVALIKKO --- */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100%;
-            background-color: rgb(40, 40, 40);
-            
-            /* Z-index 2000: Hampurilaisen (1500) päällä, logon (2001) alla */
-            z-index: 2000; 
-            
-            transition: left 0.4s ease;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 80px;
-            box-sizing: border-box;
-        }
-        .side-menu.active { left: 0; }
-        
         .menu-category {
             padding: 20px 30px 10px 30px;
             font-size: 11px;
@@ -184,11 +183,14 @@
             margin-top: 5px;
             text-transform: uppercase;
         }
+        
+        /* Overlay valikon alle */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 1900;
+            /* Overlay on ikonin (1500) päällä, mutta valikon (2000) alla */
+            z-index: 1900; 
             display: none;
         }
         .overlay.active { display: block; }
@@ -197,10 +199,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            
-            /* Ylätäyte varmistaa, ettei sisältö jää kiinteiden ikonien alle */
             padding-top: 180px; 
-            
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -268,7 +267,6 @@
             
             #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
-            /* Signet ja Hamburger ovat 'fixed' myös mobiilissa */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
             .hamburger-icon { position: fixed; top: 75px; left: 15px; }
 
@@ -570,4 +568,224 @@
                 op_finishing: "Viimeistely",
                 op_interrupted: "Katkonainen lastuaminen",
                 arctos_tagline: "Pohjoinen standardi – Luotettavaa teollista suorituskykyä",
-                fenris_tagline: "Tinkimätöntä suorituskykyä – Koville ja eksoottisille materiaale
+                fenris_tagline: "Tinkimätöntä suorituskykyä – Koville ja eksoottisille materiaaleille",
+                filtered_result: "(Suodatettu tulos)",
+                cat_turning: "Sorvaus",
+                cat_milling: "Jyrsintä",
+                cat_solid: "Täyskovametalli",
+                cat_holders: "Työkalunpitimet",
+                cat_heavy: "Raskas koneistus",
+                cat_titanium: "Titaani ja superseokset",
+                cat_aluminum: "Alumiini",
+                cat_deephole: "Syvänreiän poraus",
+                type_neg: "Negatiiviset kääntöterät",
+                type_pos: "Positiiviset kääntöterät",
+                type_part: "Katkaisu ja uransorvaus",
+                type_shoulder: "Kulmajyrsintä",
+                type_face: "Tasojyrsintä",
+                type_endmill: "Varsijyrsimet",
+                type_drill: "Porat",
+                type_rough: "Rouhinta",
+                type_hard: "Kovasorvaus",
+                type_aero: "Ilmailusorvaus",
+                type_troch: "Dynaaminen jyrsintä (Trookoidi)",
+                desc_cnmg: "Suosituin yleiskäyttöön.",
+                desc_wnmg: "Taloudellinen valinta. 6 leikkuusärmää.",
+                desc_dnmg: "Erinomainen profilointiin.",
+                desc_ccmt: "Positiivinen terä sisäsorvaukseen.",
+                desc_dcmt: "Korkean tarkkuuden viimeistely.",
+                desc_mgmn: "Katkaisu ja uransorvaus (2mm, 3mm, 4mm).",
+                desc_apkt10: "Pienen halkaisijan kulmajyrsintä (90°).",
+                desc_apkt16: "Suuri aineenpoisto.",
+                desc_sekn: "Tasojyrsinsarja (45°).",
+                desc_4flute: "Standardisarja (6mm - 20mm).",
+                desc_3xd: "Lyhyt pora, ulkoinen jäähdytys tai ilman.",
+                desc_pclnr: "PCLNR, MWLNR standardit.",
+                desc_boring: "Sisäsorvausratkaisut.",
+                desc_cnmg_h: "Suuret terät Hardox® & Armox® materiaaleille.",
+                desc_cbn: "Karkaistulle teräkselle >50 HRC.",
+                desc_vcgt: "Terävä särmä, PVD-pinnoitettu Inconelille.",
+                desc_troch: "5-7 leikkuinen muuttuva nousu Ti6Al4V:lle.",
+                desc_alu: "Laserkiillotettu / Pinnoittamaton. Estää irtosärmän.",
+                desc_5xd: "Korkea suorituskyky, sisäjäähdytys."
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Helper function to get translation
+        function t(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key;
+        }
+
+        /* --- TUOTEDATA --- */
+        const products = [
+            // ARCTOS
+            { brand: 'ARCTOS', name: 'CNMG (Rhombic 80°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_cnmg' },
+            { brand: 'ARCTOS', name: 'WNMG (Trigon 80°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_wnmg' },
+            { brand: 'ARCTOS', name: 'DNMG (Rhombic 55°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'M'], op: ['op_medium', 'op_finishing'], desc: 'desc_dnmg' },
+            { brand: 'ARCTOS', name: 'CCMT (Rhombic 80°)', category: 'cat_turning', type: 'type_pos', iso: ['M', 'S'], op: ['op_finishing'], desc: 'desc_ccmt' },
+            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'cat_turning', type: 'type_pos', iso: ['M'], op: ['op_finishing'], desc: 'desc_dcmt' },
+            { brand: 'ARCTOS', name: 'MGMN System', category: 'cat_turning', type: 'type_part', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_mgmn' },
+            { brand: 'ARCTOS', name: 'APKT 1003', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_apkt10' },
+            { brand: 'ARCTOS', name: 'APKT 1604', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'K'], op: ['op_roughing'], desc: 'desc_apkt16' },
+            { brand: 'ARCTOS', name: 'SEKN / SNMX', category: 'cat_milling', type: 'type_face', iso: ['K', 'P'], op: ['op_roughing'], desc: 'desc_sekn' },
+            { brand: 'ARCTOS', name: '4-Flute End Mill', category: 'cat_solid', type: 'type_endmill', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_4flute' },
+            { brand: 'ARCTOS', name: '3xD Drill', category: 'cat_solid', type: 'type_drill', iso: ['P', 'K'], op: ['op_medium'], desc: 'desc_3xd' },
+            { brand: 'ARCTOS', name: 'External Holders', category: 'cat_holders', type: 'cat_turning', iso: [], op: [], desc: 'desc_pclnr' },
+            { brand: 'ARCTOS', name: 'Boring Bars', category: 'cat_holders', type: 'cat_turning', iso: [], op: [], desc: 'desc_boring' },
+
+            // FENRIS
+            { brand: 'FENRIS', name: 'CNMG 16 & 19 Series', category: 'cat_heavy', type: 'type_rough', iso: ['H', 'P'], op: ['op_roughing', 'op_interrupted'], desc: 'desc_cnmg_h' },
+            { brand: 'FENRIS', name: 'Ceramic & CBN Grades', category: 'cat_heavy', type: 'type_hard', iso: ['H'], op: ['op_finishing'], desc: 'desc_cbn' },
+            { brand: 'FENRIS', name: 'VCGT / VBMT Aerospace', category: 'cat_titanium', type: 'type_aero', iso: ['S', 'M'], op: ['op_finishing'], desc: 'desc_vcgt' },
+            { brand: 'FENRIS', name: 'Trochoidal End Mills', category: 'cat_titanium', type: 'type_troch', iso: ['S'], op: ['op_roughing', 'op_medium'], desc: 'desc_troch' },
+            { brand: 'FENRIS', name: 'ALU-Series Turning', category: 'cat_aluminum', type: 'cat_turning', iso: ['N'], op: ['op_finishing'], desc: 'desc_alu' },
+            { brand: 'FENRIS', name: '5xD & 8xD Drills', category: 'cat_deephole', type: 'type_drill', iso: ['P', 'M', 'S'], op: ['op_medium'], desc: 'desc_5xd' }
+        ];
+
+        /* --- LOGIIKKA --- */
+        const landingView = document.getElementById('landing-view');
+        const shopView = document.getElementById('shop-view');
+        const productGrid = document.getElementById('productGrid');
+        const brandTitle = document.getElementById('brand-title');
+        const brandTagline = document.getElementById('brand-tagline');
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+        const checkboxes = document.querySelectorAll('.filter-checkbox');
+
+        let currentBrand = 'ALL';
+
+        function toggleMenu() {
+            sideMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        function openShop(brand) {
+            currentBrand = brand;
+            landingView.classList.add('hidden');
+            shopView.classList.add('active');
+            
+            checkboxes.forEach(cb => cb.checked = false);
+
+            updateBrandHeader();
+            filterProducts();
+            toggleMenu();
+        }
+
+        function closeShop() {
+            shopView.classList.remove('active');
+            landingView.classList.remove('hidden');
+            // If menu was open, ensure it's closed (though signet doesn't open menu anymore)
+            sideMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        function updateBrandHeader() {
+            if (currentBrand === 'ARCTOS') {
+                brandTitle.innerText = "ARCTOS Precision Tooling";
+                brandTagline.innerText = t('arctos_tagline');
+            } else {
+                brandTitle.innerText = "FENRIS Aerospace & Defence";
+                brandTagline.innerText = t('fenris_tagline');
+            }
+        }
+
+        function filterProducts() {
+            productGrid.innerHTML = '';
+            
+            const selectedIsos = Array.from(document.querySelectorAll('input[value="P"]:checked, input[value="M"]:checked, input[value="K"]:checked, input[value="H"]:checked, input[value="S"]:checked, input[value="N"]:checked')).map(cb => cb.value);
+            const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
+
+            const forceFenris = selectedIsos.includes('H') || selectedIsos.includes('S') || selectedIsos.includes('N');
+
+            const filtered = products.filter(p => {
+                let brandMatch = false;
+                if (forceFenris) {
+                    if (p.brand === 'FENRIS') brandMatch = true;
+                } else {
+                    if (p.brand === currentBrand) brandMatch = true;
+                }
+
+                let isoMatch = true;
+                if (selectedIsos.length > 0 && p.iso.length > 0) {
+                    isoMatch = p.iso.some(code => selectedIsos.includes(code));
+                }
+
+                let opMatch = true;
+                if (selectedOps.length > 0 && p.op) {
+                    opMatch = p.op.some(opKey => selectedOps.includes(opKey));
+                }
+
+                return brandMatch && isoMatch && opMatch;
+            });
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = '<div style="color:#888; grid-column:1/-1;">No products found.</div>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
+                
+                const translatedOps = p.op.map(opKey => t(opKey)).join(', ');
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="prod-brand">${p.brand}</div>
+                    <div class="prod-name">${p.name}</div>
+                    <div class="prod-desc">${t(p.desc)}</div>
+                    <ul class="prod-specs">
+                        <li>${t(p.category)}</li>
+                        ${p.type ? `<li>${t(p.type)}</li>` : ''}
+                        ${translatedOps ? `<li>${translatedOps}</li>` : ''}
+                    </ul>
+                    <div style="margin-top:10px;">${isoDots}</div>
+                `;
+                productGrid.appendChild(card);
+            });
+
+            if (forceFenris && currentBrand === 'ARCTOS') {
+                brandTitle.innerText = "FENRIS " + t('filtered_result');
+            } else if (!forceFenris) {
+                 if (currentBrand === 'ARCTOS') brandTitle.innerText = "ARCTOS Precision Tooling";
+                 else brandTitle.innerText = "FENRIS Aerospace & Defence";
+            }
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = t(key);
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
+            });
+            document.documentElement.lang = lang;
+
+            if (shopView.classList.contains('active')) {
+                updateBrandHeader();
+                filterProducts();
+            }
+        }
+        
+        document.querySelectorAll('.op-filter').forEach(cb => {
+            if(cb.value === "Roughing") cb.value = "op_roughing";
+            if(cb.value === "Medium") cb.value = "op_medium";
+            if(cb.value === "Finishing") cb.value = "op_finishing";
+            if(cb.value === "Interrupted") cb.value = "op_interrupted";
+        });
+
+        setLanguage('en');
+    </script>
+</body>
+</html>
