@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,6 +36,31 @@
             flex-direction: column;
             justify-content: center; 
             align-items: center; 
+        }
+
+        /* --- KIELIVALINTA --- */
+        .lang-selector {
+            position: absolute;
+            top: 1.5vw;
+            right: 1.5vw;
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .lang-option {
+            color: #888888;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .lang-option:hover, .lang-option.active {
+            color: #FFFFFF;
+            text-decoration: underline;
         }
 
         /* --- SIVUVALIKKO --- */
@@ -133,12 +158,18 @@
             transition: transform 0.3s ease;
         }
 
+        .signet-btn:hover {
+            transform: scale(1.05);
+        }
+
         .top-right-badges {
             position: absolute;
             z-index: 10;
             display: flex;      
             align-items: flex-start; 
-            top: 1.5vw;         
+            
+            /* SIIRRETTY ALASPÄIN, JOTTA KIELIVALINTA MAHTUU YLÄPUOLELLE */
+            top: 4.5vw;         
             right: 1.5vw;       
             gap: 1vw;           
         }
@@ -168,33 +199,40 @@
                 height: auto; 
                 min-height: 100vh; 
                 justify-content: flex-start; 
-                padding-top: 100px; 
+                padding-top: 110px; /* Lisätty tilaa yläosaan */
                 padding-bottom: 40px; 
                 box-sizing: border-box; 
             }
 
-            /* Signet pysyy vasemmalla ylhäällä */
             .signet-btn { 
                 position: fixed;
-                top: 10px; 
-                left: 10px; 
+                top: 15px; 
+                left: 15px; 
                 width: 45px; 
             }
 
-            /* NATO ja EU siirretty rinnakkain oikeaan yläkulmaan */
+            /* Kielivalinta oikeaan yläkulmaan */
+            .lang-selector {
+                position: fixed;
+                top: 15px;
+                right: 15px;
+                font-size: 14px;
+                gap: 10px;
+            }
+
+            /* Liput heti kielivalinnan alapuolelle */
             .top-right-badges { 
                 position: fixed;
-                top: 10px;
-                right: 10px;
+                top: 45px; /* Kielivalinnan alapuolella */
+                right: 15px;
                 display: flex;
-                flex-direction: row; /* Rinnakkain */
-                gap: 8px; /* Väli merkkien välillä */
+                flex-direction: row; 
+                gap: 8px; 
             }
 
             .nato-badge, .eu-badge { 
-                height: 45px; /* Pienennetty mobiiliin sopivaksi */
+                height: 40px; /* Hieman pienempi, jotta mahtuu paremmin */
                 width: auto;
-                position: static; /* Poistetaan aiemmat absoluuttiset paikat */
             }
             
             .logo { margin-bottom: 20px; max-width: 80%; }
@@ -208,14 +246,21 @@
 
     <div class="overlay" id="overlay"></div>
 
+    <div class="lang-selector">
+        <span class="lang-option active" onclick="setLanguage('en')">EN</span>
+        <span class="lang-option" onclick="setLanguage('es')">ES</span>
+        <span class="lang-option" onclick="setLanguage('de')">DE</span>
+        <span class="lang-option" onclick="setLanguage('fi')">FI</span>
+    </div>
+
     <nav class="side-menu" id="sideMenu">
         <a href="#arctos">
             ARCTOS
-            <span class="sub-text">Precision tooling</span>
+            <span class="sub-text" data-i18n="arctos_desc">Precision tooling</span>
         </a>
         <a href="#fenris">
             FENRIS
-            <span class="sub-text">Aerospace & defence tooling</span>
+            <span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span>
         </a>
     </nav>
     
@@ -234,10 +279,11 @@
     
     <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
 
-    <div class="footer-left">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
-    <div class="footer-right">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
+    <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+    <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
 
     <script>
+        // --- Valikko logiikka ---
         const menuBtn = document.getElementById('menuBtn');
         const sideMenu = document.getElementById('sideMenu');
         const overlay = document.getElementById('overlay');
@@ -249,6 +295,61 @@
 
         menuBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
+
+        // --- Kielivalinta logiikka ---
+        
+        const translations = {
+            en: {
+                arctos_desc: "Precision tooling",
+                fenris_desc: "Aerospace & defence tooling",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy"
+            },
+            es: {
+                arctos_desc: "Herramientas de precisión",
+                fenris_desc: "Herramientas aeroespaciales y de defensa",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy"
+            },
+            de: {
+                arctos_desc: "Präzisionswerkzeuge",
+                fenris_desc: "Luft- und Raumfahrt & Verteidigungswerkzeuge",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH und Industria Nordica SRL sind eingetragene Marken von Industria Nordica Oy"
+            },
+            fi: {
+                arctos_desc: "Tarkkuustyökalut",
+                fenris_desc: "Ilmailu- ja puolustusteollisuuden työkalut",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH ja Industria Nordica SRL ovat Industria Nordica Oy:n rekisteröityjä tavaramerkkejä"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Päivitä tekstit
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Päivitä aktiivinen luokka kielivalinnassa
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.textContent.toLowerCase() === lang) {
+                    opt.classList.add('active');
+                }
+            });
+
+            // Vaihda html-tagin kieli (hyvä hakukoneille)
+            document.documentElement.lang = lang;
+        }
+
+        // Aseta oletuskieli (Englanti)
+        setLanguage('en');
+
     </script>
     
 </body>
