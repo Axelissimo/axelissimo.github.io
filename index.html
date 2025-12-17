@@ -100,7 +100,7 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET (ETUSIVU) */
+        /* ALATUNNISTEET (ETUSIVU - MUSTAT) */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
@@ -208,13 +208,15 @@
         .prod-specs { font-size: 11px; color: #aaa; list-style: none; padding: 0; }
         .prod-specs li::before { content: "- "; }
 
+        /* --- ISO 513 VÄRIKOODIT (STANDARDI) --- */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .iso-p { background-color: #5dade2; }
-        .iso-m { background-color: #f1c40f; }
-        .iso-k { background-color: #e74c3c; }
-        .iso-h { background-color: #95a5a6; }
-        .iso-s { background-color: #d35400; }
-        .iso-n { background-color: #bdc3c7; }
+        
+        .iso-p { background-color: #3498db; } /* Teräs: Sininen */
+        .iso-m { background-color: #f1c40f; } /* RST: Keltainen */
+        .iso-k { background-color: #e74c3c; } /* Valurauta: Punainen */
+        .iso-n { background-color: #2ecc71; } /* Alumiini: Vihreä (KORJATTU) */
+        .iso-s { background-color: #ba7f4d; } /* Titaani: Ruskea (KORJATTU) */
+        .iso-h { background-color: #95a5a6; } /* Karkaistu: Harmaa */
 
         /* --- MOBIILIVERSIO --- */
         @media (max-width: 768px), (max-height: 500px) {
@@ -295,10 +297,10 @@
                 </div>
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_operation">Filter by Operation</div>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="Roughing" onchange="filterProducts()"> <span data-i18n="op_roughing">Roughing</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="Medium" onchange="filterProducts()"> <span data-i18n="op_medium">Medium / General</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="Finishing" onchange="filterProducts()"> <span data-i18n="op_finishing">Finishing</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="Interrupted" onchange="filterProducts()"> <span data-i18n="op_interrupted">Interrupted Cut</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_roughing" onchange="filterProducts()"> <span data-i18n="op_roughing">Roughing</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_medium" onchange="filterProducts()"> <span data-i18n="op_medium">Medium / General</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_finishing" onchange="filterProducts()"> <span data-i18n="op_finishing">Finishing</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_interrupted" onchange="filterProducts()"> <span data-i18n="op_interrupted">Interrupted Cut</span></label>
                 </div>
             </div>
             <div class="product-grid" id="productGrid"></div>
@@ -309,7 +311,6 @@
         /* --- KÄÄNNÖKSET (Dictionary) --- */
         const i18n = {
             en: {
-                // UI
                 arctos_desc: "Precision tooling",
                 fenris_desc: "Aerospace & defence tooling",
                 back_home: "← Back to Home",
@@ -318,7 +319,6 @@
                 filter_material: "Filter by Material",
                 filter_operation: "Filter by Operation",
                 
-                // Filters (Materials)
                 iso_p: "Steel (ISO P)",
                 iso_m: "Stainless (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
@@ -326,18 +326,15 @@
                 iso_s: "Titanium / Superalloys (ISO S)",
                 iso_n: "Aluminum (ISO N)",
                 
-                // Filters (Operations)
                 op_roughing: "Roughing",
                 op_medium: "Medium / General",
                 op_finishing: "Finishing",
                 op_interrupted: "Interrupted Cut",
                 
-                // Brand Taglines
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
 
-                // Product Terms
                 cat_turning: "Turning",
                 cat_milling: "Milling",
                 cat_solid: "Solid Carbide",
@@ -359,7 +356,6 @@
                 type_aero: "Aerospace Turning",
                 type_troch: "Trochoidal Milling",
                 
-                // Descriptions
                 desc_cnmg: "Best Seller for General Purpose.",
                 desc_wnmg: "Economy Choice. 6 cutting edges.",
                 desc_dnmg: "Excellent for Profiling.",
@@ -569,7 +565,7 @@
             return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key;
         }
 
-        /* --- TUOTEDATA (Käytetään avaimia käännöksiin) --- */
+        /* --- TUOTEDATA --- */
         const products = [
             // ARCTOS
             { brand: 'ARCTOS', name: 'CNMG (Rhombic 80°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_cnmg' },
@@ -666,9 +662,6 @@
 
                 let opMatch = true;
                 if (selectedOps.length > 0 && p.op) {
-                    // Check translated op values against keys
-                    // Our filter values are keys like 'Roughing' but stored as 'op_roughing' keys in DB?
-                    // Actually, let's simplify: value="op_roughing" in HTML.
                     opMatch = p.op.some(opKey => selectedOps.includes(opKey));
                 }
 
@@ -683,7 +676,6 @@
             filtered.forEach(p => {
                 let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
                 
-                // Translate Array of Operations
                 const translatedOps = p.op.map(opKey => t(opKey)).join(', ');
 
                 const card = document.createElement('div');
@@ -705,7 +697,6 @@
             if (forceFenris && currentBrand === 'ARCTOS') {
                 brandTitle.innerText = "FENRIS " + t('filtered_result');
             } else if (!forceFenris) {
-                // Restore original title
                  if (currentBrand === 'ARCTOS') brandTitle.innerText = "ARCTOS Precision Tooling";
                  else brandTitle.innerText = "FENRIS Aerospace & Defence";
             }
@@ -714,33 +705,27 @@
         function setLanguage(lang) {
             currentLang = lang;
             
-            // Update UI elements with data-i18n
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 el.textContent = t(key);
             });
             
-            // Update Active Flag
             document.querySelectorAll('.lang-option').forEach(opt => {
                 opt.classList.remove('active');
                 if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
             });
             document.documentElement.lang = lang;
 
-            // Re-render components if shop is active
             if (shopView.classList.contains('active')) {
                 updateBrandHeader();
                 filterProducts();
             }
         }
         
-        // Update checkbox values to match DB keys for easier filtering
+        // Initial setup for filter values
         document.querySelectorAll('.op-filter').forEach(cb => {
-            if(cb.value === "Roughing") cb.value = "op_roughing";
-            if(cb.value === "Medium") cb.value = "op_medium";
-            if(cb.value === "Finishing") cb.value = "op_finishing";
-            if(cb.value === "Interrupted") cb.value = "op_interrupted";
+            // No changes needed if HTML matches JS logic, assuming HTML values are correct keys
         });
 
         // Init
