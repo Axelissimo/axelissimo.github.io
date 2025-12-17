@@ -30,26 +30,78 @@
             padding: 0;
             height: 100%;
             background-color: rgb(50, 50, 50);
-            
             position: relative; 
             overflow-x: hidden; 
-
             display: flex;
             flex-direction: column;
             justify-content: center; 
             align-items: center; 
         }
 
-        /* --- ANIMAATION MÄÄRITTELY --- */
+        /* --- SIVUVALIKON TYYLIT --- */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Piilossa vasemmalla */
+            width: 280px;
+            height: 100%;
+            background-color: rgb(40, 40, 40);
+            z-index: 1000;
+            transition: left 0.4s ease;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 80px;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .side-menu.active {
+            left: 0; /* Liukuu esiin */
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 20px 30px;
+            color: #FFFFFF; /* Muutettu valkoiseksi luettavuuden vuoksi */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid rgb(60, 60, 60);
+            transition: background 0.3s;
+        }
+
+        .side-menu a:hover {
+            background-color: rgb(60, 60, 60);
+        }
+
+        .side-menu .sub-text {
+            display: block;
+            font-weight: 400;
+            font-size: 11px;
+            color: #AAAAAA;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Taustan himmennys valikon ollessa auki */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* --- LOGOT JA MUU SISÄLTÖ --- */
         @keyframes fadeInLogo {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
@@ -57,8 +109,6 @@
             max-height: 60%;
             height: auto;   
             display: block; 
-            
-            /* Animaation kesto ja pehmennys */
             animation: fadeInLogo 1.2s ease-out forwards;
         }
 
@@ -69,23 +119,24 @@
             text-decoration: none; 
             margin-top: 20px; 
             font-size: 18px; 
-            
-            /* Viivästetään sähköpostin ilmestymistä hieman logon jälkeen */
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
         }
 
-        .signet {
+        /* Signet toimii nyt valikon avaajana */
+        .signet-btn {
             position: absolute; 
-            z-index: 10;        
-            
+            z-index: 1100; /* Valikon yläpuolella */
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
-            
             max-width: 60px; 
-            
-            height: auto;       
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .signet-btn:hover {
+            transform: scale(1.05);
         }
 
         .top-right-badges {
@@ -93,136 +144,88 @@
             z-index: 10;
             display: flex;      
             align-items: flex-start; 
-            
             top: 1.5vw;         
             right: 1.5vw;       
             gap: 1vw;           
         }
 
-        .eu-badge {
-            height: 9vw;        
-            max-height: 75px;
-            width: auto;        
-        }
-        
-        .nato-badge {
+        .eu-badge, .nato-badge {
             height: 9vw;        
             max-height: 75px;
             width: auto;        
         }
 
-
-        .footer-left {
+        .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
-            left: 20px;   
-            
             font-family: 'Montserrat', sans-serif;
-            font-weight: 400; 
             font-size: 11px;  
             color: #000000; 
             z-index: 10;
         }
 
-        .footer-right {
-            position: absolute;
-            bottom: 20px; 
-            right: 20px;  
-            
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400; 
-            font-size: 11px;  
-            color: #000000; 
-            
-            text-align: right; 
-            max-width: 350px;  
-            z-index: 10;
-        }
+        .footer-left { left: 20px; }
+        .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
         @media (max-width: 768px), (max-height: 500px) {
-            html, body {
-                height: auto; 
-                min-height: 100vh;
-                justify-content: flex-start; 
-                padding-top: 80px; 
-                padding-bottom: 40px; 
-                box-sizing: border-box; 
-            }
-
-            .signet {
-                display: none;
-            }
-
-            .top-right-badges {
-                position: static;
-                gap: 0;
-            }
-            
-            .nato-badge { 
-                position: absolute;
-                top: 5px; 
-                left: 10px;
-                height: 50px; 
-                width: auto;
-            }
-                
-            .eu-badge { 
-                position: absolute;
-                top: 5px; 
-                right: 10px;
-                height: 50px; 
-                width: auto;
-            }
-            
-            .logo {
-                margin-bottom: 20px;
-                max-width: 80%; /* Mobiilissa logo saa olla hieman leveämpi suhteessa näyttöön */
-            }
-            .email-address {
-                margin-bottom: 30px;
-            }
-
-            .footer-left, 
-            .footer-right {
-                position: static;      
-                width: auto;           
-                max-width: 90%;        
-                margin-bottom: 20px;   
-                text-align: center;
-                overflow-wrap: break-word;
-                word-break: break-word;
-            }
-            
-            .footer-left {
-                margin-top: 40px;
-            }
+            html, body { height: auto; min-height: 100vh; justify-content: flex-start; padding-top: 80px; padding-bottom: 40px; box-sizing: border-box; }
+            .signet-btn { top: 5px; left: 10px; width: 45px; position: fixed; }
+            .top-right-badges { position: static; gap: 0; }
+            .nato-badge { position: absolute; top: 5px; left: 65px; height: 45px; }
+            .eu-badge { position: absolute; top: 5px; right: 10px; height: 45px; }
+            .logo { margin-bottom: 20px; max-width: 80%; }
+            .email-address { margin-bottom: 30px; }
+            .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
+            .footer-left { margin-top: 40px; }
         }
-
     </style>
 </head>
 <body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu" id="sideMenu">
+        <a href="#arctos">
+            ARCTOS
+            <span class="sub-text">Precision tooling</span>
+        </a>
+        <a href="#fenris">
+            FENRIS
+            <span class="sub-text">Aerospace & defence tooling</span>
+        </a>
+    </nav>
     
-    <a href="https://industrianordica.fi">
-        <img src="signet.png" alt="Signet" class="signet"> 
-    </a>
+    <img src="signet.png" alt="Menu" class="signet-btn" id="menuBtn">
 
     <div class="top-right-badges">
-        
         <a href="https://www.nato.int/en" target="_blank" rel="noopener noreferrer">
             <img src="badge-nato.png" alt="NATO Badge" class="nato-badge">
         </a>
-        
         <a href="https://commission.europa.eu/index_en" target="_blank" rel="noopener noreferrer">
             <img src="badge-eu.png" alt="EU VAT" class="eu-badge">
         </a>
     </div>
     
-    <img src="logo-main.png" alt="Logosi" class="logo">
+    <img src="logo-main.png" alt="Industria Nordica" class="logo">
     
     <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
 
     <div class="footer-left">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
     <div class="footer-right">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sideMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
     
 </body>
 </html>
