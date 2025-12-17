@@ -63,11 +63,10 @@
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - Aina päällimmäisenä */
+        /* 1. SIGNET (LOGO) - Taso 1 (Ylin) */
         .signet-btn {
             position: absolute; 
-            /* Z-index 2001 varmistaa että tämä on kaikkein ylin */
-            z-index: 2001; 
+            z-index: 2001; /* Korkein: Aina päällä */
             top: 1.5vw;         
             left: 1.5vw;        
             width: 6.5vw;       
@@ -77,19 +76,14 @@
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU - Korjattu z-index */
+        /* 2. HAMBURGER MENU - Taso 3 (Alin näistä kolmesta) */
         .hamburger-icon {
             position: absolute;
-            /* Z-index 2000 varmistaa että ikoni on tekstien päällä */
-            z-index: 2000;
+            z-index: 1500; /* Valikon (1600) alapuolella */
             left: 1.5vw; 
-            
-            /* Sijoitus logon alapuolelle */
             top: calc(1.5vw + 75px); 
-            
             width: 24px;  
             height: 24px; 
-            
             cursor: pointer;
             transition: transform 0.2s ease;
         }
@@ -139,7 +133,7 @@
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
-        /* --- SIVUVALIKKO --- */
+        /* --- SIVUVALIKKO - Taso 2 (Keskimmäinen) --- */
         .side-menu {
             position: fixed;
             top: 0;
@@ -147,7 +141,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1500; /* Valikko on ikonin alla, mutta sisällön päällä */
+            z-index: 1600; /* Ikonin (1500) yläpuolella, mutta logon (2001) alla */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -184,7 +178,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            padding-top: 100px; 
+            padding-top: 180px; 
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -202,11 +196,7 @@
 
         .shop-layout { display: flex; gap: 40px; }
         
-        .sidebar { 
-            width: 220px; 
-            flex-shrink: 0; 
-            padding-top: 50px; 
-        }
+        .sidebar { width: 220px; flex-shrink: 0; }
         
         .filter-group { margin-bottom: 30px; }
         .filter-title { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
@@ -254,13 +244,9 @@
         @media (max-width: 768px), (max-height: 500px) {
             html, body { height: auto; min-height: 100vh; box-sizing: border-box; }
             
-            /* KORJATTU: Suurempi padding-top (160px), jotta sisältö alkaa selvästi ikonin alta */
             #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
-            /* Logo: Kiinteä sijainti vasen yläkulma */
             .signet-btn { position: fixed; top: 15px; left: 15px; width: 45px; }
-            
-            /* Hampurilainen: Kiinteä sijainti logon alla */
             .hamburger-icon { position: fixed; top: 75px; left: 15px; }
 
             .lang-selector { position: fixed; top: 15px; right: 15px; font-size: 14px; gap: 10px; }
@@ -274,8 +260,6 @@
             .footer-left { margin-top: 40px; }
 
             .shop-layout { flex-direction: column; }
-            
-            /* Resetoidaan sidebarin padding mobiilissa, koska Shop-view hoitaa välin */
             .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; padding-top: 0; }
         }
     </style>
@@ -366,23 +350,19 @@
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
                 filter_material: "Filter by Material",
                 filter_operation: "Filter by Operation",
-                
                 iso_p: "Steel (ISO P)",
                 iso_m: "Stainless (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
                 iso_h: "Hardened (ISO H)",
                 iso_s: "Titanium / Superalloys (ISO S)",
                 iso_n: "Aluminum (ISO N)",
-                
                 op_roughing: "Roughing",
                 op_medium: "Medium / General",
                 op_finishing: "Finishing",
                 op_interrupted: "Interrupted Cut",
-                
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
-
                 cat_turning: "Turning",
                 cat_milling: "Milling",
                 cat_solid: "Solid Carbide",
@@ -391,7 +371,6 @@
                 cat_titanium: "Titanium & Superalloys",
                 cat_aluminum: "Aluminum",
                 cat_deephole: "Deep Hole Drilling",
-                
                 type_neg: "Negative Inserts",
                 type_pos: "Positive Inserts",
                 type_part: "Parting & Grooving",
@@ -403,7 +382,6 @@
                 type_hard: "Hard Part Turning",
                 type_aero: "Aerospace Turning",
                 type_troch: "Trochoidal Milling",
-                
                 desc_cnmg: "Best Seller for General Purpose.",
                 desc_wnmg: "Economy Choice. 6 cutting edges.",
                 desc_dnmg: "Excellent for Profiling.",
