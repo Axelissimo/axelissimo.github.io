@@ -97,14 +97,14 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* TARJOUSKORI-IKONI */
+        /* TARJOUSKORI-IKONI (Oletuksena piilossa: display: none) */
         .cart-btn {
+            display: none; /* PIILOTETTU ETUSIVULLA */
             position: absolute;
             top: 18px; 
             right: 160px; 
             z-index: 2000;
             cursor: pointer;
-            display: flex;
             align-items: center;
             gap: 5px;
             font-size: 13px;
@@ -170,10 +170,6 @@
         .search-container { margin-bottom: 30px; }
         .search-input { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 10px; color: #fff; border-radius: 4px; box-sizing: border-box; }
         .search-input::placeholder { color: #888; }
-
-        /* SVG Ikonit */
-        .filter-icon { width: 16px; height: 16px; margin-right: 8px; fill: #aaa; }
-        .filter-label:hover .filter-icon { fill: #fff; }
 
         /* Product Grid */
         .product-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-content: start; }
@@ -310,22 +306,10 @@
 
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_worktype">Worktype</div>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_turning" onchange="filterProducts()"> 
-                        <svg class="filter-icon" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm2 4h12v2H6zm-2 4h16v2H4zm2 4h12v2H6z"/></svg> 
-                        <span data-i18n="sub_turning">Turning</span>
-                    </label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_milling" onchange="filterProducts()"> 
-                        <svg class="filter-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 2v20M2 12h20"/></svg>
-                        <span data-i18n="sub_milling">Milling</span>
-                    </label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> 
-                        <svg class="filter-icon" viewBox="0 0 24 24"><path d="M12 2L9 22h6z"/></svg>
-                        <span data-i18n="sub_drilling">Drilling</span>
-                    </label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> 
-                        <svg class="filter-icon" viewBox="0 0 24 24"><path d="M2 12h20M2 8h20M2 16h20" stroke="currentColor" stroke-width="2"/></svg>
-                        <span data-i18n="sub_threading">Threading</span>
-                    </label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_turning" onchange="filterProducts()"> <span data-i18n="sub_turning">Turning</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_milling" onchange="filterProducts()"> <span data-i18n="sub_milling">Milling</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> <span data-i18n="sub_drilling">Drilling</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> <span data-i18n="sub_threading">Threading</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_parting" onchange="filterProducts()"> <span data-i18n="sub_parting">Parting</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_clamping" onchange="filterProducts()"> <span data-i18n="sub_clamping">Holders</span></label>
                 </div>
@@ -365,7 +349,7 @@
     </div>
 
     <script>
-        /* --- FULL DICTIONARY --- */
+        /* --- DICTIONARY --- */
         const i18n = {
             en: {
                 all_desc: "Complete Catalog",
@@ -494,6 +478,7 @@
         const modalContent = document.getElementById('modalContent');
         const cartItemsDiv = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
+        const cartBtn = document.querySelector('.cart-btn');
 
         let currentBrand = 'ALL';
 
@@ -508,6 +493,8 @@
             currentBrand = brand;
             landingView.classList.add('hidden');
             shopView.classList.add('active');
+            // Näytä kori, kun ollaan kaupassa
+            cartBtn.style.display = 'flex';
             document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
             updateBrandHeader();
             filterProducts();
@@ -517,6 +504,8 @@
         function closeShop() {
             shopView.classList.remove('active');
             landingView.classList.remove('hidden');
+            // Piilota kori etusivulla
+            cartBtn.style.display = 'none';
             if (sideMenu.classList.contains('active')) toggleMenu();
         }
 
@@ -539,15 +528,24 @@
             
             const filtered = products.filter(p => {
                 let match = true;
+                
+                // Brand logic
                 if (currentBrand !== 'ALL') {
                     if (forceFenris) { if (p.brand !== 'FENRIS') match = false; }
                     else { if (p.brand !== currentBrand) match = false; }
                 }
+
+                // Search
                 if (searchTerm && !p.name.toLowerCase().includes(searchTerm) && !t(p.desc).toLowerCase().includes(searchTerm)) match = false;
+
+                // Filters
                 if (subtypes.length && !subtypes.includes(p.subtype)) match = false;
                 if (types.length && !types.includes(p.type)) match = false;
-                if (isos.length) { if (!p.iso.length || !p.iso.some(c => isos.includes(c))) match = false; }
+                if (isos.length) {
+                    if (!p.iso.length || !p.iso.some(c => isos.includes(c))) match = false;
+                }
                 if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
+
                 return match;
             });
 
