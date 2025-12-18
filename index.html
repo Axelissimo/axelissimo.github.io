@@ -16,7 +16,6 @@
         html, body {
             margin: 0;
             padding: 0;
-            /* TÄRKEÄ MUUTOS: Poistettu height: 100%, jotta sivu rullaa normaalisti */
             min-height: 100vh;
             background-color: rgb(50, 50, 50);
             color: #FFFFFF; 
@@ -60,32 +59,30 @@
             font-size: 18px; 
             opacity: 0;
             animation: fadeInLogo 1.2s ease-out 0.4s forwards;
-            color: #000000 !important; /* Musta */
+            color: #000000 !important; 
         }
 
         /* --- MERKIT JA NAVIGAATIO --- */
         
-        /* 1. SIGNET (LOGO) - POSITION: ABSOLUTE (Rullautuu pois) */
+        /* 1. SIGNET (LOGO) - Rullautuu pois (absolute) */
         .signet-btn {
             position: absolute; 
             z-index: 2001; 
-            top: 25px; /* Käytetään pikseleitä tarkkuuden vuoksi */
-            left: 25px;        
-            width: 60px;       
+            top: 1.5vw;         
+            left: 1.5vw;        
+            width: 6.5vw;       
+            max-width: 60px; 
             cursor: pointer;
             transition: transform 0.3s ease;
         }
         .signet-btn:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER MENU - POSITION: ABSOLUTE (Rullautuu pois) */
+        /* 2. HAMBURGER MENU - Rullautuu pois (absolute) */
         .hamburger-icon {
             position: absolute; 
             z-index: 1500; 
-            
-            /* Sijoitetaan logon alle: 25px (top) + 60px (logo) + 15px (väli) = 100px */
-            top: 100px; 
-            left: 25px; 
-            
+            left: 1.5vw; 
+            top: calc(1.5vw + 75px); 
             width: 24px;  
             height: 24px; 
             cursor: pointer;
@@ -93,7 +90,7 @@
         }
         
         .hamburger-icon svg rect {
-            fill: #000000; /* Musta */
+            fill: #000000; 
         }
 
         .hamburger-icon:hover {
@@ -126,20 +123,20 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET */
+        /* --- ALATUNNISTEET (GLOBAALIT) --- */
         .footer-left, .footer-right {
-            position: absolute;
+            position: fixed; /* Kiinteästi alareunassa työpöydällä */
             bottom: 20px; 
             font-size: 11px;  
             color: #000000; /* Musta */
-            z-index: 10;
+            z-index: 500;   /* Tuotteiden päällä tarvittaessa, valikon alla */
         }
         .footer-left { left: 20px; }
         .footer-right { right: 20px; text-align: right; max-width: 350px; }
 
         /* --- SIVUVALIKKO --- */
         .side-menu {
-            position: fixed; /* Valikko on aina fixed, jotta se pysyy ruudussa avattuna */
+            position: fixed;
             top: 0;
             left: -300px;
             width: 280px;
@@ -192,13 +189,13 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            
-            /* Riittävä tila ylhäällä, jotta otsikko alkaa ikonien alapuolelta */
             padding-top: 180px; 
-            
             padding-left: 40px;
             padding-right: 40px;
-            padding-bottom: 40px;
+            
+            /* Lisätty padding-bottom, jotta kiinteä footer ei peitä alimmaisia tuotteita */
+            padding-bottom: 80px; 
+            
             background-color: rgb(50, 50, 50);
         }
         #shop-view.active { display: flex; flex-direction: column; }
@@ -263,7 +260,6 @@
             
             #shop-view { padding-top: 160px; padding-left: 20px; padding-right: 20px; }
 
-            /* Mobiilissa: Varmistetaan että absolute on voimassa */
             .signet-btn { position: absolute; top: 15px; left: 15px; width: 45px; }
             .hamburger-icon { position: absolute; top: 75px; left: 15px; }
 
@@ -274,7 +270,18 @@
             .logo { margin-bottom: 20px; max-width: 80%; }
             .email-address { margin-bottom: 30px; }
             
-            .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
+            /* Mobiilissa footerit rullaavat (static), etteivät peitä pientä ruutua */
+            .footer-left, .footer-right { 
+                position: static; 
+                width: auto; 
+                max-width: 90%; 
+                margin-bottom: 20px; 
+                text-align: center; 
+                overflow-wrap: break-word; 
+                /* Koska siirsimme ne bodyn juureen, keskitetään ne marginaalilla */
+                margin-left: auto;
+                margin-right: auto;
+            }
             .footer-left { margin-top: 40px; }
 
             .shop-layout { flex-direction: column; }
@@ -326,8 +333,6 @@
         </div>
         <img src="logo-main.png" alt="Industria Nordica" class="logo">
         <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
-        <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
-        <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
     </div>
 
     <div id="shop-view">
@@ -358,6 +363,9 @@
             <div class="product-grid" id="productGrid"></div>
         </div>
     </div>
+
+    <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+    <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
 
     <script>
         /* --- KÄÄNNÖKSET (Dictionary) --- */
@@ -622,7 +630,7 @@
             { brand: 'ARCTOS', name: 'WNMG (Trigon 80°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_wnmg' },
             { brand: 'ARCTOS', name: 'DNMG (Rhombic 55°)', category: 'cat_turning', type: 'type_neg', iso: ['P', 'M'], op: ['op_medium', 'op_finishing'], desc: 'desc_dnmg' },
             { brand: 'ARCTOS', name: 'CCMT (Rhombic 80°)', category: 'cat_turning', type: 'type_pos', iso: ['M', 'S'], op: ['op_finishing'], desc: 'desc_ccmt' },
-            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'cat_turning', type: 'type_pos', iso: ['M', 'S'], op: ['op_finishing'], desc: 'desc_dcmt' },
+            { brand: 'ARCTOS', name: 'DCMT (Rhombic 55°)', category: 'cat_turning', type: 'type_pos', iso: ['M'], op: ['op_finishing'], desc: 'desc_dcmt' },
             { brand: 'ARCTOS', name: 'MGMN System', category: 'cat_turning', type: 'type_part', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_mgmn' },
             { brand: 'ARCTOS', name: 'APKT 1003', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_apkt10' },
             { brand: 'ARCTOS', name: 'APKT 1604', category: 'cat_milling', type: 'type_shoulder', iso: ['P', 'K'], op: ['op_roughing'], desc: 'desc_apkt16' },
