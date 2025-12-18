@@ -34,7 +34,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-color: rgb(50, 50, 50); /* Varmistetaan tausta */
+            background-color: rgb(50, 50, 50);
             transition: opacity 0.5s;
         }
 
@@ -53,7 +53,6 @@
             animation: fadeInLogo 1.2s ease-out forwards;
         }
 
-        /* Etusivun sähköposti MUSTALLA */
         .email-address {
             font-weight: 600; 
             margin-top: 20px; 
@@ -63,36 +62,53 @@
             color: #000000 !important; 
         }
 
-        /* --- SIGNET / MENU BUTTON (KORJATTU) --- */
-        /* Tämä on nyt fixed, jotta se pysyy aina ruudulla */
-        .signet-btn {
+        /* --- NAVIGAATIOELEMENTIT (Fixed Top) --- */
+
+        /* 1. HAMBURGER ICON (Menu) */
+        .hamburger-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 2100; /* Ylin kerros */
+        }
+        
+        .hamburger-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #FFFFFF;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hamburger animaatio kun auki */
+        .hamburger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        /* 2. SIGNET (Home Button) */
+        .signet-home {
             position: fixed; 
-            z-index: 2000; /* Erittäin korkea z-index */
-            top: 20px;         
-            left: 20px;        
-            width: 60px;       
+            z-index: 2000; 
+            top: 12px;         
+            left: 70px; /* Siirretty oikealle hamburgerista */       
+            width: 45px;       
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
-            display: block; /* Varmistetaan näkyvyys */
+            display: block;
         }
-        .signet-btn:hover { transform: scale(1.05); }
+        .signet-home:hover { transform: scale(1.05); }
 
-        .top-right-badges {
-            position: absolute;
-            z-index: 10;
-            display: flex;      
-            align-items: flex-start; 
-            top: 4.5vw;      
-            right: 1.5vw;       
-            gap: 1vw;           
-        }
-
-        .eu-badge, .nato-badge { height: 9vw; max-height: 75px; width: auto; }
-
-        /* KIELIVALINTA */
+        /* 3. KIELIVALINTA */
         .lang-selector {
-            position: fixed; /* Fixed, jotta näkyy myös kaupassa */
+            position: fixed;
             top: 20px;
             right: 20px;
             z-index: 2000;
@@ -104,7 +120,19 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* ALATUNNISTEET (ETUSIVU - MUSTA TEKSTI) */
+        /* --- BADGES (Etusivu) --- */
+        .top-right-badges {
+            position: absolute;
+            z-index: 10;
+            display: flex;      
+            align-items: flex-start; 
+            top: 60px; /* Alempana jotta mahtuu kielivalinnan alle */     
+            right: 20px;       
+            gap: 15px;           
+        }
+        .eu-badge, .nato-badge { height: 9vw; max-height: 75px; width: auto; }
+
+        /* ALATUNNISTEET */
         .footer-left, .footer-right {
             position: absolute;
             bottom: 20px; 
@@ -119,14 +147,14 @@
         .side-menu {
             position: fixed;
             top: 0;
-            left: -300px;
+            left: -320px; /* Piilossa */
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 1900; /* Hieman alle napin */
+            z-index: 2050; /* Hamburgerin alla, mutta sisällön päällä */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 100px; /* Tilaa napille */
+            padding-top: 80px;
             box-sizing: border-box;
         }
         .side-menu.active { left: 0; }
@@ -151,7 +179,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
-            z-index: 1800;
+            z-index: 2040;
             display: none;
         }
         .overlay.active { display: block; }
@@ -213,7 +241,7 @@
         .prod-specs { font-size: 11px; color: #aaa; list-style: none; padding: 0; }
         .prod-specs li::before { content: "- "; }
 
-        /* ISO Pallot - Standardin mukaiset värit */
+        /* ISO Pallot */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
         .iso-p { background-color: #0085CA; } /* Blue */
         .iso-m { background-color: #F1C400; } /* Yellow */
@@ -228,7 +256,7 @@
             
             #shop-view { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
 
-            .signet-btn { width: 50px; top: 15px; left: 15px; }
+            .signet-home { top: 12px; left: 60px; width: 40px; }
             .lang-selector { top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 50px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
@@ -255,7 +283,13 @@
         <span class="lang-option" onclick="setLanguage('fi')">FI</span>
     </div>
 
-    <img src="signet.png" alt="Menu" class="signet-btn" id="menuBtn">
+    <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <img src="signet.png" alt="Home" class="signet-home" onclick="closeShop()">
 
     <nav class="side-menu" id="sideMenu">
         <a href="#" onclick="openShop('ALL')">
@@ -308,11 +342,11 @@
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_material">Filter by Material</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="P" onchange="filterProducts()"><span class="iso-dot iso-p"></span> <span data-i18n="iso_p">Steel (ISO P)</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="M" onchange="filterProducts()"><span class="iso-dot iso-m"></span> <span data-i18n="iso_m">Stainless (ISO M)</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="M" onchange="filterProducts()"><span class="iso-dot iso-m"></span> <span data-i18n="iso_m">Stainless / Duplex (ISO M)</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="K" onchange="filterProducts()"><span class="iso-dot iso-k"></span> <span data-i18n="iso_k">Cast Iron (ISO K)</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="H" onchange="filterProducts()"><span class="iso-dot iso-h"></span> <span data-i18n="iso_h">Hardened (ISO H)</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="S" onchange="filterProducts()"><span class="iso-dot iso-s"></span> <span data-i18n="iso_s">Titanium (ISO S)</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="N" onchange="filterProducts()"><span class="iso-dot iso-n"></span> <span data-i18n="iso_n">Aluminum (ISO N)</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="H" onchange="filterProducts()"><span class="iso-dot iso-h"></span> <span data-i18n="iso_h">Hardened / Hardox (ISO H)</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="S" onchange="filterProducts()"><span class="iso-dot iso-s"></span> <span data-i18n="iso_s">Titanium / Superalloys (ISO S)</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="N" onchange="filterProducts()"><span class="iso-dot iso-n"></span> <span data-i18n="iso_n">Aluminum / Plastics (ISO N)</span></label>
                 </div>
 
                 <div class="filter-group">
@@ -343,12 +377,10 @@
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
                 
-                // Titles
                 filter_subtype: "Product Type",
                 filter_material: "Workpiece Material",
                 filter_operation: "Operation Type",
 
-                // Subtypes
                 sub_turning: "Turning",
                 sub_milling: "Milling",
                 sub_threading: "Threading",
@@ -356,15 +388,13 @@
                 sub_drilling: "Drilling",
                 sub_clamping: "Holders / Clamping",
 
-                // Materials
                 iso_p: "Steel (ISO P)",
-                iso_m: "Stainless (ISO M)",
+                iso_m: "Stainless / Duplex (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
-                iso_h: "Hardened (ISO H)",
+                iso_h: "Hardened / Hardox (ISO H)",
                 iso_s: "Titanium / Superalloys (ISO S)",
-                iso_n: "Aluminum (ISO N)",
+                iso_n: "Aluminum / Plastics (ISO N)",
                 
-                // Operations
                 op_roughing: "Roughing",
                 op_heavy: "Heavy Roughing",
                 op_medium: "Medium / General",
@@ -379,17 +409,14 @@
                 op_dynamic: "Dynamic Milling",
                 op_deep: "Deep Drilling",
                 
-                // Brand Taglines
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
 
-                // Types (Main Types)
                 type_insert: "Insert",
                 type_rotating: "Solid / Rotating",
                 type_holder: "Tool Holder",
                 
-                // Descriptions (Arctos)
                 desc_cnmg: "80° Rhombic. Reliable General Turning.",
                 desc_wnmg: "Trigon. Economy Choice (6 edges).",
                 desc_dnmg: "55° Rhombic. Profiling & General.",
@@ -406,7 +433,6 @@
                 desc_ext_holder: "External Turning Holders.",
                 desc_boring: "Internal Boring Bars.",
 
-                // Descriptions (Fenris)
                 desc_cnmg_h: "Size 16/19. Heavy Duty (Hardox/Armox).",
                 desc_rcmt: "Round Insert. High Feed Roughing (Ti/Superalloys).",
                 desc_cbn: "Ceramic / CBN for Hardened Steel >50HRC.",
@@ -439,7 +465,7 @@
                 iso_k: "Fundición (ISO K)",
                 iso_h: "Templado / Hardox (ISO H)",
                 iso_s: "Titanio / Superaleaciones (ISO S)",
-                iso_n: "Aluminio (ISO N)",
+                iso_n: "Aluminio / Plásticos (ISO N)",
                 op_roughing: "Desbaste",
                 op_heavy: "Desbaste Pesado",
                 op_medium: "Medio / General",
@@ -506,7 +532,7 @@
                 iso_k: "Gusseisen (ISO K)",
                 iso_h: "Gehärtet / Hardox (ISO H)",
                 iso_s: "Titan / Superlegierungen (ISO S)",
-                iso_n: "Aluminium (ISO N)",
+                iso_n: "Aluminium / Kunststoffe (ISO N)",
                 op_roughing: "Schruppen",
                 op_heavy: "Schwerzerspanung",
                 op_medium: "Allgemein",
@@ -573,7 +599,7 @@
                 iso_k: "Valurauta (ISO K)",
                 iso_h: "Karkaistu / Hardox (ISO H)",
                 iso_s: "Titaani / Superseokset (ISO S)",
-                iso_n: "Alumiini (ISO N)",
+                iso_n: "Alumiini / Muovit (ISO N)",
                 op_roughing: "Rouhinta",
                 op_heavy: "Raskas Rouhinta",
                 op_medium: "Yleis / Keski",
@@ -622,30 +648,29 @@
 
         let currentLang = 'en';
 
-        // Helper function to get translation
         function t(key) {
             return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key;
         }
 
-        /* --- TUOTETIETOKANTA (KUVAN PERUSTEELLA) --- */
+        /* --- TUOTETIETOKANTA --- */
         const products = [
-            // ARCTOS - SORVAUS (Kääntöpalat)
+            // ARCTOS - SORVAUS
             { brand: 'ARCTOS', name: 'CNMG (80°)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_cnmg' },
             { brand: 'ARCTOS', name: 'WNMG (Trigon)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_wnmg' },
             { brand: 'ARCTOS', name: 'DNMG (55°)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_profiling', 'op_medium'], desc: 'desc_dnmg' },
-            { brand: 'ARCTOS', name: 'SNMG (Square)', subtype: 'sub_turning', type: 'type_insert', iso: ['M', 'K'], op: ['op_heavy'], desc: 'desc_snmg' }, // Image: Duplex, Valurauta
+            { brand: 'ARCTOS', name: 'SNMG (Square)', subtype: 'sub_turning', type: 'type_insert', iso: ['M', 'K'], op: ['op_heavy'], desc: 'desc_snmg' }, // M=Duplex
             { brand: 'ARCTOS', name: 'CCMT (Pos)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M'], op: ['op_finishing'], desc: 'desc_ccmt' },
             { brand: 'ARCTOS', name: 'DCMT (Pos)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M'], op: ['op_finishing'], desc: 'desc_dcmt' },
             
-            // ARCTOS - KIERTEYTYS & KATKAISU (Kääntöpalat)
+            // ARCTOS - KIERTEYTYS & KATKAISU
             { brand: 'ARCTOS', name: '16ER / 16IR', subtype: 'sub_threading', type: 'type_insert', iso: ['P', 'M'], op: ['op_threading'], desc: 'desc_16er' },
             { brand: 'ARCTOS', name: 'MGMN System', subtype: 'sub_parting', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_parting'], desc: 'desc_mgmn' },
 
-            // ARCTOS - JYRSINTÄ (Kääntöpalat)
+            // ARCTOS - JYRSINTÄ
             { brand: 'ARCTOS', name: 'APKT 1003/1604', subtype: 'sub_milling', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_apkt' },
             { brand: 'ARCTOS', name: 'SEKN / SNMX', subtype: 'sub_milling', type: 'type_insert', iso: ['P', 'K'], op: ['op_roughing'], desc: 'desc_sekn' },
 
-            // ARCTOS - PYÖRIVÄT (Solid)
+            // ARCTOS - PYÖRIVÄT
             { brand: 'ARCTOS', name: '4-Flute End Mill', subtype: 'sub_milling', type: 'type_rotating', iso: ['P', 'M'], op: ['op_medium'], desc: 'desc_4flute' },
             { brand: 'ARCTOS', name: '3xD Drill', subtype: 'sub_drilling', type: 'type_rotating', iso: ['P', 'M'], op: ['op_drilling'], desc: 'desc_3xd' },
             { brand: 'ARCTOS', name: 'Spiral Tap', subtype: 'sub_threading', type: 'type_rotating', iso: ['P', 'M'], op: ['op_threading'], desc: 'desc_tap' },
@@ -655,13 +680,13 @@
             { brand: 'ARCTOS', name: 'Boring Bars', subtype: 'sub_clamping', type: 'type_holder', iso: [], op: ['op_clamping'], desc: 'desc_boring' },
 
 
-            // FENRIS - SORVAUS
-            { brand: 'FENRIS', name: 'CNMG 16/19', subtype: 'sub_turning', type: 'type_insert', iso: ['H', 'P'], op: ['op_heavy'], desc: 'desc_cnmg_h' }, // Hardox
-            { brand: 'FENRIS', name: 'RCMT / RPGT', subtype: 'sub_turning', type: 'type_insert', iso: ['S'], op: ['op_highfeed'], desc: 'desc_rcmt' }, // Titaani, Super
-            { brand: 'FENRIS', name: 'Ceramic / CBN', subtype: 'sub_turning', type: 'type_insert', iso: ['H'], op: ['op_hard'], desc: 'desc_cbn' }, // Karkaistu
+            // FENRIS
+            { brand: 'FENRIS', name: 'CNMG 16/19', subtype: 'sub_turning', type: 'type_insert', iso: ['H', 'P'], op: ['op_heavy'], desc: 'desc_cnmg_h' },
+            { brand: 'FENRIS', name: 'RCMT / RPGT', subtype: 'sub_turning', type: 'type_insert', iso: ['S'], op: ['op_highfeed'], desc: 'desc_rcmt' },
+            { brand: 'FENRIS', name: 'Ceramic / CBN', subtype: 'sub_turning', type: 'type_insert', iso: ['H'], op: ['op_hard'], desc: 'desc_cbn' },
             { brand: 'FENRIS', name: 'Hard-Thread', subtype: 'sub_threading', type: 'type_insert', iso: ['H'], op: ['op_threading'], desc: 'desc_hardthread' },
-            { brand: 'FENRIS', name: 'VCGT / VBMT', subtype: 'sub_turning', type: 'type_insert', iso: ['S', 'M'], op: ['op_finishing'], desc: 'desc_vcgt' }, // Ti, Inconel
-            { brand: 'FENRIS', name: 'ALU-Series', subtype: 'sub_turning', type: 'type_insert', iso: ['N'], op: ['op_finishing'], desc: 'desc_alu' },
+            { brand: 'FENRIS', name: 'VCGT / VBMT', subtype: 'sub_turning', type: 'type_insert', iso: ['S', 'M'], op: ['op_finishing'], desc: 'desc_vcgt' },
+            { brand: 'FENRIS', name: 'ALU-Series', subtype: 'sub_turning', type: 'type_insert', iso: ['N'], op: ['op_finishing'], desc: 'desc_alu' }, // N=Muovi
 
             // FENRIS - PYÖRIVÄT
             { brand: 'FENRIS', name: 'Trochoidal Mill', subtype: 'sub_milling', type: 'type_rotating', iso: ['S', 'M'], op: ['op_dynamic'], desc: 'desc_troch' },
@@ -675,9 +700,9 @@
         const productGrid = document.getElementById('productGrid');
         const brandTitle = document.getElementById('brand-title');
         const brandTagline = document.getElementById('brand-tagline');
-        const menuBtn = document.getElementById('menuBtn');
         const sideMenu = document.getElementById('sideMenu');
         const overlay = document.getElementById('overlay');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
         const checkboxes = document.querySelectorAll('.filter-checkbox');
 
         let currentBrand = 'ALL';
@@ -685,8 +710,11 @@
         function toggleMenu() {
             sideMenu.classList.toggle('active');
             overlay.classList.toggle('active');
+            hamburgerBtn.classList.toggle('open');
         }
-        menuBtn.addEventListener('click', toggleMenu);
+
+        // Hamburger klikkaa
+        // hamburgerBtn.addEventListener('click', toggleMenu); (HTML:ssä onclick)
         overlay.addEventListener('click', toggleMenu);
 
         function openShop(brand) {
@@ -698,13 +726,14 @@
 
             updateBrandHeader();
             filterProducts();
-            toggleMenu();
+            toggleMenu(); // Sulje valikko
         }
 
         function closeShop() {
             shopView.classList.remove('active');
             landingView.classList.remove('hidden');
-            toggleMenu();
+            // Jos valikko on auki, suljetaan se
+            if (sideMenu.classList.contains('active')) toggleMenu();
         }
 
         function updateBrandHeader() {
@@ -727,7 +756,7 @@
             const selectedIsos = Array.from(document.querySelectorAll('.iso-filter:checked')).map(cb => cb.value);
             const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
 
-            // Jos ollaan ARCTOS-tilassa ja valitaan eksoottinen materiaali (H/S/N), näytä FENRIS tuotteet
+            // Jos ARCTOS-tilassa valitaan H, S tai N -> Näytä FENRIS
             const forceFenris = (currentBrand === 'ARCTOS') && (selectedIsos.includes('H') || selectedIsos.includes('S') || selectedIsos.includes('N'));
 
             const filtered = products.filter(p => {
@@ -741,24 +770,15 @@
                     if (p.brand === currentBrand) brandMatch = true;
                 }
 
-                // Subtype filter
                 let subMatch = true;
-                if (selectedSubtypes.length > 0) {
-                    subMatch = selectedSubtypes.includes(p.subtype);
-                }
+                if (selectedSubtypes.length > 0) subMatch = selectedSubtypes.includes(p.subtype);
 
-                // ISO filter
                 let isoMatch = true;
                 if (selectedIsos.length > 0) {
-                    // Jos tuotteella ei ole ISO-koodia (esim. pitimet), se ei näy jos filtteri on päällä
-                    if (p.iso.length > 0) {
-                        isoMatch = p.iso.some(code => selectedIsos.includes(code));
-                    } else {
-                        isoMatch = false; 
-                    }
+                    if (p.iso.length > 0) isoMatch = p.iso.some(code => selectedIsos.includes(code));
+                    else isoMatch = false; 
                 }
 
-                // Op filter
                 let opMatch = true;
                 if (selectedOps.length > 0 && p.op) {
                     opMatch = p.op.some(opKey => selectedOps.includes(opKey));
