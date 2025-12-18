@@ -97,11 +97,11 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* UUSI: TARJOUSKORI-IKONI */
+        /* TARJOUSKORI-IKONI */
         .cart-btn {
             position: absolute;
-            top: 18px; /* Hieman eri linjassa tai samassa */
-            right: 160px; /* Vasemmalle kielivalinnasta */
+            top: 18px; 
+            right: 160px; 
             z-index: 2000;
             cursor: pointer;
             display: flex;
@@ -166,12 +166,12 @@
         .filter-checkbox { appearance: none; width: 14px; height: 14px; border: 1px solid #fff; margin-right: 10px; background: transparent; cursor: pointer; flex-shrink: 0; }
         .filter-checkbox:checked { background: #fff; }
         
-        /* UUSI: HAKUPALKKI */
+        /* Hakupalkki */
         .search-container { margin-bottom: 30px; }
         .search-input { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 10px; color: #fff; border-radius: 4px; box-sizing: border-box; }
         .search-input::placeholder { color: #888; }
 
-        /* UUSI: SVG IKONIT SUODATTIMISSA */
+        /* SVG Ikonit */
         .filter-icon { width: 16px; height: 16px; margin-right: 8px; fill: #aaa; }
         .filter-label:hover .filter-icon { fill: #fff; }
 
@@ -194,7 +194,7 @@
 
         .shop-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: #888; font-size: 11px; width: 100%; }
 
-        /* --- MODALS (UUSI) --- */
+        /* --- MODALS --- */
         .modal-overlay { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
         .modal-overlay.open { display: flex; }
         .modal-content { background-color: #2b2b2b; padding: 30px; border: 1px solid #444; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -224,7 +224,7 @@
             .signet-home { width: 50px; top: 15px; left: 15px; }
             .hamburger-btn { top: 75px; left: 28px; }
             .lang-selector { top: 15px; right: 15px; }
-            .cart-btn { top: 18px; right: 160px; /* Pidä tilaa */ }
+            .cart-btn { top: 18px; right: 160px; }
             .top-right-badges { top: 50px; right: 15px; }
             .logo { margin-bottom: 20px; max-width: 80%; }
             .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; }
@@ -365,7 +365,7 @@
     </div>
 
     <script>
-        /* --- DICTIONARY --- */
+        /* --- FULL DICTIONARY --- */
         const i18n = {
             en: {
                 all_desc: "Complete Catalog",
@@ -377,17 +377,74 @@
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
                 quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade",
                 filter_worktype: "Worktype", filter_tooltype: "Tool Type", filter_material: "Material", filter_intensity: "Intensity",
-                sub_turning: "Turning", sub_milling: "Milling", sub_threading: "Threading", sub_parting: "Parting", sub_drilling: "Drilling", sub_clamping: "Holders",
+                sub_turning: "Turning", sub_milling: "Milling", sub_threading: "Threading", sub_parting: "Parting", sub_drilling: "Drilling", sub_clamping: "Holders / Clamping",
                 type_insert: "Insert", type_rotating: "Solid / Rotating", type_holder: "Tool Holder",
                 iso_p: "Steel", iso_m: "Stainless/Duplex", iso_k: "Cast Iron", iso_h: "Hardened", iso_s: "Titanium/Super", iso_n: "Alu/Plastic",
                 op_heavy: "Heavy Roughing", op_roughing: "Roughing", op_medium: "Medium", op_finishing: "Finishing",
-                arctos_tagline: "The Northern Standard", fenris_tagline: "Uncompromising Performance", filtered_result: "(Filtered)",
+                arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
+                fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
+                filtered_result: "(Filtered Result)",
                 desc_cnmg: "80° Rhombic. Reliable General Turning.", desc_wnmg: "Trigon. Economy Choice.", desc_dnmg: "55° Rhombic. Profiling.", desc_snmg: "Square. Heavy Roughing.",
                 desc_apkt: "Shoulder Milling 90°.", desc_4flute: "Universal End Mill.", desc_3xd: "Short Drill (3xD).", desc_cnmg_h: "Heavy Duty Hardox.", desc_vcgt: "Sharp Edge / Polished.",
                 desc_ccmt: "Pos 80°. Internal.", desc_dcmt: "Pos 55°. Internal.", desc_16er: "Threading Inserts.", desc_mgmn: "Parting System.", desc_sekn: "Face Mill 45°.", desc_tap: "Spiral Tap.", desc_ext_holder: "Ext. Holders.", desc_boring: "Boring Bars.", desc_rcmt: "Round High Feed.", desc_cbn: "Ceramic/CBN.", desc_hardthread: "Hard Threading.", desc_alu: "Alu Series.", desc_troch: "Trochoidal Mill.", desc_threadmill: "Thread Mill.", desc_5xd: "Deep Drill."
             },
-            // Muut kielet yksinkertaistettu tilan säästämiseksi, logiikka pysyy samana
-            fi: { all_desc: "Koko kuvasto", all_tagline: "Premium-työkalut", arctos_desc: "Tarkkuustyökalut", fenris_desc: "Ilmailu ja puolustus", back_home: "← Etusivu", quote: "Tarjous", quote_basket: "Tarjouskori", form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus / VAT", btn_send: "Luo sähköposti", btn_add: "Lisää tarjouspyyntöön", btn_download: "Lataa esite", tech_speed: "Lastuamisnopeus (Vc)", tech_feed: "Syöttö (fn)", tech_depth: "Lastuamissyvyys (ap)", tech_grade: "Laatu", filter_worktype: "Työstömuoto", filter_tooltype: "Tyyppi", filter_material: "Materiaali", filter_intensity: "Intensiteetti", sub_turning: "Sorvaus", sub_milling: "Jyrsintä", sub_threading: "Kierteytys", sub_parting: "Katkaisu", sub_drilling: "Poraus", sub_clamping: "Pitimet", type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin", iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini", op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön suorituskyky", filtered_result: "(Suodatettu)", desc_cnmg: "80° Rombinen." }
+            es: {
+                all_desc: "Catálogo Completo",
+                all_tagline: "Herramientas premium para cada aplicación",
+                arctos_desc: "Herramientas de precisión",
+                fenris_desc: "Herramientas aeroespaciales",
+                back_home: "← Volver al Inicio",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy",
+                quote: "Cotizar", quote_basket: "Cesta de Cotización", form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "ID Negocio / VAT", btn_send: "Crear Email", btn_add: "Añadir a Cotización", btn_download: "Descargar Ficha", tech_speed: "Velocidad (Vc)", tech_feed: "Avance (fn)", tech_depth: "Profundidad (ap)", tech_grade: "Calidad",
+                filter_worktype: "Tipo de Trabajo", filter_tooltype: "Tipo Herramienta", filter_material: "Material", filter_intensity: "Intensidad",
+                sub_turning: "Torneado", sub_milling: "Fresado", sub_threading: "Roscado", sub_parting: "Tronzado", sub_drilling: "Taladrado", sub_clamping: "Sujeción",
+                type_insert: "Plaquita", type_rotating: "Rotativo", type_holder: "Portaherramientas",
+                iso_p: "Acero", iso_m: "Inox/Duplex", iso_k: "Fundición", iso_h: "Templado", iso_s: "Titanio", iso_n: "Aluminio",
+                op_heavy: "Desbaste Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado",
+                arctos_tagline: "El Estándar Nórdico", fenris_tagline: "Rendimiento Sin Concesiones", filtered_result: "(Filtrado)",
+                desc_cnmg: "Rómbica 80°. Torneado General.", desc_wnmg: "Trígono. Económica.", desc_dnmg: "Rómbica 55°. Perfilado.", desc_snmg: "Cuadrada. Desbaste Pesado.",
+                desc_apkt: "Fresado Escuadra 90°.", desc_4flute: "Fresa Universal.", desc_3xd: "Broca Corta (3xD).", desc_cnmg_h: "Pesado Hardox.", desc_vcgt: "Filo Vivo.",
+                desc_ccmt: "Pos 80°. Interior.", desc_dcmt: "Pos 55°. Interior.", desc_16er: "Plaquitas Roscado.", desc_mgmn: "Tronzado.", desc_sekn: "Fresado Frontal 45°.", desc_tap: "Macho Espiral.", desc_ext_holder: "Portaherramientas Ext.", desc_boring: "Barras Mandrinar.", desc_rcmt: "Redonda Alto Avance.", desc_cbn: "Cerámica/CBN.", desc_hardthread: "Roscado Duro.", desc_alu: "Serie Alu.", desc_troch: "Fresado Trocoidal.", desc_threadmill: "Fresa Roscar.", desc_5xd: "Taladro Profundo."
+            },
+            de: {
+                all_desc: "Gesamtkatalog",
+                all_tagline: "Premium-Werkzeuge für jede Anwendung",
+                arctos_desc: "Präzisionswerkzeuge",
+                fenris_desc: "Luft- und Raumfahrt",
+                back_home: "← Zurück",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
+                trademarks: "Eingetragene Marken von Industria Nordica Oy",
+                quote: "Angebot", quote_basket: "Angebotskorb", form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Email erstellen", btn_add: "Zum Angebot", btn_download: "Datenblatt", tech_speed: "Schnittgeschw. (Vc)", tech_feed: "Vorschub (fn)", tech_depth: "Schnitttiefe (ap)", tech_grade: "Sorte",
+                filter_worktype: "Bearbeitung", filter_tooltype: "Werkzeugtyp", filter_material: "Werkstoff", filter_intensity: "Intensität",
+                sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden", sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
+                type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter",
+                iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Gusseisen", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
+                op_heavy: "Schwerzerspanung", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten",
+                arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Kompromisslose Leistung", filtered_result: "(Gefiltert)",
+                desc_cnmg: "80° Rhombisch. Allgemein.", desc_wnmg: "Trigon. Wirtschaftlich.", desc_dnmg: "55° Rhombisch. Profil.", desc_snmg: "Quadratisch. Schwer.",
+                desc_apkt: "Eckfräsen 90°.", desc_4flute: "Universalfräser.", desc_3xd: "Kurzbohrer (3xD).", desc_cnmg_h: "Schwer Hardox.", desc_vcgt: "Scharfe Schneide.",
+                desc_ccmt: "Pos 80°. Innen.", desc_dcmt: "Pos 55°. Innen.", desc_16er: "Gewindeplatten.", desc_mgmn: "Abstechen.", desc_sekn: "Planfräsen 45°.", desc_tap: "Spiralbohrer.", desc_ext_holder: "Außendrehhalter.", desc_boring: "Bohrstangen.", desc_rcmt: "Rundplatte Hochvorschub.", desc_cbn: "Keramik/CBN.", desc_hardthread: "Hartgewinden.", desc_alu: "Alu Serie.", desc_troch: "Trochoidal.", desc_threadmill: "Gewindefräser.", desc_5xd: "Tiefloch."
+            },
+            fi: {
+                all_desc: "Koko kuvasto",
+                all_tagline: "Premium-työkalut kaikkiin tarpeisiin",
+                arctos_desc: "Tarkkuustyökalut",
+                fenris_desc: "Ilmailu ja puolustus",
+                back_home: "← Etusivu",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
+                trademarks: "Industria Nordica Oy:n rekisteröityjä tavaramerkkejä",
+                quote: "Tarjous", quote_basket: "Tarjouskori", form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus / VAT", btn_send: "Luo sähköposti", btn_add: "Lisää tarjouspyyntöön", btn_download: "Lataa esite", tech_speed: "Lastuamisnopeus (Vc)", tech_feed: "Syöttö (fn)", tech_depth: "Lastuamissyvyys (ap)", tech_grade: "Laatu",
+                filter_worktype: "Työstömuoto", filter_tooltype: "Tyyppi", filter_material: "Materiaali", filter_intensity: "Intensiteetti",
+                sub_turning: "Sorvaus", sub_milling: "Jyrsintä", sub_threading: "Kierteytys", sub_parting: "Katkaisu", sub_drilling: "Poraus", sub_clamping: "Pitimet",
+                type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin",
+                iso_p: "Teräs", iso_m: "RST/Duplex", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
+                op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely",
+                arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön suorituskyky", filtered_result: "(Suodatettu)",
+                desc_cnmg: "80° Rombinen. Luotettava yleissorvaus.", desc_wnmg: "Trigon. Taloudellinen (6 särmää).", desc_dnmg: "55° Rombinen. Profilointi.", desc_snmg: "Neliö. Raskas rouhinta.",
+                desc_apkt: "Varsijyrsintä 90°.", desc_4flute: "Yleisjyrsin.", desc_3xd: "Lyhyt pora (3xD).", desc_cnmg_h: "Raskas Hardox.", desc_vcgt: "Terävä särmä.",
+                desc_ccmt: "Pos 80°. Sisäsorvaus.", desc_dcmt: "Pos 55°. Sisäsorvaus.", desc_16er: "Kierrepalat.", desc_mgmn: "Katkaisu.", desc_sekn: "Tasojyrsintä 45°.", desc_tap: "Kierretappi.", desc_ext_holder: "Ulkosorvausvarret.", desc_boring: "Sisäsorvauspuomit.", desc_rcmt: "Pyöreä High Feed.", desc_cbn: "Keramia/CBN.", desc_hardthread: "Kierteytys karkaistulle.", desc_alu: "Alu-sarja.", desc_troch: "Trookoidijyrsintä.", desc_threadmill: "Kierrejyrsin.", desc_5xd: "Syväporaus."
+            }
         };
 
         let currentLang = 'en';
@@ -482,24 +539,15 @@
             
             const filtered = products.filter(p => {
                 let match = true;
-                
-                // Brand logic
                 if (currentBrand !== 'ALL') {
                     if (forceFenris) { if (p.brand !== 'FENRIS') match = false; }
                     else { if (p.brand !== currentBrand) match = false; }
                 }
-
-                // Search
                 if (searchTerm && !p.name.toLowerCase().includes(searchTerm) && !t(p.desc).toLowerCase().includes(searchTerm)) match = false;
-
-                // Filters
                 if (subtypes.length && !subtypes.includes(p.subtype)) match = false;
                 if (types.length && !types.includes(p.type)) match = false;
-                if (isos.length) {
-                    if (!p.iso.length || !p.iso.some(c => isos.includes(c))) match = false;
-                }
+                if (isos.length) { if (!p.iso.length || !p.iso.some(c => isos.includes(c))) match = false; }
                 if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
-
                 return match;
             });
 
@@ -546,7 +594,6 @@
             const p = products.find(x => x.id === id);
             cart.push(p);
             updateCartUI();
-            // Optional feedback
             const btn = document.querySelector('.cart-btn');
             btn.style.color = "#fff"; setTimeout(()=> btn.style.color="#ccc", 300);
         }
