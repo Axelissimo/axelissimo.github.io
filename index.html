@@ -64,10 +64,10 @@
 
         /* --- NAVIGAATIOELEMENTIT (Fixed Top Left) --- */
 
-        /* 1. SIGNET (Home Button) - YLINNÄ */
+        /* 1. SIGNET (Home Button) - YLINNÄ JA AINA NÄKYVISSÄ */
         .signet-home {
             position: fixed; 
-            z-index: 2000; 
+            z-index: 2200; /* KORJATTU: Korkeampi kuin valikko (2050) */
             top: 20px;         
             left: 20px;          
             width: 50px;       
@@ -78,34 +78,36 @@
         }
         .signet-home:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER ICON (Menu) - LOGON ALAPUOLELLA */
+        /* 2. HAMBURGER ICON (Menu) */
         .hamburger-btn {
             position: fixed;
-            top: 80px; /* Signetin (50px) + margin (20px) alapuolella */
-            left: 33px; /* Keskitetty logoon nähden (logo 50px leveä) */
-            width: 24px; /* Pienennetty */
+            top: 80px; 
+            left: 33px; 
+            width: 24px; 
             height: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
             z-index: 2100;
+            transition: opacity 0.3s ease; /* Pehmeä katoaminen */
         }
         
         .hamburger-btn span {
             display: block;
-            height: 2px; /* Ohuempi viiva */
+            height: 2px; 
             width: 100%;
             background-color: #000000; /* MUSTA */
             border-radius: 2px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 2px rgba(255,255,255,0.2); /* Pieni hehku erottuvuuden vuoksi tummalla pohjalla */
+            box-shadow: 0 0 2px rgba(255,255,255,0.2); 
         }
         
-        /* Hamburger animaatio */
-        .hamburger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background-color: #FFF; }
-        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
-        .hamburger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); background-color: #FFF; }
+        /* KORJATTU: Piilotetaan nappi kokonaan kun valikko on auki */
+        .hamburger-btn.open {
+            opacity: 0;
+            pointer-events: none;
+        }
 
         /* 3. KIELIVALINTA */
         .lang-selector {
@@ -152,7 +154,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 2050; 
+            z-index: 2050; /* Signet on nyt tämän päällä (2200) */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -258,7 +260,6 @@
             #shop-view { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
 
             .signet-home { width: 50px; top: 15px; left: 15px; }
-            /* Mobiilissa menu-nappi hieman alemmas, jotta ei ole liian lähellä reunaa */
             .hamburger-btn { top: 75px; left: 28px; }
 
             .lang-selector { top: 15px; right: 15px; font-size: 14px; gap: 10px; }
