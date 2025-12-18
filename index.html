@@ -22,7 +22,7 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            position: relative; /* Tärkeä absolute-elementeille */
+            position: relative;
         }
 
         a { text-decoration: none; color: #FFFFFF; }
@@ -63,13 +63,12 @@
             color: #000000 !important; 
         }
 
-        /* --- NAVIGAATIOELEMENTIT (ABSOLUTE POSITION) --- */
-        /* Nämä katoavat ruudusta kun rullataan alaspäin */
+        /* --- NAVIGAATIO (ABSOLUTE) --- */
 
-        /* 1. SIGNET (Home Button) */
+        /* 1. SIGNET (Home Button) - AINA PÄÄLLIMMÄISENÄ */
         .signet-home {
-            position: absolute; /* MUUTETTU: ABSOLUTE */
-            z-index: 2200; 
+            position: absolute; 
+            z-index: 2200; /* Tärkeä: suurempi kuin valikon z-index */
             top: 20px;         
             left: 20px;          
             width: 50px;       
@@ -80,13 +79,13 @@
         }
         .signet-home:hover { transform: scale(1.05); }
 
-        /* 2. HAMBURGER ICON (Menu) */
+        /* 2. HAMBURGER ICON */
         .hamburger-btn {
-            position: absolute; /* MUUTETTU: ABSOLUTE */
+            position: absolute;
             top: 80px; 
             left: 33px; 
             width: 24px; 
-            height: 20px; /* Hieman korkeampi paksummille viivoille */
+            height: 20px; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -97,15 +96,15 @@
         
         .hamburger-btn span {
             display: block;
-            height: 3px; /* MUUTETTU: Paksumpi viiva */
+            height: 3px; 
             width: 100%;
             background-color: #000000; /* Täysin musta */
             border-radius: 2px;
             transition: all 0.3s ease;
-            box-shadow: none; /* MUUTETTU: Poistettu valkoinen reuna/varjo */
+            box-shadow: none; /* Ei valkoista hehkua */
         }
         
-        /* Piilotetaan nappi kokonaan kun valikko on auki */
+        /* Piiloutuu kun valikko auki */
         .hamburger-btn.open {
             opacity: 0;
             pointer-events: none;
@@ -113,7 +112,7 @@
 
         /* 3. KIELIVALINTA */
         .lang-selector {
-            position: absolute; /* MUUTETTU: ABSOLUTE */
+            position: absolute;
             top: 20px;
             right: 20px;
             z-index: 2000;
@@ -125,9 +124,9 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* --- BADGES (Etusivu) --- */
+        /* --- BADGES --- */
         .top-right-badges {
-            position: absolute; /* MUUTETTU: ABSOLUTE */
+            position: absolute;
             z-index: 10;
             display: flex;      
             align-items: flex-start; 
@@ -137,26 +136,35 @@
         }
         .eu-badge, .nato-badge { height: 9vw; max-height: 75px; width: auto; }
 
-        /* ALATUNNISTEET */
-        .footer-left, .footer-right {
+        /* --- ALATUNNISTEET (ETUSIVU - MUSTA) --- */
+        .footer-left {
             position: absolute;
             bottom: 20px; 
+            left: 20px;
             font-size: 11px;  
             color: #000000; 
             z-index: 10;
         }
-        .footer-left { left: 20px; }
-        .footer-right { right: 20px; text-align: right; max-width: 350px; }
+        .footer-right {
+            position: absolute;
+            bottom: 20px; 
+            right: 20px;
+            text-align: right; 
+            max-width: 350px;
+            font-size: 11px;  
+            color: #000000; 
+            z-index: 10;
+        }
 
         /* --- SIVUVALIKKO --- */
         .side-menu {
-            position: fixed; /* Valikko pysyy fixed, jotta se peittää ruudun kun auki */
+            position: fixed;
             top: 0;
             left: -320px;
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 2050; 
+            z-index: 2050; /* Signet (2200) on tämän päällä */
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -193,7 +201,7 @@
         #shop-view {
             display: none;
             min-height: 100vh;
-            padding-top: 100px; /* Tilaa headerille, joka nyt scrollaa pois */
+            padding-top: 100px; 
             padding-left: 40px;
             padding-right: 40px;
             padding-bottom: 40px;
@@ -209,7 +217,7 @@
         .shop-title { font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
         .shop-tagline { font-size: 14px; color: #cccccc; margin-top: 5px; font-style: italic; }
 
-        .shop-layout { display: flex; gap: 40px; }
+        .shop-layout { display: flex; gap: 40px; flex: 1; }
         
         .sidebar { width: 220px; flex-shrink: 0; }
         .filter-group { margin-bottom: 30px; }
@@ -230,6 +238,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
+            align-content: start;
         }
 
         .product-card {
@@ -248,12 +257,24 @@
 
         /* ISO Pallot */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .iso-p { background-color: #0085CA; } /* Blue */
-        .iso-m { background-color: #F1C400; } /* Yellow */
-        .iso-k { background-color: #E60000; } /* Red */
-        .iso-h { background-color: #787878; } /* Grey */
-        .iso-s { background-color: #8C4B30; } /* Brown */
-        .iso-n { background-color: #009640; } /* Green */
+        .iso-p { background-color: #0085CA; } 
+        .iso-m { background-color: #F1C400; } 
+        .iso-k { background-color: #E60000; } 
+        .iso-h { background-color: #787878; } 
+        .iso-s { background-color: #8C4B30; } 
+        .iso-n { background-color: #009640; } 
+
+        /* --- KAUPPASIVUN FOOTER (VALKOINEN) --- */
+        .shop-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #888;
+            font-size: 11px;
+            width: 100%;
+        }
+        .shop-footer div { margin-bottom: 5px; }
 
         /* --- MOBIILIVERSIO --- */
         @media (max-width: 768px), (max-height: 500px) {
@@ -265,14 +286,21 @@
             .hamburger-btn { top: 75px; left: 28px; }
 
             .lang-selector { top: 15px; right: 15px; font-size: 14px; gap: 10px; }
-            /* Mobiilissa absolute toimii samoin, ne scrollaavat pois näkyvistä */
             .top-right-badges { top: 50px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
             
             .logo { margin-bottom: 20px; max-width: 80%; }
             .email-address { margin-bottom: 30px; }
             
-            .footer-left, .footer-right { position: static; width: auto; max-width: 90%; margin-bottom: 20px; text-align: center; overflow-wrap: break-word; }
+            /* Etusivun footer mobiilissa */
+            .footer-left, .footer-right { 
+                position: static; 
+                width: auto; 
+                max-width: 90%; 
+                margin-bottom: 20px; 
+                text-align: center; 
+                overflow-wrap: break-word; 
+            }
             .footer-left { margin-top: 40px; }
 
             .shop-layout { flex-direction: column; }
@@ -322,8 +350,10 @@
             <a href="https://www.nato.int/en" target="_blank" rel="noopener noreferrer"><img src="badge-nato.png" alt="NATO Badge" class="nato-badge"></a>
             <a href="https://commission.europa.eu/index_en" target="_blank" rel="noopener noreferrer"><img src="badge-eu.png" alt="EU VAT" class="eu-badge"></a>
         </div>
+        
         <img src="logo-main.png" alt="Industria Nordica" class="logo">
         <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
+        
         <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
         <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
     </div>
@@ -374,6 +404,11 @@
             </div>
             <div class="product-grid" id="productGrid"></div>
         </div>
+
+        <div class="shop-footer">
+            <div data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+            <div data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
+        </div>
     </div>
 
     <script>
@@ -387,45 +422,32 @@
                 back_home: "← Back to Home",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
-                
-                // Titles
                 filter_worktype: "Worktype",
                 filter_tooltype: "Tool Type",
                 filter_material: "Material",
                 filter_intensity: "Intensity",
-
-                // Subtypes (Worktype)
                 sub_turning: "Turning",
                 sub_milling: "Milling",
                 sub_threading: "Threading",
                 sub_parting: "Parting & Grooving",
                 sub_drilling: "Drilling",
                 sub_clamping: "Holders / Clamping",
-
-                // Tool Types
                 type_insert: "Insert",
                 type_rotating: "Solid / Rotating",
                 type_holder: "Tool Holder",
-
-                // Materials
                 iso_p: "Steel (ISO P)",
                 iso_m: "Stainless / Duplex (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
                 iso_h: "Hardened / Hardox (ISO H)",
                 iso_s: "Titanium / Superalloys (ISO S)",
                 iso_n: "Aluminum / Plastics (ISO N)",
-                
-                // Intensity (Operations)
                 op_heavy: "Heavy Roughing",
                 op_roughing: "Roughing",
                 op_medium: "Medium / General",
                 op_finishing: "Finishing",
-                
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
-
-                // Product Descriptions
                 desc_cnmg: "80° Rhombic. Reliable General Turning.",
                 desc_wnmg: "Trigon. Economy Choice (6 edges).",
                 desc_dnmg: "55° Rhombic. Profiling & General.",
@@ -441,7 +463,6 @@
                 desc_tap: "Spiral Tap for Threading.",
                 desc_ext_holder: "External Turning Holders.",
                 desc_boring: "Internal Boring Bars.",
-
                 desc_cnmg_h: "Size 16/19. Heavy Duty (Hardox/Armox).",
                 desc_rcmt: "Round Insert. High Feed Roughing (Ti/Superalloys).",
                 desc_cbn: "Ceramic / CBN for Hardened Steel >50HRC.",
