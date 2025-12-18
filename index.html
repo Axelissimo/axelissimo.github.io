@@ -7,6 +7,17 @@
     <meta name="description" content="Commercium Gratia Dei - Terra Mare et Aer">
     <link rel="icon" type="image/png" href="signet.png">
     
+    <meta property="og:title" content="Industria Nordica">
+    <meta property="og:description" content="Commercium Gratia Dei - Terra Mare et Aer">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.industrianordica.fi/">
+    
+    <meta property="og:image" content="https://www.industrianordica.fi/signet.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="283">
+    <meta property="og:image:height" content="283">
+    
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -65,10 +76,10 @@
 
         /* --- NAVIGAATIO (ABSOLUTE) --- */
 
-        /* 1. SIGNET (Home Button) - AINA PÄÄLLIMMÄISENÄ */
+        /* 1. SIGNET (Home Button) */
         .signet-home {
             position: absolute; 
-            z-index: 2200; /* Tärkeä: suurempi kuin valikon z-index */
+            z-index: 2200; 
             top: 20px;         
             left: 20px;          
             width: 50px;       
@@ -98,10 +109,10 @@
             display: block;
             height: 3px; 
             width: 100%;
-            background-color: #000000; /* Täysin musta */
+            background-color: #000000; 
             border-radius: 2px;
             transition: all 0.3s ease;
-            box-shadow: none; /* Ei valkoista hehkua */
+            box-shadow: none; 
         }
         
         /* Piiloutuu kun valikko auki */
@@ -164,7 +175,7 @@
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 2050; /* Signet (2200) on tämän päällä */
+            z-index: 2050; 
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -292,7 +303,6 @@
             .logo { margin-bottom: 20px; max-width: 80%; }
             .email-address { margin-bottom: 30px; }
             
-            /* Etusivun footer mobiilissa */
             .footer-left, .footer-right { 
                 position: static; 
                 width: auto; 
