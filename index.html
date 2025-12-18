@@ -62,49 +62,50 @@
             color: #000000 !important; 
         }
 
-        /* --- NAVIGAATIOELEMENTIT (Fixed Top) --- */
+        /* --- NAVIGAATIOELEMENTIT (Fixed Top Left) --- */
 
-        /* 1. HAMBURGER ICON (Menu) */
-        .hamburger-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 30px;
-            height: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            z-index: 2100; /* Ylin kerros */
-        }
-        
-        .hamburger-btn span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: #FFFFFF;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        
-        /* Hamburger animaatio kun auki */
-        .hamburger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
-        .hamburger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
-        /* 2. SIGNET (Home Button) */
+        /* 1. SIGNET (Home Button) - YLINNÄ */
         .signet-home {
             position: fixed; 
             z-index: 2000; 
-            top: 12px;         
-            left: 70px; /* Siirretty oikealle hamburgerista */       
-            width: 45px;       
+            top: 20px;         
+            left: 20px;          
+            width: 50px;       
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
             display: block;
         }
         .signet-home:hover { transform: scale(1.05); }
+
+        /* 2. HAMBURGER ICON (Menu) - LOGON ALAPUOLELLA */
+        .hamburger-btn {
+            position: fixed;
+            top: 80px; /* Signetin (50px) + margin (20px) alapuolella */
+            left: 33px; /* Keskitetty logoon nähden (logo 50px leveä) */
+            width: 24px; /* Pienennetty */
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 2100;
+        }
+        
+        .hamburger-btn span {
+            display: block;
+            height: 2px; /* Ohuempi viiva */
+            width: 100%;
+            background-color: #000000; /* MUSTA */
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 2px rgba(255,255,255,0.2); /* Pieni hehku erottuvuuden vuoksi tummalla pohjalla */
+        }
+        
+        /* Hamburger animaatio */
+        .hamburger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background-color: #FFF; }
+        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); background-color: #FFF; }
 
         /* 3. KIELIVALINTA */
         .lang-selector {
@@ -126,7 +127,7 @@
             z-index: 10;
             display: flex;      
             align-items: flex-start; 
-            top: 60px; /* Alempana jotta mahtuu kielivalinnan alle */     
+            top: 60px;     
             right: 20px;       
             gap: 15px;           
         }
@@ -147,11 +148,11 @@
         .side-menu {
             position: fixed;
             top: 0;
-            left: -320px; /* Piilossa */
+            left: -320px;
             width: 280px;
             height: 100%;
             background-color: rgb(40, 40, 40);
-            z-index: 2050; /* Hamburgerin alla, mutta sisällön päällä */
+            z-index: 2050; 
             transition: left 0.4s ease;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             padding-top: 80px;
@@ -256,7 +257,10 @@
             
             #shop-view { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
 
-            .signet-home { top: 12px; left: 60px; width: 40px; }
+            .signet-home { width: 50px; top: 15px; left: 15px; }
+            /* Mobiilissa menu-nappi hieman alemmas, jotta ei ole liian lähellä reunaa */
+            .hamburger-btn { top: 75px; left: 28px; }
+
             .lang-selector { top: 15px; right: 15px; font-size: 14px; gap: 10px; }
             .top-right-badges { position: fixed; top: 50px; right: 15px; display: flex; flex-direction: row; gap: 8px; }
             .nato-badge, .eu-badge { height: 40px; width: auto; }
@@ -283,13 +287,13 @@
         <span class="lang-option" onclick="setLanguage('fi')">FI</span>
     </div>
 
+    <img src="signet.png" alt="Home" class="signet-home" onclick="closeShop()">
+
     <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
     </div>
-
-    <img src="signet.png" alt="Home" class="signet-home" onclick="closeShop()">
 
     <nav class="side-menu" id="sideMenu">
         <a href="#" onclick="openShop('ALL')">
@@ -330,17 +334,24 @@
             <div class="sidebar">
                 
                 <div class="filter-group">
-                    <div class="filter-title" data-i18n="filter_subtype">Product Type</div>
+                    <div class="filter-title" data-i18n="filter_worktype">Worktype</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_turning" onchange="filterProducts()"> <span data-i18n="sub_turning">Turning</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_milling" onchange="filterProducts()"> <span data-i18n="sub_milling">Milling</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> <span data-i18n="sub_drilling">Drilling</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> <span data-i18n="sub_threading">Threading</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_parting" onchange="filterProducts()"> <span data-i18n="sub_parting">Parting & Grooving</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> <span data-i18n="sub_drilling">Drilling</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_clamping" onchange="filterProducts()"> <span data-i18n="sub_clamping">Holders / Clamping</span></label>
                 </div>
 
                 <div class="filter-group">
-                    <div class="filter-title" data-i18n="filter_material">Filter by Material</div>
+                    <div class="filter-title" data-i18n="filter_tooltype">Tool Type</div>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_insert" onchange="filterProducts()"> <span data-i18n="type_insert">Insert</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_rotating" onchange="filterProducts()"> <span data-i18n="type_rotating">Solid / Rotating</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_holder" onchange="filterProducts()"> <span data-i18n="type_holder">Tool Holder</span></label>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title" data-i18n="filter_material">Material</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="P" onchange="filterProducts()"><span class="iso-dot iso-p"></span> <span data-i18n="iso_p">Steel (ISO P)</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="M" onchange="filterProducts()"><span class="iso-dot iso-m"></span> <span data-i18n="iso_m">Stainless / Duplex (ISO M)</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="K" onchange="filterProducts()"><span class="iso-dot iso-k"></span> <span data-i18n="iso_k">Cast Iron (ISO K)</span></label>
@@ -350,15 +361,11 @@
                 </div>
 
                 <div class="filter-group">
-                    <div class="filter-title" data-i18n="filter_operation">Operation Type</div>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_roughing" onchange="filterProducts()"> <span data-i18n="op_roughing">Roughing</span></label>
+                    <div class="filter-title" data-i18n="filter_intensity">Intensity</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_heavy" onchange="filterProducts()"> <span data-i18n="op_heavy">Heavy Roughing</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_roughing" onchange="filterProducts()"> <span data-i18n="op_roughing">Roughing</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_medium" onchange="filterProducts()"> <span data-i18n="op_medium">Medium / General</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_finishing" onchange="filterProducts()"> <span data-i18n="op_finishing">Finishing</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_threading" onchange="filterProducts()"> <span data-i18n="op_threading">Threading</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_drilling" onchange="filterProducts()"> <span data-i18n="op_drilling">Drilling</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_highfeed" onchange="filterProducts()"> <span data-i18n="op_highfeed">High Feed</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_deep" onchange="filterProducts()"> <span data-i18n="op_deep">Deep Drilling</span></label>
                 </div>
             </div>
             <div class="product-grid" id="productGrid"></div>
@@ -377,10 +384,13 @@
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
                 
-                filter_subtype: "Product Type",
-                filter_material: "Workpiece Material",
-                filter_operation: "Operation Type",
+                // Titles
+                filter_worktype: "Worktype",
+                filter_tooltype: "Tool Type",
+                filter_material: "Material",
+                filter_intensity: "Intensity",
 
+                // Subtypes (Worktype)
                 sub_turning: "Turning",
                 sub_milling: "Milling",
                 sub_threading: "Threading",
@@ -388,6 +398,12 @@
                 sub_drilling: "Drilling",
                 sub_clamping: "Holders / Clamping",
 
+                // Tool Types
+                type_insert: "Insert",
+                type_rotating: "Solid / Rotating",
+                type_holder: "Tool Holder",
+
+                // Materials
                 iso_p: "Steel (ISO P)",
                 iso_m: "Stainless / Duplex (ISO M)",
                 iso_k: "Cast Iron (ISO K)",
@@ -395,28 +411,17 @@
                 iso_s: "Titanium / Superalloys (ISO S)",
                 iso_n: "Aluminum / Plastics (ISO N)",
                 
-                op_roughing: "Roughing",
+                // Intensity (Operations)
                 op_heavy: "Heavy Roughing",
+                op_roughing: "Roughing",
                 op_medium: "Medium / General",
                 op_finishing: "Finishing",
-                op_profiling: "Profiling",
-                op_threading: "Threading",
-                op_drilling: "Drilling",
-                op_parting: "Parting & Grooving",
-                op_clamping: "Clamping",
-                op_highfeed: "High Feed",
-                op_hard: "Hard Turning",
-                op_dynamic: "Dynamic Milling",
-                op_deep: "Deep Drilling",
                 
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 filtered_result: "(Filtered Result)",
 
-                type_insert: "Insert",
-                type_rotating: "Solid / Rotating",
-                type_holder: "Tool Holder",
-                
+                // Product Descriptions
                 desc_cnmg: "80° Rhombic. Reliable General Turning.",
                 desc_wnmg: "Trigon. Economy Choice (6 edges).",
                 desc_dnmg: "55° Rhombic. Profiling & General.",
@@ -451,40 +456,32 @@
                 back_home: "← Volver al Inicio",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy",
-                filter_subtype: "Tipo de Producto",
-                filter_material: "Material de Pieza",
-                filter_operation: "Tipo de Operación",
+                filter_worktype: "Tipo de Trabajo",
+                filter_tooltype: "Tipo de Herramienta",
+                filter_material: "Material",
+                filter_intensity: "Intensidad",
                 sub_turning: "Torneado",
                 sub_milling: "Fresado",
                 sub_threading: "Roscado",
                 sub_parting: "Tronzado y Ranurado",
                 sub_drilling: "Taladrado",
                 sub_clamping: "Sujeción",
+                type_insert: "Plaquita",
+                type_rotating: "Rotativo",
+                type_holder: "Portaherramientas",
                 iso_p: "Acero (ISO P)",
                 iso_m: "Inox / Duplex (ISO M)",
                 iso_k: "Fundición (ISO K)",
                 iso_h: "Templado / Hardox (ISO H)",
                 iso_s: "Titanio / Superaleaciones (ISO S)",
                 iso_n: "Aluminio / Plásticos (ISO N)",
-                op_roughing: "Desbaste",
                 op_heavy: "Desbaste Pesado",
+                op_roughing: "Desbaste",
                 op_medium: "Medio / General",
                 op_finishing: "Acabado",
-                op_profiling: "Perfilado",
-                op_threading: "Roscado",
-                op_drilling: "Taladrado",
-                op_parting: "Tronzado",
-                op_clamping: "Fijación",
-                op_highfeed: "Alto Avance",
-                op_hard: "Torneado Duro",
-                op_dynamic: "Fresado Dinámico",
-                op_deep: "Taladrado Profundo",
                 arctos_tagline: "El Estándar Nórdico – Rendimiento Confiable",
                 fenris_tagline: "Rendimiento Sin Concesiones – Materiales Duros",
                 filtered_result: "(Filtrado)",
-                type_insert: "Plaquita",
-                type_rotating: "Rotativo",
-                type_holder: "Portaherramientas",
                 desc_cnmg: "Rómbica 80°. Torneado General.",
                 desc_wnmg: "Trígono. Económica (6 filos).",
                 desc_dnmg: "Rómbica 55°. Perfilado.",
@@ -518,40 +515,32 @@
                 back_home: "← Zurück",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
                 trademarks: "Eingetragene Marken von Industria Nordica Oy",
-                filter_subtype: "Produktart",
+                filter_worktype: "Bearbeitungsart",
+                filter_tooltype: "Werkzeugtyp",
                 filter_material: "Werkstoff",
-                filter_operation: "Bearbeitungsart",
+                filter_intensity: "Intensität",
                 sub_turning: "Drehen",
                 sub_milling: "Fräsen",
                 sub_threading: "Gewinden",
                 sub_parting: "Abstechen",
                 sub_drilling: "Bohren",
                 sub_clamping: "Spannen",
+                type_insert: "Wendeplatte",
+                type_rotating: "Rotierend",
+                type_holder: "Halter",
                 iso_p: "Stahl (ISO P)",
                 iso_m: "Rostfrei / Duplex (ISO M)",
                 iso_k: "Gusseisen (ISO K)",
                 iso_h: "Gehärtet / Hardox (ISO H)",
                 iso_s: "Titan / Superlegierungen (ISO S)",
                 iso_n: "Aluminium / Kunststoffe (ISO N)",
-                op_roughing: "Schruppen",
                 op_heavy: "Schwerzerspanung",
+                op_roughing: "Schruppen",
                 op_medium: "Allgemein",
                 op_finishing: "Schlichten",
-                op_profiling: "Profilieren",
-                op_threading: "Gewinden",
-                op_drilling: "Bohren",
-                op_parting: "Abstechen",
-                op_clamping: "Spannen",
-                op_highfeed: "Hochvorschub",
-                op_hard: "Hartdrehen",
-                op_dynamic: "Dynamisches Fräsen",
-                op_deep: "Tieflochbohren",
                 arctos_tagline: "Der Nördliche Standard – Zuverlässige Leistung",
                 fenris_tagline: "Kompromisslose Leistung – Harte Materialien",
                 filtered_result: "(Gefiltert)",
-                type_insert: "Wendeplatte",
-                type_rotating: "Rotierend",
-                type_holder: "Halter",
                 desc_cnmg: "80° Rhombisch. Allgemeines Drehen.",
                 desc_wnmg: "Trigon. Wirtschaftlich (6 Schneiden).",
                 desc_dnmg: "55° Rhombisch. Profilieren.",
@@ -585,40 +574,32 @@
                 back_home: "← Takaisin etusivulle",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
                 trademarks: "Industria Nordica Oy:n rekisteröityjä tavaramerkkejä",
-                filter_subtype: "Alatyyppi",
+                filter_worktype: "Työstömuoto",
+                filter_tooltype: "Työkalun tyyppi",
                 filter_material: "Materiaali",
-                filter_operation: "Työstötyyppi",
+                filter_intensity: "Intensiteetti",
                 sub_turning: "Sorvaus",
                 sub_milling: "Jyrsintä",
                 sub_threading: "Kierteytys",
                 sub_parting: "Katkaisu & Ura",
                 sub_drilling: "Poraus",
                 sub_clamping: "Kiinnitys (Pitimet)",
+                type_insert: "Kääntöpala",
+                type_rotating: "Pyörivä / Solid",
+                type_holder: "Pidin",
                 iso_p: "Teräs (ISO P)",
                 iso_m: "RST / Duplex (ISO M)",
                 iso_k: "Valurauta (ISO K)",
                 iso_h: "Karkaistu / Hardox (ISO H)",
                 iso_s: "Titaani / Superseokset (ISO S)",
                 iso_n: "Alumiini / Muovit (ISO N)",
-                op_roughing: "Rouhinta",
                 op_heavy: "Raskas Rouhinta",
+                op_roughing: "Rouhinta",
                 op_medium: "Yleis / Keski",
                 op_finishing: "Viimeistely",
-                op_profiling: "Profilointi",
-                op_threading: "Kierteytys",
-                op_drilling: "Poraus",
-                op_parting: "Katkaisu",
-                op_clamping: "Kiinnitys",
-                op_highfeed: "High Feed (Suurnopeus)",
-                op_hard: "Kova sorvaus",
-                op_dynamic: "Dynaaminen jyrsintä",
-                op_deep: "Syväporaus",
                 arctos_tagline: "Pohjoinen standardi – Luotettavaa suorituskykyä",
                 fenris_tagline: "Tinkimätöntä suorituskykyä – Koville materiaaleille",
                 filtered_result: "(Suodatettu)",
-                type_insert: "Kääntöpala",
-                type_rotating: "Pyörivä",
-                type_holder: "Pidin",
                 desc_cnmg: "80° Rombinen. Luotettava yleissorvaus.",
                 desc_wnmg: "Trigon. Taloudellinen (6 särmää).",
                 desc_dnmg: "55° Rombinen. Profilointi ja yleis.",
@@ -648,6 +629,7 @@
 
         let currentLang = 'en';
 
+        // Helper function to get translation
         function t(key) {
             return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key;
         }
@@ -657,14 +639,14 @@
             // ARCTOS - SORVAUS
             { brand: 'ARCTOS', name: 'CNMG (80°)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_cnmg' },
             { brand: 'ARCTOS', name: 'WNMG (Trigon)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_roughing', 'op_medium'], desc: 'desc_wnmg' },
-            { brand: 'ARCTOS', name: 'DNMG (55°)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_profiling', 'op_medium'], desc: 'desc_dnmg' },
-            { brand: 'ARCTOS', name: 'SNMG (Square)', subtype: 'sub_turning', type: 'type_insert', iso: ['M', 'K'], op: ['op_heavy'], desc: 'desc_snmg' }, // M=Duplex
+            { brand: 'ARCTOS', name: 'DNMG (55°)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_dnmg' },
+            { brand: 'ARCTOS', name: 'SNMG (Square)', subtype: 'sub_turning', type: 'type_insert', iso: ['M', 'K'], op: ['op_heavy'], desc: 'desc_snmg' }, 
             { brand: 'ARCTOS', name: 'CCMT (Pos)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M'], op: ['op_finishing'], desc: 'desc_ccmt' },
             { brand: 'ARCTOS', name: 'DCMT (Pos)', subtype: 'sub_turning', type: 'type_insert', iso: ['P', 'M'], op: ['op_finishing'], desc: 'desc_dcmt' },
             
             // ARCTOS - KIERTEYTYS & KATKAISU
-            { brand: 'ARCTOS', name: '16ER / 16IR', subtype: 'sub_threading', type: 'type_insert', iso: ['P', 'M'], op: ['op_threading'], desc: 'desc_16er' },
-            { brand: 'ARCTOS', name: 'MGMN System', subtype: 'sub_parting', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_parting'], desc: 'desc_mgmn' },
+            { brand: 'ARCTOS', name: '16ER / 16IR', subtype: 'sub_threading', type: 'type_insert', iso: ['P', 'M'], op: ['op_medium'], desc: 'desc_16er' },
+            { brand: 'ARCTOS', name: 'MGMN System', subtype: 'sub_parting', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_mgmn' },
 
             // ARCTOS - JYRSINTÄ
             { brand: 'ARCTOS', name: 'APKT 1003/1604', subtype: 'sub_milling', type: 'type_insert', iso: ['P', 'M', 'K'], op: ['op_medium'], desc: 'desc_apkt' },
@@ -672,26 +654,26 @@
 
             // ARCTOS - PYÖRIVÄT
             { brand: 'ARCTOS', name: '4-Flute End Mill', subtype: 'sub_milling', type: 'type_rotating', iso: ['P', 'M'], op: ['op_medium'], desc: 'desc_4flute' },
-            { brand: 'ARCTOS', name: '3xD Drill', subtype: 'sub_drilling', type: 'type_rotating', iso: ['P', 'M'], op: ['op_drilling'], desc: 'desc_3xd' },
-            { brand: 'ARCTOS', name: 'Spiral Tap', subtype: 'sub_threading', type: 'type_rotating', iso: ['P', 'M'], op: ['op_threading'], desc: 'desc_tap' },
+            { brand: 'ARCTOS', name: '3xD Drill', subtype: 'sub_drilling', type: 'type_rotating', iso: ['P', 'M'], op: ['op_medium'], desc: 'desc_3xd' },
+            { brand: 'ARCTOS', name: 'Spiral Tap', subtype: 'sub_threading', type: 'type_rotating', iso: ['P', 'M'], op: ['op_medium'], desc: 'desc_tap' },
 
             // ARCTOS - PITIMET
-            { brand: 'ARCTOS', name: 'Ext. Holders', subtype: 'sub_clamping', type: 'type_holder', iso: [], op: ['op_clamping'], desc: 'desc_ext_holder' },
-            { brand: 'ARCTOS', name: 'Boring Bars', subtype: 'sub_clamping', type: 'type_holder', iso: [], op: ['op_clamping'], desc: 'desc_boring' },
+            { brand: 'ARCTOS', name: 'Ext. Holders', subtype: 'sub_clamping', type: 'type_holder', iso: [], op: [], desc: 'desc_ext_holder' },
+            { brand: 'ARCTOS', name: 'Boring Bars', subtype: 'sub_clamping', type: 'type_holder', iso: [], op: [], desc: 'desc_boring' },
 
 
             // FENRIS
             { brand: 'FENRIS', name: 'CNMG 16/19', subtype: 'sub_turning', type: 'type_insert', iso: ['H', 'P'], op: ['op_heavy'], desc: 'desc_cnmg_h' },
-            { brand: 'FENRIS', name: 'RCMT / RPGT', subtype: 'sub_turning', type: 'type_insert', iso: ['S'], op: ['op_highfeed'], desc: 'desc_rcmt' },
-            { brand: 'FENRIS', name: 'Ceramic / CBN', subtype: 'sub_turning', type: 'type_insert', iso: ['H'], op: ['op_hard'], desc: 'desc_cbn' },
-            { brand: 'FENRIS', name: 'Hard-Thread', subtype: 'sub_threading', type: 'type_insert', iso: ['H'], op: ['op_threading'], desc: 'desc_hardthread' },
+            { brand: 'FENRIS', name: 'RCMT / RPGT', subtype: 'sub_turning', type: 'type_insert', iso: ['S'], op: ['op_roughing'], desc: 'desc_rcmt' },
+            { brand: 'FENRIS', name: 'Ceramic / CBN', subtype: 'sub_turning', type: 'type_insert', iso: ['H'], op: ['op_finishing'], desc: 'desc_cbn' },
+            { brand: 'FENRIS', name: 'Hard-Thread', subtype: 'sub_threading', type: 'type_insert', iso: ['H'], op: ['op_finishing'], desc: 'desc_hardthread' },
             { brand: 'FENRIS', name: 'VCGT / VBMT', subtype: 'sub_turning', type: 'type_insert', iso: ['S', 'M'], op: ['op_finishing'], desc: 'desc_vcgt' },
-            { brand: 'FENRIS', name: 'ALU-Series', subtype: 'sub_turning', type: 'type_insert', iso: ['N'], op: ['op_finishing'], desc: 'desc_alu' }, // N=Muovi
+            { brand: 'FENRIS', name: 'ALU-Series', subtype: 'sub_turning', type: 'type_insert', iso: ['N'], op: ['op_finishing'], desc: 'desc_alu' },
 
             // FENRIS - PYÖRIVÄT
-            { brand: 'FENRIS', name: 'Trochoidal Mill', subtype: 'sub_milling', type: 'type_rotating', iso: ['S', 'M'], op: ['op_dynamic'], desc: 'desc_troch' },
-            { brand: 'FENRIS', name: 'Thread Mill', subtype: 'sub_threading', type: 'type_rotating', iso: ['S', 'M', 'H'], op: ['op_threading'], desc: 'desc_threadmill' },
-            { brand: 'FENRIS', name: '5xD & 8xD Drill', subtype: 'sub_drilling', type: 'type_rotating', iso: ['P', 'M', 'K', 'S', 'H', 'N'], op: ['op_deep'], desc: 'desc_5xd' }
+            { brand: 'FENRIS', name: 'Trochoidal Mill', subtype: 'sub_milling', type: 'type_rotating', iso: ['S', 'M'], op: ['op_roughing'], desc: 'desc_troch' },
+            { brand: 'FENRIS', name: 'Thread Mill', subtype: 'sub_threading', type: 'type_rotating', iso: ['S', 'M', 'H'], op: ['op_medium'], desc: 'desc_threadmill' },
+            { brand: 'FENRIS', name: '5xD & 8xD Drill', subtype: 'sub_drilling', type: 'type_rotating', iso: ['P', 'M', 'K', 'S', 'H', 'N'], op: ['op_medium'], desc: 'desc_5xd' }
         ];
 
         /* --- LOGIIKKA --- */
@@ -713,9 +695,7 @@
             hamburgerBtn.classList.toggle('open');
         }
 
-        // Hamburger klikkaa
-        // hamburgerBtn.addEventListener('click', toggleMenu); (HTML:ssä onclick)
-        overlay.addEventListener('click', toggleMenu);
+        // overlay.addEventListener('click', toggleMenu); (Already in HTML for hamburger)
 
         function openShop(brand) {
             currentBrand = brand;
@@ -732,7 +712,6 @@
         function closeShop() {
             shopView.classList.remove('active');
             landingView.classList.remove('hidden');
-            // Jos valikko on auki, suljetaan se
             if (sideMenu.classList.contains('active')) toggleMenu();
         }
 
@@ -753,6 +732,7 @@
             productGrid.innerHTML = '';
             
             const selectedSubtypes = Array.from(document.querySelectorAll('.sub-filter:checked')).map(cb => cb.value);
+            const selectedTypes = Array.from(document.querySelectorAll('.type-filter:checked')).map(cb => cb.value);
             const selectedIsos = Array.from(document.querySelectorAll('.iso-filter:checked')).map(cb => cb.value);
             const selectedOps = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
 
@@ -772,6 +752,9 @@
 
                 let subMatch = true;
                 if (selectedSubtypes.length > 0) subMatch = selectedSubtypes.includes(p.subtype);
+                
+                let typeMatch = true;
+                if (selectedTypes.length > 0) typeMatch = selectedTypes.includes(p.type);
 
                 let isoMatch = true;
                 if (selectedIsos.length > 0) {
@@ -784,7 +767,7 @@
                     opMatch = p.op.some(opKey => selectedOps.includes(opKey));
                 }
 
-                return brandMatch && isoMatch && opMatch && subMatch;
+                return brandMatch && isoMatch && opMatch && subMatch && typeMatch;
             });
 
             if (filtered.length === 0) {
@@ -794,7 +777,7 @@
 
             filtered.forEach(p => {
                 let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
-                const translatedOps = p.op.map(opKey => t(opKey)).join(', ');
+                // const translatedOps = p.op.map(opKey => t(opKey)).join(', '); // Not requested in card, keeping clean
 
                 const card = document.createElement('div');
                 card.className = 'product-card';
@@ -804,7 +787,6 @@
                     <div class="prod-desc">${t(p.desc)}</div>
                     <ul class="prod-specs">
                         <li>${t(p.subtype)} / ${t(p.type)}</li>
-                        ${translatedOps ? `<li>${translatedOps}</li>` : ''}
                     </ul>
                     <div style="margin-top:10px;">${isoDots}</div>
                 `;
