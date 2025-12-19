@@ -168,6 +168,11 @@
         .rec-holder-info { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .rec-actions { display: flex; gap: 15px; margin-top: 20px; }
         .btn-rec { flex: 1; padding: 12px; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-secondary { background: transparent; border: 1px solid #666; color: #fff; margin-top: 10px; }
+        .btn-secondary:hover { border-color: #fff; }
+        .btn-outline { background: transparent; border: 1px solid #fff; color: #fff; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
         /* --- KAUPPASIVU --- */
         #shop-view { display: none; min-height: 100vh; padding: 100px 40px 40px 40px; }
@@ -224,12 +229,7 @@
         
         .btn-action { background: #fff; color: #000; border: none; padding: 12px 20px; font-weight: 700; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; font-size: 12px; }
         .btn-action:hover { background: #ddd; }
-        .btn-primary { background: #fff; color: #000; }
-        .btn-secondary { background: transparent; border: 1px solid #666; color: #fff; margin-top: 10px; }
-        .btn-secondary:hover { border-color: #fff; }
-        .btn-outline { background: transparent; border: 1px solid #fff; color: #fff; }
-        .btn-outline:hover { background: rgba(255,255,255,0.1); }
-
+        
         /* Dropdown style in modal */
         .size-selector {
             width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 2px; margin-bottom: 20px;
@@ -410,7 +410,7 @@
     </div>
 
     <script>
-        /* --- MAPPING DATA FOR SELECTION TOOL (PALAUTETTU) --- */
+        /* --- MAPPING DATA FOR SELECTION TOOL --- */
         const selectionData = [
             { key: 'tnmg', prodId: 2, holderId: 12, reqHolder: true }, // TNMG -> WNMG
             { key: 'cnmg_basic', prodId: 1, holderId: null, reqHolder: false }, // CNMG -> CNMG 1204
@@ -431,7 +431,7 @@
             { key: 'high_feed', prodId: 22, holderId: 28, reqHolder: true } // High Feed -> RCMT
         ];
 
-        /* --- FULL DICTIONARY (LAAJENNETTU SELECTION TOOL KÄÄNNÖKSILLÄ) --- */
+        /* --- FULL DICTIONARY --- */
         const i18n = {
             en: {
                 all_desc: "Complete Catalog",
@@ -593,7 +593,8 @@
         };
 
         // Initialize cart from localStorage if available
-        cart = JSON.parse(localStorage.getItem('industria_cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('industria_cart')) || [];
+        let currentLang = 'en';
         let currentRecProduct = null;
         let currentRecHolder = null;
 
