@@ -30,7 +30,7 @@
             --accent: #FFFFFF;
             --text-muted: #aaaaaa;
             --border: rgba(255,255,255,0.1);
-            --highlight: #0085CA; /* Arctos Blue highlight */
+            --highlight: #4CAF50; /* Vihreä korostusvalinnoille */
         }
 
         html, body {
@@ -48,7 +48,7 @@
         a { text-decoration: none; color: #FFFFFF; }
         input, button, textarea, select { font-family: 'Montserrat', sans-serif; }
 
-        /* --- NAVIGAATIO --- */
+        /* --- NAVIGAATIO (ABSOLUTE) --- */
         .signet-home {
             position: absolute; 
             z-index: 2200; 
@@ -98,6 +98,7 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
+        /* TARJOUSKORI-IKONI */
         .cart-btn {
             display: none;
             position: absolute;
@@ -139,7 +140,7 @@
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2040; display: none; }
         .overlay.active { display: block; }
 
-        /* --- LANDING VIEW --- */
+        /* --- ETUSIVU --- */
         #landing-view { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
         #landing-view.hidden { display: none; }
         .logo { max-width: 60%; max-height: 60%; height: auto; display: block; animation: fadeInLogo 1.2s ease-out forwards; }
@@ -149,10 +150,11 @@
         .footer-left { position: absolute; bottom: 20px; left: 20px; font-size: 11px; color: #000000; z-index: 10; }
         .footer-right { position: absolute; bottom: 20px; right: 20px; text-align: right; max-width: 350px; font-size: 11px; color: #000000; z-index: 10; }
 
-        /* --- SHOP VIEW --- */
-        #shop-view { display: none; min-height: 100vh; padding: 100px 40px 40px 40px; }
-        #shop-view.active { display: flex; flex-direction: column; }
-        
+        /* --- VIEW CONTAINERS --- */
+        .view-container { display: none; min-height: 100vh; padding: 100px 40px 40px 40px; }
+        .view-container.active { display: flex; flex-direction: column; }
+
+        /* --- KAUPPASIVU (SHOP VIEW) --- */
         .shop-header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
         .shop-title { font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
         .shop-tagline { font-size: 14px; color: #cccccc; margin-top: 5px; font-style: italic; }
@@ -184,32 +186,54 @@
         .iso-p { background-color: #0085CA; } .iso-m { background-color: #F1C400; } .iso-k { background-color: #E60000; }
         .iso-h { background-color: #787878; } .iso-s { background-color: #8C4B30; } .iso-n { background-color: #009640; }
 
-        /* --- SELECTION TOOL VIEW --- */
-        #selection-view { display: none; min-height: 100vh; padding: 100px 40px 40px 40px; flex-direction: column; align-items: center; }
-        #selection-view.active { display: flex; }
-        
-        .selector-container { width: 100%; max-width: 800px; }
-        .selector-header { text-align: center; margin-bottom: 40px; }
-        .selector-select { width: 100%; padding: 15px; font-size: 16px; background: #333; color: #fff; border: 1px solid #555; margin-bottom: 30px; border-radius: 4px; }
-        
-        .recommendation-card { background: rgba(0, 133, 202, 0.1); border: 1px solid var(--highlight); padding: 30px; border-radius: 8px; display: none; animation: fadeIn 0.5s; }
-        .rec-title { font-size: 14px; text-transform: uppercase; color: var(--highlight); font-weight: 700; margin-bottom: 10px; }
-        .rec-product-name { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
-        .rec-reason { font-style: italic; color: #ddd; margin-bottom: 20px; border-left: 3px solid #fff; padding-left: 15px; }
-        
-        .holder-alert { margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px dashed #666; border-radius: 4px; }
-        .holder-alert strong { color: #fff; }
-        
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+        .shop-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: #888; font-size: 11px; width: 100%; }
 
-        /* --- MODALS & FORMS --- */
+        /* --- SELECTION TOOL VIEW --- */
+        #selection-view { /* uses view-container */ }
+        
+        .selection-panel {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 4px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+        }
+        .selection-label { font-size: 14px; text-transform: uppercase; color: #aaa; margin-bottom: 10px; display: block; font-weight: 600; }
+        .selection-dropdown {
+            width: 100%; padding: 15px; background: #222; border: 1px solid #555; color: #fff; font-size: 16px; border-radius: 4px; cursor: pointer;
+        }
+        .selection-dropdown:focus { border-color: #fff; outline: none; }
+
+        .solution-card {
+            margin-top: 30px;
+            border: 1px solid var(--highlight);
+            background: rgba(76, 175, 80, 0.05);
+            padding: 25px;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+            animation: fadeInLogo 0.5s ease-out;
+        }
+        .solution-header { font-size: 18px; font-weight: 700; color: var(--highlight); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .solution-item { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 4px; }
+        .solution-label { font-size: 11px; color: #aaa; text-transform: uppercase; margin-bottom: 5px; }
+        .solution-name { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+        .solution-reason { font-style: italic; color: #ddd; font-size: 13px; margin-bottom: 15px; line-height: 1.4; }
+        
+        .btn-add-solution {
+            background: #fff; color: #000; border: none; padding: 8px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 10px;
+        }
+        .btn-add-solution:hover { background: #ddd; }
+
+        /* --- MODALS --- */
         .modal-overlay { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
         .modal-overlay.open { display: flex; }
         .modal-content { background-color: #2b2b2b; padding: 30px; border: 1px solid #444; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #888; }
         .close-modal:hover { color: #fff; }
-        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
         
+        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
         .tech-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
         .tech-table td { padding: 8px; border-bottom: 1px solid #333; }
         .tech-table td:first-child { color: #888; width: 40%; }
@@ -218,17 +242,19 @@
         .btn-action:hover { background: #ddd; }
         .btn-secondary { background: transparent; border: 1px solid #666; color: #fff; margin-top: 10px; }
         .btn-secondary:hover { border-color: #fff; }
+
         .size-selector { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 2px; margin-bottom: 20px; }
 
+        /* Forms */
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
         .form-group input, .form-group textarea { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 2px; box-sizing: border-box; }
         .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 10px 0; font-size: 13px; }
         .cart-remove { color: #E60000; cursor: pointer; margin-left: 10px; }
-        .shop-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: #888; font-size: 11px; width: 100%; }
 
+        /* --- MOBIILI --- */
         @media (max-width: 768px) {
-            #shop-view, #selection-view { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+            .view-container { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
             .signet-home { width: 50px; top: 15px; left: 15px; }
             .hamburger-btn { top: 75px; left: 28px; }
             .lang-selector { top: 15px; right: 15px; }
@@ -239,6 +265,7 @@
             .footer-left { margin-top: 40px; }
             .shop-layout { flex-direction: column; }
             .sidebar { width: 100%; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+            .solution-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -247,13 +274,18 @@
     <div class="overlay" id="navOverlay"></div>
     
     <div class="modal-overlay" id="productModal">
-        <div class="modal-content"><span class="close-modal" onclick="closeModal('productModal')">&times;</span><div id="modalContent"></div></div>
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('productModal')">&times;</span>
+            <div id="modalContent"></div>
+        </div>
     </div>
+
     <div class="modal-overlay" id="rfqModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('rfqModal')">&times;</span>
             <div class="modal-title" data-i18n="quote_basket">Quote Basket</div>
             <div id="cartItems" style="margin-bottom: 20px;"></div>
+            
             <form id="rfqForm" onsubmit="sendQuote(event)">
                 <div class="form-group"><label data-i18n="form_name">Name</label><input type="text" id="rfqName" required></div>
                 <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" id="rfqEmail" required></div>
@@ -270,17 +302,22 @@
         <span class="lang-option" onclick="setLanguage('de')">DE</span>
         <span class="lang-option" onclick="setLanguage('fi')">FI</span>
     </div>
+
     <div class="cart-btn" onclick="openCart()">
         <span style="font-size:16px;">🛒</span> <span data-i18n="quote">Quote</span> <span class="cart-count" id="cartCount">0</span>
     </div>
+
     <img src="signet.png" alt="Home" class="signet-home" onclick="closeShop()">
-    <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+
+    <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
 
     <nav class="side-menu" id="sideMenu">
+        <a href="#" onclick="switchView('selection')">SELECTION TOOL<span class="sub-text">Upgrade your tools</span></a>
         <a href="#" onclick="openShop('ARCTOS')">ARCTOS<span class="sub-text" data-i18n="arctos_desc">Precision tooling</span></a>
         <a href="#" onclick="openShop('FENRIS')">FENRIS<span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span></a>
         <a href="#" onclick="openShop('ALL')">ALL PRODUCTS<span class="sub-text" data-i18n="all_desc">Complete Catalog</span></a>
-        <a href="#" onclick="openSelectionTool()" style="border-top: 1px solid #666; margin-top:10px;">SELECTION TOOL<span class="sub-text">Find your replacement</span></a>
         <a href="#" onclick="closeShop()" style="border-top: 1px solid rgb(60,60,60); margin-top: 20px;"><span style="font-size: 12px; color: #fff;" data-i18n="back_home">← Back to Home</span></a>
     </nav>
     
@@ -292,17 +329,57 @@
         <img src="logo-main.png" alt="Industria Nordica" class="logo">
         <a href="mailto:info@industrianordica.fi" class="email-address">info@industrianordica.fi</a>
         <div class="footer-left" data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
-        <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd...</div>
+        <div class="footer-right" data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
     </div>
 
-    <div id="shop-view">
+    <div id="selection-view" class="view-container">
+        <div class="shop-header">
+            <div class="shop-title">SELECTION TOOL</div>
+            <div class="shop-tagline">Find the perfect replacement from our range</div>
+        </div>
+        
+        <div class="selection-panel">
+            <label class="selection-label">Select your current tool type:</label>
+            <select id="currentToolSelect" class="selection-dropdown" onchange="showSolution()">
+                <option value="">-- Choose from list --</option>
+                </select>
+
+            <div id="solutionCard" class="solution-card">
+                <div class="solution-header">Recommended Upgrade</div>
+                <div class="solution-grid">
+                    <div class="solution-item">
+                        <div class="solution-label">New Product</div>
+                        <div class="solution-name" id="solName">Product Name</div>
+                        <div class="solution-reason" id="solReason">Reason for upgrade...</div>
+                        <button class="btn-add-solution" id="btnAddInsert">Add Insert</button>
+                    </div>
+                    <div class="solution-item" id="holderSolution" style="display:none;">
+                        <div class="solution-label">Recommended Holder</div>
+                        <div class="solution-name" id="solHolderName">Holder Name</div>
+                        <div class="solution-reason" style="color:#aaa;">Required for this insert geometry.</div>
+                        <button class="btn-add-solution" id="btnAddHolder">Add Holder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="shop-footer">
+            <div data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+        </div>
+    </div>
+
+    <div id="shop-view" class="view-container">
         <div class="shop-header">
             <div id="brand-title" class="shop-title">BRAND NAME</div>
             <div id="brand-tagline" class="shop-tagline">Tagline</div>
         </div>
+
         <div class="shop-layout">
             <div class="sidebar">
-                <div class="search-container"><input type="text" id="productSearch" class="search-input" placeholder="Search..." onkeyup="filterProducts()"></div>
+                <div class="search-container">
+                    <input type="text" id="productSearch" class="search-input" placeholder="Search products (e.g. CNMG)..." onkeyup="filterProducts()">
+                </div>
+
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_worktype">Worktype</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_turning" onchange="filterProducts()"> <span data-i18n="sub_turning">Turning</span></label>
@@ -311,12 +388,14 @@
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> <span data-i18n="sub_threading">Threading</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_parting" onchange="filterProducts()"> <span data-i18n="sub_parting">Parting</span></label>
                 </div>
+
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_tooltype">Tool Type</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_insert" onchange="filterProducts()"> <span data-i18n="type_insert">Insert</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_rotating" onchange="filterProducts()"> <span data-i18n="type_rotating">Solid / Rotating</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox type-filter" value="type_holder" onchange="filterProducts()"> <span data-i18n="type_holder">Tool Holder</span></label>
                 </div>
+
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_material">Material</div>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="P" onchange="filterProducts()"><span class="iso-dot iso-p"></span> <span data-i18n="iso_p">Steel</span></label>
@@ -326,114 +405,179 @@
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="S" onchange="filterProducts()"><span class="iso-dot iso-s"></span> <span data-i18n="iso_s">Titanium</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox iso-filter" value="N" onchange="filterProducts()"><span class="iso-dot iso-n"></span> <span data-i18n="iso_n">Alu/Plastics</span></label>
                 </div>
+
+                <div class="filter-group">
+                    <div class="filter-title" data-i18n="filter_intensity">Intensity</div>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_heavy" onchange="filterProducts()"> <span data-i18n="op_heavy">Heavy</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_roughing" onchange="filterProducts()"> <span data-i18n="op_roughing">Roughing</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_medium" onchange="filterProducts()"> <span data-i18n="op_medium">Medium</span></label>
+                    <label class="filter-label"><input type="checkbox" class="filter-checkbox op-filter" value="op_finishing" onchange="filterProducts()"> <span data-i18n="op_finishing">Finishing</span></label>
+                </div>
             </div>
             <div class="product-grid" id="productGrid"></div>
         </div>
-        <div class="shop-footer"><div data-i18n="copyright">Copyright © 2025...</div></div>
-    </div>
 
-    <div id="selection-view">
-        <div class="selector-container">
-            <div class="selector-header">
-                <h2 class="shop-title" style="margin-bottom:10px;">TOOL SELECTOR</h2>
-                <div class="shop-tagline">Select your current tool to find the perfect upgrade.</div>
-            </div>
-            
-            <select id="toolSelector" class="selector-select" onchange="updateRecommendation()">
-                <option value="">-- Select Your Current Tool Type --</option>
-                </select>
-
-            <div id="recommendationCard" class="recommendation-card">
-                <div class="rec-title">Recommended Upgrade</div>
-                <div class="rec-product-name" id="recName">-</div>
-                <div class="rec-reason" id="recReason">-</div>
-                
-                <button class="btn-action" id="btnAddRec" onclick="">Add Tool to Quote</button>
-                
-                <div id="holderSection" style="display:none;" class="holder-alert">
-                    <div style="font-size:12px; text-transform:uppercase; color:#aaa; margin-bottom:5px;">Requires / Recommended Holder:</div>
-                    <div style="font-size:16px; font-weight:700; margin-bottom:10px;" id="recHolderName">-</div>
-                    <button class="btn-action btn-secondary" style="margin-top:0;" id="btnAddHolder" onclick="">Add Holder to Quote</button>
-                </div>
-            </div>
+        <div class="shop-footer">
+            <div data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
+            <div data-i18n="trademarks">Industria Nordica Ltd...</div>
         </div>
     </div>
 
     <script>
+        /* --- FULL DICTIONARY --- */
         const i18n = {
-            en: { all_desc:"Complete Catalog", arctos_desc:"Precision tooling", fenris_desc:"Aerospace", quote:"Quote", quote_basket:"Quote Basket", form_name:"Name", form_email:"Email", form_company:"Company", form_id:"ID", btn_send:"Send", btn_add:"Add", btn_download:"Download", tech_speed:"Speed", tech_feed:"Feed", tech_depth:"Depth", tech_sizes:"Sizes", select_size:"Select Size", back_home:"Back", filter_worktype:"Worktype", filter_tooltype:"Tool Type", filter_material:"Material", sub_turning:"Turning", sub_milling:"Milling", sub_threading:"Threading", sub_parting:"Parting", sub_drilling:"Drilling", sub_clamping:"Holders", type_insert:"Insert", type_rotating:"Solid", type_holder:"Holder", iso_p:"Steel", iso_m:"Stainless", iso_k:"Cast Iron", iso_h:"Hardened", iso_s:"Titanium", iso_n:"Alu", all_tagline:"Premium Tools", arctos_tagline:"Northern Standard", fenris_tagline:"High Performance", desc_cnmg:"General Turning", desc_pclnr:"Lever Lock Holder", desc_ncspot:"Spotting Drill" },
-            // Simplified langs for brevity, logic remains
-            fi: { all_desc:"Kuvasto", quote:"Tarjous", select_size:"Valitse koko", btn_add:"Lisää", btn_download:"Lataa", back_home:"Takaisin" }
+            en: {
+                all_desc: "Complete Catalog",
+                all_tagline: "Premium Tools for Every Application",
+                arctos_desc: "Precision tooling",
+                fenris_desc: "Aerospace & defence tooling",
+                back_home: "← Back to Home",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
+                quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade", tech_sizes: "Available Sizes", select_size: "Select Size/Model",
+                filter_worktype: "Worktype", filter_tooltype: "Tool Type", filter_material: "Material", filter_intensity: "Intensity",
+                sub_turning: "Turning", sub_milling: "Milling", sub_threading: "Threading", sub_parting: "Parting", sub_drilling: "Drilling", sub_clamping: "Holders / Clamping",
+                type_insert: "Insert", type_rotating: "Solid / Rotating", type_holder: "Tool Holder",
+                iso_p: "Steel", iso_m: "Stainless/Duplex", iso_k: "Cast Iron", iso_h: "Hardened", iso_s: "Titanium/Super", iso_n: "Alu/Plastic",
+                op_heavy: "Heavy Roughing", op_roughing: "Roughing", op_medium: "Medium", op_finishing: "Finishing",
+                arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
+                fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
+                filtered_result: "(Filtered Result)",
+                desc_cnmg: "80° Rhombic. Reliable General Turning.", desc_wnmg: "Trigon. Economy Choice.", desc_dnmg: "55° Rhombic. Profiling.", desc_snmg: "Square. Heavy Roughing.",
+                desc_apkt: "Shoulder Milling 90°.", desc_4flute: "Universal End Mill.", desc_3xd: "Short Drill (3xD).", desc_cnmg_h: "Heavy Duty Hardox.", desc_vcgt: "Sharp Edge / Polished.",
+                desc_ccmt: "Pos 80°. Internal.", desc_dcmt: "Pos 55°. Internal.", desc_16er: "Threading Inserts.", desc_mgmn: "Parting System.", desc_sekn: "Face Mill 45°.", desc_tap: "Spiral Tap.", 
+                desc_pclnr: "External Turning (Lever-Lock). Fits: CNMG 1204.",
+                desc_mwlnr: "External Turning (Lever-Lock). Fits: WNMG 0804.",
+                desc_pdjnr: "External Turning (Lever-Lock). Fits: DNMG 1506.",
+                desc_ser: "External Threading (Screw-Lock). Fits: 16ER.",
+                desc_ssclcr: "Internal Turning (Steel Shank). Fits: CCMT 09T3.",
+                desc_ssducr: "Internal Profiling (Steel Shank). Fits: DCMT 11T3.",
+                desc_weldon: "Weldon Chuck (DIN 69871). For End Mills.",
+                desc_er: "ER Collet Chuck (DIN 69871). For ER32/40.",
+                desc_dclnr: "Jet Coolant (High Pressure). Fits: CNMG.",
+                desc_srdcn: "Top Clamp (Round Inserts). Fits: RCMT.",
+                desc_esclcr: "Carbide Shank (Vibration Damping). Fits: CCMT.",
+                desc_sir: "Internal Threading (Carbide Shank). Fits: 16IR.",
+                desc_hydraulic: "Hydraulic Precision Chuck (<0.003mm).",
+                desc_ext_holder: "Ext. Holders.", desc_boring: "Boring Bars.", desc_rcmt: "Round High Feed.", desc_cbn: "Ceramic/CBN.", desc_hardthread: "Hard Threading.", desc_alu: "Alu Series.", desc_troch: "Trochoidal Mill.", desc_threadmill: "Thread Mill.", desc_5xd: "Deep Drill.", desc_ncspot: "Solid Carbide 90°. Centering & Chamfering. HA Shank. Uncoated."
+            },
+            es: {
+                all_desc: "Catálogo Completo", all_tagline: "Herramientas premium", arctos_desc: "Herramientas de precisión", fenris_desc: "Aeroespacial", back_home: "← Volver",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS", trademarks: "Industria Nordica Ltd...", quote: "Cotizar", quote_basket: "Cesta",
+                form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar", tech_sizes: "Tamaños", select_size: "Seleccionar tamaño",
+                filter_worktype: "Trabajo", filter_tooltype: "Tipo", filter_material: "Material", filter_intensity: "Intensidad", sub_turning: "Torneado", sub_milling: "Fresado", sub_threading: "Roscado", sub_parting: "Tronzado", sub_drilling: "Taladrado", sub_clamping: "Sujeción",
+                type_insert: "Plaquita", type_rotating: "Rotativo", type_holder: "Portaherramientas", iso_p: "Acero", iso_m: "Inox", iso_k: "Fundición", iso_h: "Templado", iso_s: "Titanio", iso_n: "Alu",
+                op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado", arctos_tagline: "Estándar Nórdico", fenris_tagline: "Rendimiento", filtered_result: "(Filtrado)",
+                desc_cnmg: "Rómbica 80°.", desc_wnmg: "Trígono.", desc_dnmg: "Rómbica 55°.", desc_snmg: "Cuadrada.", desc_apkt: "Fresado 90°.", desc_sekn: "Frontal 45°.", desc_4flute: "Universal.", desc_3xd: "Broca 3xD.",
+                desc_pclnr: "Torneado Ext. (Palanca). CNMG 1204.", desc_mwlnr: "Torneado Ext. (Palanca). WNMG 0804.", desc_pdjnr: "Torneado Ext. DNMG 1506.", desc_ser: "Roscado Ext. (Tornillo). 16ER.", desc_ssclcr: "Torneado Int. (Acero). CCMT 09T3.",
+                desc_ssducr: "Perfilado Int. (Acero). DCMT 11T3.", desc_weldon: "Portafresas Weldon.", desc_er: "Portapinzas ER.", desc_dclnr: "Refrigeración Jet (Alta Presión).", desc_srdcn: "Sujeción Superior (Redonda).",
+                desc_esclcr: "Barra Metal Duro (Antivibración).", desc_sir: "Roscado Int. (Metal Duro).", desc_hydraulic: "Portaherramientas Hidráulico.", desc_tap: "Macho.", desc_rcmt: "Redonda.", desc_cbn: "Cerámica.", desc_hardthread: "Roscado Duro.", desc_alu: "Alu.", desc_troch: "Trocoidal.", desc_threadmill: "Fresa Roscar.", desc_5xd: "Taladro Profundo.", desc_ncspot: "Metal Duro 90°. Centrado y Chaflanado. Mango HA. Sin recubrimiento."
+            },
+            de: {
+                all_desc: "Gesamtkatalog", all_tagline: "Premium-Werkzeuge", arctos_desc: "Präzisionswerkzeuge", fenris_desc: "Luftfahrt", back_home: "← Zurück",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN", trademarks: "Industria Nordica Ltd...", quote: "Angebot", quote_basket: "Korb",
+                form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download", tech_sizes: "Größen", select_size: "Größe wählen",
+                filter_worktype: "Bearbeitung", filter_tooltype: "Typ", filter_material: "Werkstoff", filter_intensity: "Intensität", sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden", sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
+                type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter", iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
+                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
+                desc_cnmg: "Rhombisch 80°.", desc_wnmg: "Trigon.", desc_dnmg: "Rhombisch 55°.", desc_snmg: "Quadratisch.", desc_apkt: "Eckfräsen.", desc_sekn: "Planfräsen.", desc_4flute: "Universal.", desc_3xd: "Kurzbohrer.",
+                desc_pclnr: "Außendrehen (Hebel). CNMG 1204.", desc_mwlnr: "Außendrehen (Hebel). WNMG 0804.", desc_pdjnr: "Außendrehen. DNMG 1506.", desc_ser: "Außengewinde (Schraube). 16ER.", desc_ssclcr: "Innendrehen (Stahl). CCMT 09T3.",
+                desc_ssducr: "Innenprofil (Stahl). DCMT 11T3.", desc_weldon: "Weldon-Futter.", desc_er: "ER-Spannzangenfutter.", desc_dclnr: "Jet-Kühlung (Hochdruck).", desc_srdcn: "Klemmhalter (Rund).",
+                desc_esclcr: "VHM-Bohrstange (Dämpfung).", desc_sir: "Innengewinde (VHM).", desc_hydraulic: "Hydro-Dehnspannfutter.", desc_tap: "Bohrer.", desc_rcmt: "Rund.", desc_cbn: "Keramik.", desc_hardthread: "Hartgewinden.", desc_alu: "Alu.", desc_troch: "Trochoidal.", desc_threadmill: "Gewindefräser.", desc_5xd: "Tiefloch.", desc_ncspot: "Vollhartmetall 90°. Zentrieren und Anfasen. HA-Schaft. Unbeschichtet."
+            },
+            fi: {
+                all_desc: "Koko kuvasto", all_tagline: "Premium-työkalut", arctos_desc: "Tarkkuustyökalut", fenris_desc: "Ilmailu", back_home: "← Etusivu",
+                copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN", trademarks: "Industria Nordica Oy...", quote: "Tarjous", quote_basket: "Tarjouskori",
+                form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa", tech_sizes: "Koot", select_size: "Valitse koko/malli",
+                filter_worktype: "Työstömuoto", filter_tooltype: "Tyyppi", filter_material: "Materiaali", filter_intensity: "Intensiteetti", sub_turning: "Sorvaus", sub_milling: "Jyrsintä", sub_threading: "Kierteytys", sub_parting: "Katkaisu", sub_drilling: "Poraus", sub_clamping: "Pitimet",
+                type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin", iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
+                op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön", filtered_result: "(Suodatettu)",
+                desc_cnmg: "80° Rombinen.", desc_wnmg: "Trigon.", desc_dnmg: "55° Rombinen.", desc_snmg: "Neliö.", desc_apkt: "Varsijyrsintä.", desc_sekn: "Tasojyrsintä.", desc_4flute: "Yleisjyrsin.", desc_3xd: "Lyhyt pora.",
+                desc_pclnr: "Ulkosorvaus (Vipu). CNMG 1204.", desc_mwlnr: "Ulkosorvaus (Vipu). WNMG 0804.", desc_pdjnr: "Ulkosorvaus. DNMG 1506.", desc_ser: "Ulkokierre (Ruuvi). 16ER.", desc_ssclcr: "Sisäsorvaus (Teräs). CCMT 09T3.",
+                desc_ssducr: "Sisäprofiili (Teräs). DCMT 11T3.", desc_weldon: "Weldon-istukka.", desc_er: "ER-holkki-istukka.", desc_dclnr: "Jet-jäähdytys (Korkeapaine).", desc_srdcn: "Päältäpuristus (Pyöreä).",
+                desc_esclcr: "Kovametallivarsi (Vaimennettu).", desc_sir: "Sisäkierre (Kovametalli).", desc_hydraulic: "Hydrauli-istukka.", desc_tap: "Kierretappi.", desc_rcmt: "Pyöreä.", desc_cbn: "Keramia.", desc_hardthread: "Kierteytys karkaistulle.", desc_alu: "Alu.", desc_troch: "Trookoidi.", desc_threadmill: "Kierrejyrsin.", desc_5xd: "Syväporaus.", desc_ncspot: "Täyskovametalli 90°. Keskiöinti ja viiste. HA-varsi. Pinnoittamaton."
+            }
         };
+
         let currentLang = 'en';
         let cart = [];
+
         function t(key) { return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key; }
 
-        /* DATA */
+        /* --- DATA --- */
         const products = [
-            { id:1, brand:'ARCTOS', name:'CNMG (80°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_cnmg', vc:'220-300', sizes:['120408','120412'] },
-            { id:2, brand:'ARCTOS', name:'WNMG (Trigon)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], desc:'desc_wnmg', vc:'200-280', sizes:['080408','080412'] },
-            { id:3, brand:'ARCTOS', name:'DNMG (55°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], desc:'desc_dnmg', vc:'240-320', sizes:['150604','150608'] },
-            { id:4, brand:'ARCTOS', name:'SNMG (Square)', subtype:'sub_turning', type:'type_insert', iso:['M','K'], desc:'desc_snmg', sizes:['120412','190616'] },
-            { id:5, brand:'ARCTOS', name:'CCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], desc:'desc_ccmt', sizes:['060204','09T304','09T308','120408'] },
-            { id:6, brand:'ARCTOS', name:'DCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], desc:'desc_dcmt', sizes:['070204','11T304'] },
-            { id:7, brand:'ARCTOS', name:'16ER / 16IR', subtype:'sub_threading', type:'type_insert', iso:['P','M'], desc:'desc_16er', sizes:['ISO 1.0','ISO 1.5','ISO 2.0','3.0','NPT'] },
-            { id:8, brand:'ARCTOS', name:'MGMN System', subtype:'sub_parting', type:'type_insert', iso:['P','M','K'], desc:'desc_mgmn', sizes:['300-M','400-M'] },
-            { id:9, brand:'ARCTOS', name:'APKT 1003/1604', subtype:'sub_milling', type:'type_insert', iso:['P','M','K'], desc:'desc_apkt', sizes:['1003','1604'] },
-            { id:10, brand:'ARCTOS', name:'SEKN / SNMX', subtype:'sub_milling', type:'type_insert', iso:['P','K'], desc:'desc_sekn', sizes:['1204'] },
-            { id:11, brand:'ARCTOS', name:'PCLNR / PCLNL', subtype:'sub_turning', type:'type_holder', desc:'desc_pclnr', sizes:['2525M12'] },
-            { id:12, brand:'ARCTOS', name:'MWLNR / MWLNL', subtype:'sub_turning', type:'type_holder', desc:'desc_mwlnr', sizes:['2525M08'] },
-            { id:13, brand:'ARCTOS', name:'SER / SEL', subtype:'sub_threading', type:'type_holder', desc:'desc_ser', sizes:['2525M16'] },
-            { id:14, brand:'ARCTOS', name:'S-SCLCR (Steel)', subtype:'sub_turning', type:'type_holder', desc:'desc_ssclcr', sizes:['S20R (09)','S25T (09)'] },
-            { id:15, brand:'ARCTOS', name:'S-SDUCR (Steel)', subtype:'sub_turning', type:'type_holder', desc:'desc_ssducr', sizes:['S20R (11)'] },
-            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_milling', type:'type_holder', desc:'desc_weldon', sizes:['SK40-20','SK50-32'] },
-            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_milling', type:'type_holder', desc:'desc_er', sizes:['SK40-ER32','SK50-ER40'] },
-            { id:18, brand:'ARCTOS', name:'4-Flute End Mill', subtype:'sub_milling', type:'type_rotating', iso:['P','M'], desc:'desc_4flute', sizes:['6','8','10','12','16','20'] },
-            { id:19, brand:'ARCTOS', name:'3xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M'], desc:'desc_3xd', sizes:['6.0','6.8','8.0','8.5','10.0','10.2','12.0'] },
-            { id:20, brand:'ARCTOS', name:'Spiral Tap', subtype:'sub_threading', type:'type_rotating', iso:['P','M'], desc:'desc_tap', sizes:['M6','M8','M10','M12','M16'] },
-            { id:21, brand:'FENRIS', name:'CNMG 16/19', subtype:'sub_turning', type:'type_insert', iso:['H','P'], desc:'desc_cnmg_h', sizes:['160612','190616'] },
-            { id:22, brand:'FENRIS', name:'RCMT / RPGT', subtype:'sub_turning', type:'type_insert', iso:['S'], desc:'desc_rcmt', sizes:['10T3','1204'] },
-            { id:23, brand:'FENRIS', name:'Ceramic / CBN', subtype:'sub_turning', type:'type_insert', iso:['H'], desc:'desc_cbn', sizes:['CNGA 1204','16ER CBN'] },
-            { id:24, brand:'FENRIS', name:'Hard-Thread', subtype:'sub_threading', type:'type_insert', iso:['H'], desc:'desc_hardthread', sizes:['16ER 1.5'] },
-            { id:25, brand:'FENRIS', name:'VCGT / VBMT', subtype:'sub_turning', type:'type_insert', iso:['S','M'], desc:'desc_vcgt', sizes:['160402','160404'] },
-            { id:26, brand:'FENRIS', name:'ALU-Series', subtype:'sub_turning', type:'type_insert', iso:['N'], desc:'desc_alu', sizes:['VCGT 1604'] },
-            { id:27, brand:'FENRIS', name:'DCLNR + Jet', subtype:'sub_turning', type:'type_holder', desc:'desc_dclnr', sizes:['2525 (12)'] },
-            { id:28, brand:'FENRIS', name:'SRDCN (Round)', subtype:'sub_turning', type:'type_holder', desc:'desc_srdcn', sizes:['2525M10'] },
-            { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning', type:'type_holder', desc:'desc_esclcr', sizes:['E16R (09)','E20S (09)'] },
-            { id:30, brand:'FENRIS', name:'SIR / SIL (Carbide)', subtype:'sub_threading', type:'type_holder', desc:'desc_sir', sizes:['E16R-16'] },
-            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_milling', type:'type_holder', desc:'desc_hydraulic', sizes:['SK40'] },
-            { id:32, brand:'FENRIS', name:'Trochoidal Mill', subtype:'sub_milling', type:'type_rotating', iso:['S'], desc:'desc_troch', sizes:['10','12'] },
-            { id:33, brand:'FENRIS', name:'Thread Mill', subtype:'sub_threading', type:'type_rotating', iso:['S','H'], desc:'desc_threadmill', sizes:['M10'] },
-            { id:34, brand:'FENRIS', name:'5xD & 8xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','S','H','N'], desc:'desc_5xd', sizes:['6.0','8.0','10.0'] },
-            { id:35, brand:'ARCTOS', name:'NC Spotting Drill 90°', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','N'], desc:'desc_ncspot', sizes:['10','12'] },
-            // NEW HOLDERS FOR SELECTOR
-            { id:36, brand:'ARCTOS', name:'PDJNR 2525M15', subtype:'sub_turning', type:'type_holder', desc:'For DNMG 1506', sizes:['2525M15'] },
-            { id:37, brand:'ARCTOS', name:'APKT-Cutter Body', subtype:'sub_milling', type:'type_holder', desc:'For APKT 1003', sizes:['Ø16','Ø20','Ø25'] },
-            { id:38, brand:'FENRIS', name:'RCMT-Cutter Body', subtype:'sub_milling', type:'type_holder', desc:'For RCMT', sizes:['Ø25','Ø32'] }
+            // ARCTOS - INSERTS
+            { id:1, brand:'ARCTOS', name:'CNMG (80°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_cnmg', vc:'220-300 m/min', fn:'0.2-0.4 mm/r', ap:'1.0-4.0 mm', sizes: ['120408', '120412'] },
+            { id:2, brand:'ARCTOS', name:'WNMG (Trigon)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_wnmg', vc:'200-280 m/min', fn:'0.2-0.45 mm/r', ap:'1.0-4.0 mm', sizes: ['080408', '080412'] },
+            { id:3, brand:'ARCTOS', name:'DNMG (55°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_dnmg', vc:'240-320 m/min', fn:'0.1-0.3 mm/r', ap:'0.5-3.0 mm', sizes: ['150604', '150608'] },
+            { id:4, brand:'ARCTOS', name:'SNMG (Square)', subtype:'sub_turning', type:'type_insert', iso:['M','K'], op:['op_heavy'], desc:'desc_snmg', vc:'160-220 m/min', fn:'0.3-0.6 mm/r', ap:'2.0-6.0 mm', sizes: ['120412', '190616'] },
+            { id:5, brand:'ARCTOS', name:'CCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_ccmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm', sizes: ['060204', '09T304', '09T308', '120408'] },
+            { id:6, brand:'ARCTOS', name:'DCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_dcmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm', sizes: ['070204', '11T304'] },
+            { id:7, brand:'ARCTOS', name:'16ER / 16IR', subtype:'sub_threading', type:'type_insert', iso:['P','M'], op:['op_medium'], desc:'desc_16er', vc:'120-180 m/min', fn:'Pitch dependent', ap:'-', sizes: ['ISO 1.0', 'ISO 1.5', 'ISO 2.0', 'ISO 3.0', 'NPT 11.5'] },
+            { id:8, brand:'ARCTOS', name:'MGMN System', subtype:'sub_parting', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_mgmn', vc:'140-200 m/min', fn:'0.05-0.15 mm/r', ap:'-', sizes: ['300-M', '400-M'] },
+            { id:9, brand:'ARCTOS', name:'APKT 1003/1604', subtype:'sub_milling', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_apkt', vc:'180-260 m/min', fn:'0.1-0.2 mm/z', ap:'Max 10mm', sizes: ['1003 PDTR', '1604 PDTR'] },
+            { id:10, brand:'ARCTOS', name:'SEKN / SNMX', subtype:'sub_milling', type:'type_insert', iso:['P','K'], op:['op_roughing'], desc:'desc_sekn', vc:'150-220 m/min', fn:'0.2-0.35 mm/z', ap:'Max 6mm', sizes: ['1204 AFTN'] },
+            
+            // ARCTOS - HOLDERS
+            { id:11, brand:'ARCTOS', name:'PCLNR / PCLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_pclnr', vc:'-', fn:'-', ap:'-', sizes: ['2525M12'] },
+            { id:12, brand:'ARCTOS', name:'MWLNR / MWLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_mwlnr', vc:'-', fn:'-', ap:'-', sizes: ['2525M08'] },
+            { id:13, brand:'ARCTOS', name:'SER / SEL', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_ser', vc:'-', fn:'-', ap:'-', sizes: ['2525M16'] },
+            { id:14, brand:'ARCTOS', name:'S-SCLCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssclcr', vc:'-', fn:'-', ap:'-', sizes: ['S20R (09)', 'S25T (09)'] },
+            { id:15, brand:'ARCTOS', name:'S-SDUCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssducr', vc:'-', fn:'-', ap:'-', sizes: ['S20R (11)'] },
+            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_weldon', vc:'-', fn:'-', ap:'-', sizes: ['SK40-Ø20', 'SK50-Ø32'] },
+            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_er', vc:'-', fn:'-', ap:'-', sizes: ['SK40-ER32', 'SK50-ER40'] },
+            // NEW HOLDER ADDED FOR SELECTION TOOL
+            { id:36, brand:'ARCTOS', name:'PDJNR / PDJNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_pdjnr', vc:'-', fn:'-', ap:'-', sizes: ['2525M15'] },
+
+            // ARCTOS - ROTATING
+            { id:18, brand:'ARCTOS', name:'4-Flute End Mill', subtype:'sub_milling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_4flute', vc:'80-120 m/min', fn:'0.03-0.08 mm/z', ap:'1.5xD', sizes: ['Ø6', 'Ø8', 'Ø10', 'Ø12', 'Ø16', 'Ø20'] },
+            { id:19, brand:'ARCTOS', name:'3xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_3xd', vc:'70-100 m/min', fn:'0.1-0.25 mm/r', ap:'3xD', sizes: ['Ø6.0', 'Ø6.8', 'Ø8.0', 'Ø8.5', 'Ø10.0', 'Ø10.2', 'Ø12.0'] },
+            { id:20, brand:'ARCTOS', name:'Spiral Tap', subtype:'sub_threading', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_tap', vc:'10-20 m/min', fn:'-', ap:'-', sizes: ['M6', 'M8', 'M10', 'M12', 'M16'] },
+            { id:35, brand:'ARCTOS', name:'NC Spotting Drill 90°', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','N'], op:['op_drilling'], desc:'desc_ncspot', vc:'80-120 m/min', fn:'0.05-0.15 mm/r', ap:'-', sizes: ['Ø10', 'Ø12'] },
+
+            // FENRIS - INSERTS
+            { id:21, brand:'FENRIS', name:'CNMG 16/19', subtype:'sub_turning', type:'type_insert', iso:['H','P'], op:['op_heavy'], desc:'desc_cnmg_h', vc:'100-160 m/min', fn:'0.3-0.8 mm/r', ap:'2.0-8.0 mm', sizes: ['160612', '190616'] },
+            { id:22, brand:'FENRIS', name:'RCMT / RPGT', subtype:'sub_turning', type:'type_insert', iso:['S'], op:['op_roughing'], desc:'desc_rcmt', vc:'40-70 m/min', fn:'0.1-0.3 mm/r', ap:'1.0-3.0 mm', sizes: ['10T3 MO', '1204 MO'] },
+            { id:23, brand:'FENRIS', name:'Ceramic / CBN', subtype:'sub_turning', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_cbn', vc:'120-180 m/min', fn:'0.05-0.15 mm/r', ap:'0.1-0.5 mm', sizes: ['CNGA 120408', '16ER 1.5 CBN'] },
+            { id:24, brand:'FENRIS', name:'Hard-Thread', subtype:'sub_threading', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_hardthread', vc:'40-60 m/min', fn:'-', ap:'-', sizes: ['16ER 1.5'] },
+            { id:25, brand:'FENRIS', name:'VCGT / VBMT', subtype:'sub_turning', type:'type_insert', iso:['S','M'], op:['op_finishing'], desc:'desc_vcgt', vc:'50-90 m/min', fn:'0.05-0.15 mm/r', ap:'0.2-1.5 mm', sizes: ['160402', '160404'] },
+            { id:26, brand:'FENRIS', name:'ALU-Series', subtype:'sub_turning', type:'type_insert', iso:['N'], op:['op_finishing'], desc:'desc_alu', vc:'400-800 m/min', fn:'0.1-0.4 mm/r', ap:'0.5-4.0 mm', sizes: ['VCGT 160404'] },
+
+            // FENRIS - HOLDERS
+            { id:27, brand:'FENRIS', name:'DCLNR + Jet', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_dclnr', vc:'-', fn:'-', ap:'-', sizes: ['2525 (12)'] },
+            { id:28, brand:'FENRIS', name:'SRDCN (Round)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_srdcn', vc:'-', fn:'-', ap:'-', sizes: ['2525M10'] },
+            { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_esclcr', vc:'-', fn:'-', ap:'-', sizes: ['E16R (09)', 'E20S (09)'] },
+            { id:30, brand:'FENRIS', name:'SIR / SIL (Carbide)', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_sir', vc:'-', fn:'-', ap:'-', sizes: ['E16R-SIR-16'] },
+            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-', sizes: ['SK40'] },
+
+            // FENRIS - ROTATING
+            { id:32, brand:'FENRIS', name:'Trochoidal Mill', subtype:'sub_milling', type:'type_rotating', iso:['S','M'], op:['op_roughing'], desc:'desc_troch', vc:'80-140 m/min', fn:'High Feed', ap:'2xD', sizes: ['Ø10', 'Ø12'] },
+            { id:33, brand:'FENRIS', name:'Thread Mill', subtype:'sub_threading', type:'type_rotating', iso:['S','M','H'], op:['op_medium'], desc:'desc_threadmill', vc:'60-100 m/min', fn:'0.02-0.05 mm/z', ap:'-', sizes: ['M10'] },
+            { id:34, brand:'FENRIS', name:'5xD & 8xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','S','H','N'], op:['op_medium'], desc:'desc_5xd', vc:'60-90 m/min', fn:'0.1-0.2 mm/r', ap:'8xD', sizes: ['Ø6.0', 'Ø8.0', 'Ø10.0'] }
         ];
 
-        /* SELECTOR DATA FROM EXCEL */
-        const selectorData = [
-            { input: "TNMG (Triangle)", recId: 2, reason: "Better. 80° corner is stronger than 60°. Same edges (6), better life.", holderId: 12 },
-            { input: "CNMG (General)", recId: 1, reason: "Equivalent. Optimized price/performance ratio.", holderId: null },
-            { input: "CNMG (Heavy / Hardox)", recId: 21, reason: "Stronger. Reinforced geometry for heavy duty.", holderId: null },
-            { input: "VNMG (35° Diamond)", recId: 3, reason: "Stronger. 55° tip is more robust but fits tight spaces.", holderId: 36 },
-            { input: "KNUX", recId: 3, reason: "Modern. Better chip control, cheaper insert cost.", holderId: 36 },
-            { input: "SNMG (General)", recId: 4, reason: "Tougher. Optimized for heavy interrupted cuts.", holderId: null },
-            { input: "TPMT / TCMT (Internal)", recId: 5, reason: "Stronger. 80° shape resists internal forces better.", holderId: 14 },
-            { input: "DCMT (Steel)", recId: 6, reason: "Equivalent. General grade for finishing.", holderId: null },
-            { input: "DCMT (Alu/Ti)", recId: 25, reason: "Sharper. Polished edge prevents built-up edge.", holderId: null },
-            { input: "Hard Turning (>50HRC)", recId: 23, reason: "Faster. Enables hard turning without coolant.", holderId: 28 },
-            { input: "APKT 1003 / 1604", recId: 9, reason: "Equivalent. Industry standard 90° shoulder mill.", holderId: null },
-            { id: "R390", input: "R390 (Sandvik Type)", recId: 9, reason: "More economical. Easier availability.", holderId: 37 },
-            { input: "HSS Drill", recId: 19, reason: "More efficient. 5-10x faster than HSS.", holderId: 17 },
-            { input: "HSS Tap", recId: 20, reason: "Durable. Powder metal is tougher than basic HSS.", holderId: null },
-            { input: "Tap (Hard/Ti)", recId: 33, reason: "Safer. No broken taps in expensive parts.", holderId: 16 },
-            { input: "Face Mill 45°", recId: 10, reason: "Equivalent. Cost effective for large areas.", holderId: null },
-            { input: "High Feed Mill", recId: 22, reason: "Efficient. Round shape is best for difficult materials.", holderId: 38 }
+        /* --- SELECTION TOOL DATA (EXCEL) --- */
+        const selectionData = [
+            { current: 'TNMG (Kolmio 60°)', recommendId: 2, reason: "80° kärkikulma on vahvempi kuin 60°. 6 särmää (WNMG) on taloudellisempi.", holderId: 12 }, // WNMG + MWLNR
+            { current: 'CNMG (Perus)', recommendId: 1, reason: "Hinta-laatusuhteeltaan optimoitu yleislaatu.", holderId: null }, // CNMG
+            { current: 'CNMG (Raskas/Hardox)', recommendId: 21, reason: "Vahvistettu geometria panssariteräksille.", holderId: null }, // Fenris CNMG
+            { current: 'VNMG (35° Timantti)', recommendId: 3, reason: "55° kärki (DNMG) on vahvempi, mutta mahtuu ahtaisiin paikkoihin.", holderId: 36 }, // DNMG + PDJNR (New ID)
+            { current: 'KNUX (Viikate)', recommendId: 3, reason: "Modernimpi lastunhallinta ja halvempi kappalehinta.", holderId: 36 }, // DNMG + PDJNR
+            { current: 'SNMG (Perus)', recommendId: 4, reason: "Optimoitu raskaalle ja epäjatkuvalle lastulle.", holderId: null }, // SNMG
+            { current: 'TPMT / TCMT (Sisä)', recommendId: 5, reason: "80° muoto (CCMT) kestää paremmin sisäsorvauksen rasitusta.", holderId: 14 }, // CCMT + S-SCLCR
+            { current: 'DCMT (Teräkselle)', recommendId: 6, reason: "Tarkkuusviimeistelyyn sopiva yleislaatu.", holderId: null }, // DCMT
+            { current: 'DCMT (Alumiini/Titaani)', recommendId: 25, reason: "Kiillotettu ja terävä särmä estää tarttumisen.", holderId: null }, // VCGT
+            { current: 'Kovametalli (>50HRC)', recommendId: 23, reason: "Mahdollistaa kovan sorvauksen ilman jäähdytystä.", holderId: 28 }, // Ceramic + SRDCN (Note: Excel says SRDCN, usually ceramic fits CNGA holder, check if holder 28 fits round. 28 is SRDCN Round. Ceramic is CNGA/Round. Let's map to SRDCN if user wants round ceramic, or keep null if standard holder fits.) *Adjusted to recommended holder in sheet*
+            { current: 'APKT 1003 / 1604', recommendId: 9, reason: "Teollisuuden yleisin 90° varsijyrsinpala.", holderId: null },
+            { current: 'R390 (Sandvik)', recommendId: 9, reason: "Edullisempi ja yleisempi standardi (APKT).", holderId: 16 }, // APKT + Weldon
+            { current: 'HSS-Poranterä', recommendId: 19, reason: "5-10x nopeampi ja tarkempi kuin pikateräs.", holderId: 17 }, // 3xD + ER
+            { current: 'HSS-Kierretappi', recommendId: 20, reason: "Pulveriteräs on sitkeämpää kuin perus HSS.", holderId: null },
+            { current: 'Kierretappi (Kova/Ti)', recommendId: 33, reason: "Turvallisempi. Jos työkalu katkeaa, kappale ei mene pilalle.", holderId: 16 }, // Thread Mill + Weldon
+            { current: 'Tasojyrsin 45°', recommendId: 10, reason: "Kustannustehokas ratkaisu isoille tasopinnoille.", holderId: null },
+            { current: 'High Feed Jyrsin', recommendId: 22, reason: "Pyöreä muoto on paras vaikeasti lastuttaville aineille.", holderId: null } // RCMT
         ];
 
-        /* LOGIC */
+        /* --- LOGIIKKA --- */
         const landingView = document.getElementById('landing-view');
         const shopView = document.getElementById('shop-view');
         const selectionView = document.getElementById('selection-view');
@@ -449,28 +593,46 @@
         const cartItemsDiv = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
         const cartBtn = document.querySelector('.cart-btn');
+
         let currentBrand = 'ALL';
 
-        function toggleMenu() { sideMenu.classList.toggle('active'); navOverlay.classList.toggle('active'); hamburgerBtn.classList.toggle('open'); }
+        function toggleMenu() {
+            sideMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            hamburgerBtn.classList.toggle('open');
+        }
         navOverlay.addEventListener('click', toggleMenu);
+
+        // Populate Selection Dropdown
+        const selDropdown = document.getElementById('currentToolSelect');
+        selectionData.forEach((item, index) => {
+            let opt = document.createElement('option');
+            opt.value = index;
+            opt.innerText = item.current;
+            selDropdown.appendChild(opt);
+        });
+
+        function switchView(viewName) {
+            landingView.classList.add('hidden');
+            shopView.classList.remove('active');
+            selectionView.classList.remove('active');
+            
+            if (viewName === 'shop') {
+                shopView.classList.add('active');
+                cartBtn.style.display = 'flex';
+            } else if (viewName === 'selection') {
+                selectionView.classList.add('active');
+                cartBtn.style.display = 'flex';
+            }
+            toggleMenu();
+        }
 
         function openShop(brand) {
             currentBrand = brand;
-            landingView.classList.add('hidden');
-            selectionView.classList.remove('active');
-            shopView.classList.add('active');
-            cartBtn.style.display = 'flex';
+            switchView('shop'); // Handles visibility
+            document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+            updateBrandHeader();
             filterProducts();
-            toggleMenu(); 
-        }
-
-        function openSelectionTool() {
-            landingView.classList.add('hidden');
-            shopView.classList.remove('active');
-            selectionView.classList.add('active');
-            cartBtn.style.display = 'flex';
-            toggleMenu();
-            initSelector();
         }
 
         function closeShop() {
@@ -481,12 +643,65 @@
             if (sideMenu.classList.contains('active')) toggleMenu();
         }
 
+        /* --- SELECTION TOOL LOGIC --- */
+        function showSolution() {
+            const index = document.getElementById('currentToolSelect').value;
+            const card = document.getElementById('solutionCard');
+            
+            if (index === "") {
+                card.style.display = 'none';
+                return;
+            }
+
+            const data = selectionData[index];
+            const product = products.find(p => p.id === data.recommendId);
+            
+            // Fill Product Info
+            document.getElementById('solName').innerText = product.brand + " " + product.name;
+            document.getElementById('solReason').innerText = data.reason;
+            
+            // Setup Add Button
+            const btnInsert = document.getElementById('btnAddInsert');
+            // If product has sizes, open modal. If not, add directly.
+            btnInsert.onclick = function() { 
+                if (product.sizes && product.sizes.length > 0) openProductDetails(product);
+                else addToCart(product.id, '');
+            };
+
+            // Holder Info
+            const holderDiv = document.getElementById('holderSolution');
+            if (data.holderId) {
+                const holder = products.find(p => p.id === data.holderId);
+                if (holder) {
+                    holderDiv.style.display = 'block';
+                    document.getElementById('solHolderName').innerText = holder.brand + " " + holder.name;
+                    document.getElementById('btnAddHolder').onclick = function() {
+                        if (holder.sizes && holder.sizes.length > 0) openProductDetails(holder);
+                        else addToCart(holder.id, '');
+                    };
+                } else {
+                    holderDiv.style.display = 'none'; // Holder ID not found in DB
+                }
+            } else {
+                holderDiv.style.display = 'none';
+            }
+
+            card.style.display = 'block';
+        }
+
+        function updateBrandHeader() {
+            if (currentBrand === 'ALL') { brandTitle.innerText = "INDUSTRIA NORDICA"; brandTagline.innerText = t('all_tagline'); }
+            else if (currentBrand === 'ARCTOS') { brandTitle.innerText = "ARCTOS Precision Tooling"; brandTagline.innerText = t('arctos_tagline'); }
+            else { brandTitle.innerText = "FENRIS Aerospace & Defence"; brandTagline.innerText = t('fenris_tagline'); }
+        }
+
         function filterProducts() {
             const searchTerm = document.getElementById('productSearch').value.toLowerCase();
             const subtypes = Array.from(document.querySelectorAll('.sub-filter:checked')).map(cb => cb.value);
             const types = Array.from(document.querySelectorAll('.type-filter:checked')).map(cb => cb.value);
             const isos = Array.from(document.querySelectorAll('.iso-filter:checked')).map(cb => cb.value);
             const ops = Array.from(document.querySelectorAll('.op-filter:checked')).map(cb => cb.value);
+
             const forceFenris = (currentBrand === 'ARCTOS') && (isos.includes('H') || isos.includes('S') || isos.includes('N'));
 
             productGrid.innerHTML = '';
@@ -497,7 +712,7 @@
                     if (forceFenris) { if (p.brand !== 'FENRIS') match = false; }
                     else { if (p.brand !== currentBrand) match = false; }
                 }
-                if (searchTerm && !p.name.toLowerCase().includes(searchTerm)) match = false;
+                if (searchTerm && !p.name.toLowerCase().includes(searchTerm) && !t(p.desc).toLowerCase().includes(searchTerm)) match = false;
                 if (subtypes.length && !subtypes.includes(p.subtype)) match = false;
                 if (types.length && !types.includes(p.type)) match = false;
                 if (isos.length) {
@@ -505,6 +720,7 @@
                     else if (!p.iso.some(c => isos.includes(c))) match = false;
                 }
                 if (isos.length > 0 && p.iso.length === 0) match = false;
+
                 if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
                 return match;
             });
@@ -512,13 +728,14 @@
             if (!filtered.length) { productGrid.innerHTML = '<div style="color:#888; grid-column:1/-1;">No products found.</div>'; return; }
 
             filtered.forEach(p => {
-                let isoDots = p.iso ? p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('') : '';
+                let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.onclick = (e) => { 
                     if(e.target.classList.contains('quick-add-btn')) return;
                     openProductDetails(p); 
                 };
+                
                 card.innerHTML = `
                     <div class="quick-add-btn" onclick="quickAdd(${p.id}); event.stopPropagation();">+</div>
                     <div class="prod-brand">${p.brand}</div>
@@ -531,36 +748,56 @@
             });
         }
 
+        /* --- MODAL LOGIC (UPDATED) --- */
         function openProductDetails(p) {
             let sizesHtml = '';
             if (p.sizes && p.sizes.length > 0) {
                 let options = p.sizes.map(s => `<option value="${s}">${s}</option>`).join('');
-                sizesHtml = `<div style="margin-bottom:15px;"><label style="font-size:11px; text-transform:uppercase; color:#aaa; display:block; margin-bottom:5px;">${t('select_size')}:</label><select id="selectedSize" class="size-selector">${options}</select></div>`;
+                sizesHtml = `
+                    <div style="margin-bottom:15px;">
+                        <label style="font-size:11px; text-transform:uppercase; color:#aaa; display:block; margin-bottom:5px;">${t('select_size')}:</label>
+                        <select id="selectedSize" class="size-selector">
+                            ${options}
+                        </select>
+                    </div>
+                `;
             }
+
             modalContent.innerHTML = `
                 <div class="modal-title">${p.name}</div>
                 <div style="margin-bottom:15px; color:#ccc;">${t(p.desc)}</div>
                 ${sizesHtml}
                 <table class="tech-table">
-                    <tr><td>ISO</td><td>${p.iso ? p.iso.join(', ') : '-'}</td></tr>
+                    <tr><td>${t('tech_speed')}</td><td>${p.vc}</td></tr>
+                    <tr><td>${t('tech_feed')}</td><td>${p.fn}</td></tr>
+                    <tr><td>${t('tech_depth')}</td><td>${p.ap}</td></tr>
+                    <tr><td>ISO</td><td>${p.iso.join(', ')}</td></tr>
                 </table>
                 <button class="btn-action" onclick="addFromModal(${p.id})">${t('btn_add')}</button>
+                <button class="btn-action btn-secondary">${t('btn_download')}</button>
             `;
             productModal.classList.add('open');
         }
+
         function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-        function quickAdd(id) {
-            const p = products.find(x => x.id === id);
-            if (p.sizes && p.sizes.length > 0) openProductDetails(p);
-            else addToCart(id, '');
-        }
+        /* --- CART LOGIC --- */
         function addFromModal(id) {
             const select = document.getElementById('selectedSize');
-            const size = select ? select.value : '';
+            const size = select ? select.value : ''; 
             addToCart(id, size);
             closeModal('productModal');
         }
+
+        function quickAdd(id) {
+            const p = products.find(x => x.id === id);
+            if (p.sizes && p.sizes.length > 0) {
+                openProductDetails(p);
+            } else {
+                addToCart(id, '');
+            }
+        }
+
         function addToCart(id, size) {
             const p = products.find(x => x.id === id);
             cart.push({ ...p, selectedSize: size });
@@ -568,61 +805,59 @@
             const btn = document.querySelector('.cart-btn');
             btn.style.color = "#fff"; setTimeout(()=> btn.style.color="#ccc", 300);
         }
-        function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
         function updateCartUI() {
             cartCount.innerText = cart.length;
             cartItemsDiv.innerHTML = '';
             cart.forEach((p, i) => {
                 const sizeStr = p.selectedSize ? ` (${p.selectedSize})` : '';
-                cartItemsDiv.innerHTML += `<div class="cart-item"><span>${p.brand} ${p.name}${sizeStr}</span><span class="cart-remove" onclick="removeFromCart(${i})">X</span></div>`;
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${p.brand} ${p.name}${sizeStr}</span>
+                        <span class="cart-remove" onclick="removeFromCart(${i})">X</span>
+                    </div>`;
             });
         }
-        function openCart() { updateCartUI(); rfqModal.classList.add('open'); }
+
+        function openCart() {
+            updateCartUI();
+            rfqModal.classList.add('open');
+        }
+
         function sendQuote(e) {
             e.preventDefault();
             if(!cart.length) { alert("Cart is empty"); return; }
+            
             const name = document.getElementById('rfqName').value;
+            const email = document.getElementById('rfqEmail').value;
             const company = document.getElementById('rfqCompany').value;
-            let body = `REQUEST FOR QUOTE\nName: ${name}\nCompany: ${company}\n\n`;
-            cart.forEach(p => { body += `- ${p.brand} ${p.name} ${p.selectedSize ? '['+p.selectedSize+']' : ''}\n`; });
+            const bid = document.getElementById('rfqID').value;
+            
+            let body = `REQUEST FOR QUOTE\n\nContact:\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nBusiness ID: ${bid}\n\nProducts:\n`;
+            cart.forEach(p => {
+                const sizeStr = p.selectedSize ? ` [Size: ${p.selectedSize}]` : '';
+                body += `- ${p.brand} ${p.name}${sizeStr}\n`;
+            });
+            
             window.location.href = `mailto:info@industrianordica.fi?subject=RFQ from ${company}&body=${encodeURIComponent(body)}`;
             closeModal('rfqModal');
         }
 
-        /* --- SELECTION TOOL LOGIC --- */
-        function initSelector() {
-            const sel = document.getElementById('toolSelector');
-            sel.innerHTML = '<option value="">-- Select Your Current Tool --</option>';
-            selectorData.forEach((item, index) => {
-                sel.innerHTML += `<option value="${index}">${item.input}</option>`;
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.textContent.toLowerCase() === lang) opt.classList.add('active');
             });
+            if (shopView.classList.contains('active')) { updateBrandHeader(); filterProducts(); }
         }
-        function updateRecommendation() {
-            const index = document.getElementById('toolSelector').value;
-            const card = document.getElementById('recommendationCard');
-            if(index === "") { card.style.display = 'none'; return; }
-            
-            const data = selectorData[index];
-            const p = products.find(x => x.id === data.recId);
-            const h = data.holderId ? products.find(x => x.id === data.holderId) : null;
-            
-            document.getElementById('recName').innerText = p.brand + " " + p.name;
-            document.getElementById('recReason').innerText = "\"" + data.reason + "\"";
-            
-            // Add insert button logic
-            document.getElementById('btnAddRec').onclick = function() { quickAdd(p.id); };
-            
-            const hSec = document.getElementById('holderSection');
-            if (h) {
-                hSec.style.display = 'block';
-                document.getElementById('recHolderName').innerText = h.brand + " " + h.name;
-                document.getElementById('btnAddHolder').onclick = function() { quickAdd(h.id); };
-            } else {
-                hSec.style.display = 'none';
-            }
-            card.style.display = 'block';
-        }
-
+        
         setLanguage('en');
     </script>
 </body>
