@@ -45,7 +45,7 @@
         }
 
         a { text-decoration: none; color: #FFFFFF; }
-        input, button, textarea { font-family: 'Montserrat', sans-serif; }
+        input, button, textarea, select { font-family: 'Montserrat', sans-serif; }
 
         /* --- NAVIGAATIO (ABSOLUTE) --- */
         .signet-home {
@@ -207,6 +207,11 @@
         .btn-secondary { background: transparent; border: 1px solid #666; color: #fff; margin-top: 10px; }
         .btn-secondary:hover { border-color: #fff; }
 
+        /* Dropdown style in modal */
+        .size-selector {
+            width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 2px; margin-bottom: 20px;
+        }
+
         /* Forms */
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
@@ -358,7 +363,7 @@
                 back_home: "← Back to Home",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
-                quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade", tech_sizes: "Available Sizes",
+                quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade", tech_sizes: "Available Sizes", select_size: "Select Size/Model",
                 filter_worktype: "Worktype", filter_tooltype: "Tool Type", filter_material: "Material", filter_intensity: "Intensity",
                 sub_turning: "Turning", sub_milling: "Milling", sub_threading: "Threading", sub_parting: "Parting", sub_drilling: "Drilling", sub_clamping: "Holders / Clamping",
                 type_insert: "Insert", type_rotating: "Solid / Rotating", type_holder: "Tool Holder",
@@ -387,7 +392,7 @@
             es: {
                 all_desc: "Catálogo Completo", all_tagline: "Herramientas premium", arctos_desc: "Herramientas de precisión", fenris_desc: "Aeroespacial", back_home: "← Volver",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS", trademarks: "Industria Nordica Ltd...", quote: "Cotizar", quote_basket: "Cesta",
-                form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar", tech_sizes: "Tamaños",
+                form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar", tech_sizes: "Tamaños", select_size: "Seleccionar tamaño",
                 filter_worktype: "Trabajo", filter_tooltype: "Tipo", filter_material: "Material", filter_intensity: "Intensidad", sub_turning: "Torneado", sub_milling: "Fresado", sub_threading: "Roscado", sub_parting: "Tronzado", sub_drilling: "Taladrado", sub_clamping: "Sujeción",
                 type_insert: "Plaquita", type_rotating: "Rotativo", type_holder: "Portaherramientas", iso_p: "Acero", iso_m: "Inox", iso_k: "Fundición", iso_h: "Templado", iso_s: "Titanio", iso_n: "Alu",
                 op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado", arctos_tagline: "Estándar Nórdico", fenris_tagline: "Rendimiento", filtered_result: "(Filtrado)",
@@ -399,7 +404,7 @@
             de: {
                 all_desc: "Gesamtkatalog", all_tagline: "Premium-Werkzeuge", arctos_desc: "Präzisionswerkzeuge", fenris_desc: "Luftfahrt", back_home: "← Zurück",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN", trademarks: "Industria Nordica Ltd...", quote: "Angebot", quote_basket: "Korb",
-                form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download", tech_sizes: "Größen",
+                form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download", tech_sizes: "Größen", select_size: "Größe wählen",
                 filter_worktype: "Bearbeitung", filter_tooltype: "Typ", filter_material: "Werkstoff", filter_intensity: "Intensität", sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden", sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
                 type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter", iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
                 op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
@@ -411,7 +416,7 @@
             fi: {
                 all_desc: "Koko kuvasto", all_tagline: "Premium-työkalut", arctos_desc: "Tarkkuustyökalut", fenris_desc: "Ilmailu", back_home: "← Etusivu",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN", trademarks: "Industria Nordica Oy...", quote: "Tarjous", quote_basket: "Tarjouskori",
-                form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa", tech_sizes: "Koot",
+                form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa", tech_sizes: "Koot", select_size: "Valitse koko/malli",
                 filter_worktype: "Työstömuoto", filter_tooltype: "Tyyppi", filter_material: "Materiaali", filter_intensity: "Intensiteetti", sub_turning: "Sorvaus", sub_milling: "Jyrsintä", sub_threading: "Kierteytys", sub_parting: "Katkaisu", sub_drilling: "Poraus", sub_clamping: "Pitimet",
                 type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin", iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
                 op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön", filtered_result: "(Suodatettu)",
@@ -550,7 +555,6 @@
                     if (!p.iso.length) { if(!types.includes('type_holder')) match = false; }
                     else if (!p.iso.some(c => isos.includes(c))) match = false;
                 }
-                // Pitimille sallitaan näkyvyys jos ISO-filtteri on tyhjä
                 if (isos.length > 0 && p.iso.length === 0) match = false;
 
                 if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
@@ -563,9 +567,14 @@
                 let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.onclick = (e) => { if(!e.target.classList.contains('quick-add-btn')) openProductDetails(p); };
+                // PÄIVITETTY: Klikkaus avaa aina modalin jos kokoja on, muuten suora lisäys
+                card.onclick = (e) => { 
+                    if(e.target.classList.contains('quick-add-btn')) return;
+                    openProductDetails(p); 
+                };
+                
                 card.innerHTML = `
-                    <div class="quick-add-btn" onclick="addToCart(${p.id}); event.stopPropagation();">+</div>
+                    <div class="quick-add-btn" onclick="quickAdd(${p.id}); event.stopPropagation();">+</div>
                     <div class="prod-brand">${p.brand}</div>
                     <div class="prod-name">${p.name}</div>
                     <div class="prod-desc">${t(p.desc)}</div>
@@ -576,24 +585,33 @@
             });
         }
 
-        /* --- MODAL LOGIC (UPDATED WITH SIZES) --- */
+        /* --- MODAL LOGIC (UPDATED) --- */
         function openProductDetails(p) {
             let sizesHtml = '';
             if (p.sizes && p.sizes.length > 0) {
-                sizesHtml = `<tr><td>${t('tech_sizes')}</td><td>${p.sizes.join(', ')}</td></tr>`;
+                // Dropdown menu for sizes
+                let options = p.sizes.map(s => `<option value="${s}">${s}</option>`).join('');
+                sizesHtml = `
+                    <div style="margin-bottom:15px;">
+                        <label style="font-size:11px; text-transform:uppercase; color:#aaa; display:block; margin-bottom:5px;">${t('select_size')}:</label>
+                        <select id="selectedSize" class="size-selector">
+                            ${options}
+                        </select>
+                    </div>
+                `;
             }
 
             modalContent.innerHTML = `
                 <div class="modal-title">${p.name}</div>
                 <div style="margin-bottom:15px; color:#ccc;">${t(p.desc)}</div>
+                ${sizesHtml}
                 <table class="tech-table">
                     <tr><td>${t('tech_speed')}</td><td>${p.vc}</td></tr>
                     <tr><td>${t('tech_feed')}</td><td>${p.fn}</td></tr>
                     <tr><td>${t('tech_depth')}</td><td>${p.ap}</td></tr>
                     <tr><td>ISO</td><td>${p.iso.join(', ')}</td></tr>
-                    ${sizesHtml}
                 </table>
-                <button class="btn-action" onclick="addToCart(${p.id}); closeModal('productModal')">${t('btn_add')}</button>
+                <button class="btn-action" onclick="addFromModal(${p.id})">${t('btn_add')}</button>
                 <button class="btn-action btn-secondary">${t('btn_download')}</button>
             `;
             productModal.classList.add('open');
@@ -602,9 +620,29 @@
         function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
         /* --- CART LOGIC --- */
-        function addToCart(id) {
+        // UUSI: Lisää modalista valitun koon kanssa
+        function addFromModal(id) {
+            const select = document.getElementById('selectedSize');
+            const size = select ? select.value : ''; // Jos ei kokoja, tyhjä
+            addToCart(id, size);
+            closeModal('productModal');
+        }
+
+        // UUSI: Quick Add (+) napin logiikka
+        function quickAdd(id) {
             const p = products.find(x => x.id === id);
-            cart.push(p);
+            // Jos tuotteella on kokoja, pakota avaamaan modal
+            if (p.sizes && p.sizes.length > 0) {
+                openProductDetails(p);
+            } else {
+                addToCart(id, '');
+            }
+        }
+
+        function addToCart(id, size) {
+            const p = products.find(x => x.id === id);
+            // Lisätään koriin objekti, jossa on myös valittu koko
+            cart.push({ ...p, selectedSize: size });
             updateCartUI();
             const btn = document.querySelector('.cart-btn');
             btn.style.color = "#fff"; setTimeout(()=> btn.style.color="#ccc", 300);
@@ -619,7 +657,13 @@
             cartCount.innerText = cart.length;
             cartItemsDiv.innerHTML = '';
             cart.forEach((p, i) => {
-                cartItemsDiv.innerHTML += `<div class="cart-item"><span>${p.name}</span><span class="cart-remove" onclick="removeFromCart(${i})">X</span></div>`;
+                // Näytetään koko jos se on valittu
+                const sizeStr = p.selectedSize ? ` (${p.selectedSize})` : '';
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${p.brand} ${p.name}${sizeStr}</span>
+                        <span class="cart-remove" onclick="removeFromCart(${i})">X</span>
+                    </div>`;
             });
         }
 
@@ -638,7 +682,10 @@
             const bid = document.getElementById('rfqID').value;
             
             let body = `REQUEST FOR QUOTE\n\nContact:\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nBusiness ID: ${bid}\n\nProducts:\n`;
-            cart.forEach(p => body += `- ${p.brand} ${p.name}\n`);
+            cart.forEach(p => {
+                const sizeStr = p.selectedSize ? ` [Size: ${p.selectedSize}]` : '';
+                body += `- ${p.brand} ${p.name}${sizeStr}\n`;
+            });
             
             window.location.href = `mailto:info@industrianordica.fi?subject=RFQ from ${company}&body=${encodeURIComponent(body)}`;
             closeModal('rfqModal');
