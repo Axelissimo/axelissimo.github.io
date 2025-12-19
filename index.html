@@ -219,16 +219,15 @@
             transition: background 0.2s, transform 0.2s; 
             cursor: pointer; 
             position: relative; 
-            border-left: 3px solid transparent; /* Default border */
+            border-left: 3px solid transparent; 
         }
         .product-card:hover { background: rgba(255,255,255,0.05); transform: translateY(-2px); }
         
-        /* Brand Colors in Grid */
+        /* Brand Colors */
         .brand-arctos { border-left-color: var(--color-arctos); }
         .brand-fenris { border-left-color: var(--color-fenris); }
         
         .prod-brand { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 1; margin-bottom: 5px; font-weight: 700; }
-        /* Text color matching brand */
         .brand-arctos .prod-brand { color: var(--color-arctos); }
         .brand-fenris .prod-brand { color: var(--color-fenris); }
 
@@ -239,26 +238,20 @@
         .quick-add-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: 1px solid #555; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; transition: all 0.2s; }
         .quick-add-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* Cross-sell box (New Feature) */
-        .cross-sell-box {
+        /* Cross-sell Notice */
+        .cross-sell-notice {
             grid-column: 1 / -1;
             padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px dashed #666;
-            text-align: center;
-            margin-top: 20px;
+            background: rgba(255,255,255,0.08);
+            border-left: 4px solid #fff;
+            margin-bottom: 10px;
+            animation: fadeInLogo 0.5s ease;
         }
-        .btn-cross {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 10px;
-            font-weight: 600;
-        }
-        .btn-cross:hover { background: #fff; color: #000; }
+        /* Dynamic color for notice based on recommended brand */
+        .cross-sell-notice.ns-arctos { border-left-color: var(--color-arctos); }
+        .cross-sell-notice.ns-fenris { border-left-color: var(--color-fenris); }
+        
+        .cs-title { font-size: 14px; font-weight: 700; margin: 0; color: #fff; }
 
         /* ISO Colors */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
@@ -502,8 +495,8 @@
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 
-                // Cross sell
-                not_found_here: "Not found in", check_in: "Check availability in",
+                // Cross sell notification
+                cross_sell_notice: "Product not found in {0} series. Check these matching {1} products:",
                 
                 // Selection Tool Translation
                 tool_select_desc: "Find the right insert", tool_selector_title: "Tool Selection Guide", select_current: "Select Current Tool / Insert Type", select_placeholder: "-- Select from list --", our_recommendation: "Our Recommendation", holder_needed: "New Holder Required?", yes: "YES", recommended_holder: "Recommended Holder:", add_product_quote: "Add Product to Quote", add_holder_quote: "Add Holder to Quote",
@@ -552,7 +545,7 @@
                 op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado", arctos_tagline: "Estándar Nórdico", fenris_tagline: "Rendimiento",
                 
                 // Cross sell
-                not_found_here: "No encontrado en", check_in: "Buscar disponibilidad en",
+                cross_sell_notice: "No encontrado en la serie {0}. Vea estos productos de la serie {1}:",
 
                 // Selection Tool Translation
                 tool_select_desc: "Guía de selección", tool_selector_title: "Guía de Selección", select_current: "Seleccionar Herramienta Actual", select_placeholder: "-- Seleccionar --", our_recommendation: "Recomendación", holder_needed: "¿Requiere porta?", yes: "SÍ", recommended_holder: "Porta recomendado:", add_product_quote: "Añadir Producto", add_holder_quote: "Añadir Porta",
@@ -589,7 +582,7 @@
                 op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung",
                 
                 // Cross sell
-                not_found_here: "Nicht gefunden in", check_in: "Verfügbarkeit prüfen in",
+                cross_sell_notice: "Nicht in der {0}-Serie gefunden. Sehen Sie sich diese {1}-Produkte an:",
 
                 // Selection Tool Translation
                 tool_select_desc: "Auswahlhilfe", tool_selector_title: "Werkzeugauswahl", select_current: "Aktuelles Werkzeug wählen", select_placeholder: "-- Wählen --", our_recommendation: "Unsere Empfehlung", holder_needed: "Neuer Halter?", yes: "JA", recommended_holder: "Empfohlener Halter:", add_product_quote: "Produkt hinzufügen", add_holder_quote: "Halter hinzufügen",
@@ -626,7 +619,7 @@
                 op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön",
                 
                 // Cross sell
-                not_found_here: "Ei hakutuloksia: ", check_in: "Katso saatavuus sarjasta",
+                cross_sell_notice: "Ei löydy {0}-sarjasta. Katso nämä vastaavat {1}-tuotteet:",
 
                 // Selection Tool Translation
                 tool_select_desc: "Valitse oikea terä", tool_selector_title: "Terän valintaopas", select_current: "Valitse nykyinen työkalu / pala", select_placeholder: "-- Valitse listasta --", our_recommendation: "Meidän suositus", holder_needed: "Vaatiiko uuden pitimen?", yes: "KYLLÄ", recommended_holder: "Suositeltu pidin:", add_product_quote: "Lisää tuote tarjoukseen", add_holder_quote: "Lisää pidin tarjoukseen",
@@ -865,24 +858,51 @@
             const filtered = runFilter(products, currentBrand, searchTerm, subtypes, types, isos, ops);
 
             if (!filtered.length) { 
-                let html = `<div style="color:#888; grid-column:1/-1;">${t('not_found_here')} ${currentBrand}.</div>`;
                 
-                // --- CROSS-SELL LOGIC ---
+                // --- CROSS-SELL LOGIC (AUTOMATIC SHOW) ---
                 // If we are in a specific brand view (not ALL), check the OTHER brand
                 if (currentBrand === 'ARCTOS' || currentBrand === 'FENRIS') {
                     const otherBrand = currentBrand === 'ARCTOS' ? 'FENRIS' : 'ARCTOS';
                     const crossResults = runFilter(products, otherBrand, searchTerm, subtypes, types, isos, ops);
                     
                     if (crossResults.length > 0) {
-                        html += `
-                        <div class="cross-sell-box">
-                            <span style="color:#ddd; font-size:13px;">${t('check_in')} <strong>${otherBrand}</strong>? (${crossResults.length} items)</span>
-                            <button class="btn-cross" onclick="openShop('${otherBrand}')">GO TO ${otherBrand}</button>
+                        // Create the warning message
+                        let msg = t('cross_sell_notice').replace('{0}', currentBrand).replace('{1}', otherBrand);
+                        const noticeClass = otherBrand === 'ARCTOS' ? 'ns-arctos' : 'ns-fenris';
+                        
+                        let html = `
+                        <div class="cross-sell-notice ${noticeClass}">
+                            <h3 class="cs-title">${msg}</h3>
                         </div>`;
+                        
+                        productGrid.innerHTML = html;
+
+                        // Render the other brand products immediately
+                        crossResults.forEach(p => {
+                            let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
+                            const card = document.createElement('div');
+                            const brandClass = p.brand === 'ARCTOS' ? 'brand-arctos' : 'brand-fenris';
+                            card.className = `product-card ${brandClass}`;
+                            card.onclick = (e) => { 
+                                if(e.target.classList.contains('quick-add-btn')) return;
+                                openProductDetails(p); 
+                            };
+                            card.innerHTML = `
+                                <div class="quick-add-btn" onclick="quickAdd(${p.id}); event.stopPropagation();">+</div>
+                                <div class="prod-brand">${p.brand}</div>
+                                <div class="prod-name">${p.name}</div>
+                                <div class="prod-desc">${t(p.desc)}</div>
+                                <ul class="prod-specs"><li>${t(p.subtype)} / ${t(p.type)}</li></ul>
+                                <div style="margin-top:10px;">${isoDots}</div>
+                            `;
+                            productGrid.appendChild(card);
+                        });
+                        return;
                     }
                 }
                 
-                productGrid.innerHTML = html;
+                // Standard no results
+                productGrid.innerHTML = `<div style="color:#888; grid-column:1/-1;">${t('not_found_here')} ${currentBrand}.</div>`;
                 return; 
             }
 
