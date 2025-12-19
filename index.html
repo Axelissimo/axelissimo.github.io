@@ -97,9 +97,9 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* TARJOUSKORI-IKONI (Oletuksena piilossa: display: none) */
+        /* TARJOUSKORI-IKONI */
         .cart-btn {
-            display: none; /* PIILOTETTU ETUSIVULLA */
+            display: none;
             position: absolute;
             top: 18px; 
             right: 160px; 
@@ -311,7 +311,7 @@
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> <span data-i18n="sub_drilling">Drilling</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> <span data-i18n="sub_threading">Threading</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_parting" onchange="filterProducts()"> <span data-i18n="sub_parting">Parting</span></label>
-                    </div>
+                </div>
 
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_tooltype">Tool Type</div>
@@ -358,7 +358,7 @@
                 back_home: "← Back to Home",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy",
-                quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade",
+                quote: "Quote", quote_basket: "Quote Basket", form_name: "Full Name", form_email: "Email Address", form_company: "Company Name", form_id: "Business ID / VAT Number", btn_send: "Create Email Request", btn_add: "Add to Quote", btn_download: "Download Datasheet", tech_speed: "Cutting Speed (Vc)", tech_feed: "Feed (fn)", tech_depth: "Depth (ap)", tech_grade: "Grade", tech_sizes: "Available Sizes",
                 filter_worktype: "Worktype", filter_tooltype: "Tool Type", filter_material: "Material", filter_intensity: "Intensity",
                 sub_turning: "Turning", sub_milling: "Milling", sub_threading: "Threading", sub_parting: "Parting", sub_drilling: "Drilling", sub_clamping: "Holders / Clamping",
                 type_insert: "Insert", type_rotating: "Solid / Rotating", type_holder: "Tool Holder",
@@ -382,43 +382,43 @@
                 desc_esclcr: "Carbide Shank (Vibration Damping). Fits: CCMT.",
                 desc_sir: "Internal Threading (Carbide Shank). Fits: 16IR.",
                 desc_hydraulic: "Hydraulic Precision Chuck (<0.003mm).",
-                desc_ext_holder: "Ext. Holders.", desc_boring: "Boring Bars.", desc_rcmt: "Round High Feed.", desc_cbn: "Ceramic/CBN.", desc_hardthread: "Hard Threading.", desc_alu: "Alu Series.", desc_troch: "Trochoidal Mill.", desc_threadmill: "Thread Mill.", desc_5xd: "Deep Drill."
+                desc_ext_holder: "Ext. Holders.", desc_boring: "Boring Bars.", desc_rcmt: "Round High Feed.", desc_cbn: "Ceramic/CBN.", desc_hardthread: "Hard Threading.", desc_alu: "Alu Series.", desc_troch: "Trochoidal Mill.", desc_threadmill: "Thread Mill.", desc_5xd: "Deep Drill.", desc_ncspot: "Solid Carbide 90°. Centering & Chamfering. HA Shank. Uncoated."
             },
             es: {
                 all_desc: "Catálogo Completo", all_tagline: "Herramientas premium", arctos_desc: "Herramientas de precisión", fenris_desc: "Aeroespacial", back_home: "← Volver",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS", trademarks: "Industria Nordica Ltd...", quote: "Cotizar", quote_basket: "Cesta",
-                form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar",
+                form_name: "Nombre", form_email: "Email", form_company: "Empresa", form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar", tech_sizes: "Tamaños",
                 filter_worktype: "Trabajo", filter_tooltype: "Tipo", filter_material: "Material", filter_intensity: "Intensidad", sub_turning: "Torneado", sub_milling: "Fresado", sub_threading: "Roscado", sub_parting: "Tronzado", sub_drilling: "Taladrado", sub_clamping: "Sujeción",
                 type_insert: "Plaquita", type_rotating: "Rotativo", type_holder: "Portaherramientas", iso_p: "Acero", iso_m: "Inox", iso_k: "Fundición", iso_h: "Templado", iso_s: "Titanio", iso_n: "Alu",
                 op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado", arctos_tagline: "Estándar Nórdico", fenris_tagline: "Rendimiento", filtered_result: "(Filtrado)",
                 desc_cnmg: "Rómbica 80°.", desc_wnmg: "Trígono.", desc_dnmg: "Rómbica 55°.", desc_snmg: "Cuadrada.", desc_apkt: "Fresado 90°.", desc_sekn: "Frontal 45°.", desc_4flute: "Universal.", desc_3xd: "Broca 3xD.",
                 desc_pclnr: "Torneado Ext. (Palanca). CNMG 1204.", desc_mwlnr: "Torneado Ext. (Palanca). WNMG 0804.", desc_ser: "Roscado Ext. (Tornillo). 16ER.", desc_ssclcr: "Torneado Int. (Acero). CCMT 09T3.",
                 desc_ssducr: "Perfilado Int. (Acero). DCMT 11T3.", desc_weldon: "Portafresas Weldon.", desc_er: "Portapinzas ER.", desc_dclnr: "Refrigeración Jet (Alta Presión).", desc_srdcn: "Sujeción Superior (Redonda).",
-                desc_esclcr: "Barra Metal Duro (Antivibración).", desc_sir: "Roscado Int. (Metal Duro).", desc_hydraulic: "Portaherramientas Hidráulico.", desc_tap: "Macho.", desc_rcmt: "Redonda.", desc_cbn: "Cerámica.", desc_hardthread: "Roscado Duro.", desc_alu: "Alu.", desc_troch: "Trocoidal.", desc_threadmill: "Fresa Roscar.", desc_5xd: "Taladro Profundo."
+                desc_esclcr: "Barra Metal Duro (Antivibración).", desc_sir: "Roscado Int. (Metal Duro).", desc_hydraulic: "Portaherramientas Hidráulico.", desc_tap: "Macho.", desc_rcmt: "Redonda.", desc_cbn: "Cerámica.", desc_hardthread: "Roscado Duro.", desc_alu: "Alu.", desc_troch: "Trocoidal.", desc_threadmill: "Fresa Roscar.", desc_5xd: "Taladro Profundo.", desc_ncspot: "Metal Duro 90°. Centrado y Chaflanado. Mango HA. Sin recubrimiento."
             },
             de: {
                 all_desc: "Gesamtkatalog", all_tagline: "Premium-Werkzeuge", arctos_desc: "Präzisionswerkzeuge", fenris_desc: "Luftfahrt", back_home: "← Zurück",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN", trademarks: "Industria Nordica Ltd...", quote: "Angebot", quote_basket: "Korb",
-                form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download",
+                form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download", tech_sizes: "Größen",
                 filter_worktype: "Bearbeitung", filter_tooltype: "Typ", filter_material: "Werkstoff", filter_intensity: "Intensität", sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden", sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
                 type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter", iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
-                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Mittel", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
+                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
                 desc_cnmg: "Rhombisch 80°.", desc_wnmg: "Trigon.", desc_dnmg: "Rhombisch 55°.", desc_snmg: "Quadratisch.", desc_apkt: "Eckfräsen.", desc_sekn: "Planfräsen.", desc_4flute: "Universal.", desc_3xd: "Kurzbohrer.",
                 desc_pclnr: "Außendrehen (Hebel). CNMG 1204.", desc_mwlnr: "Außendrehen (Hebel). WNMG 0804.", desc_ser: "Außengewinde (Schraube). 16ER.", desc_ssclcr: "Innendrehen (Stahl). CCMT 09T3.",
                 desc_ssducr: "Innenprofil (Stahl). DCMT 11T3.", desc_weldon: "Weldon-Futter.", desc_er: "ER-Spannzangenfutter.", desc_dclnr: "Jet-Kühlung (Hochdruck).", desc_srdcn: "Klemmhalter (Rund).",
-                desc_esclcr: "VHM-Bohrstange (Dämpfung).", desc_sir: "Innengewinde (VHM).", desc_hydraulic: "Hydro-Dehnspannfutter.", desc_tap: "Bohrer.", desc_rcmt: "Rund.", desc_cbn: "Keramik.", desc_hardthread: "Hartgewinden.", desc_alu: "Alu.", desc_troch: "Trochoidal.", desc_threadmill: "Gewindefräser.", desc_5xd: "Tiefloch."
+                desc_esclcr: "VHM-Bohrstange (Dämpfung).", desc_sir: "Innengewinde (VHM).", desc_hydraulic: "Hydro-Dehnspannfutter.", desc_tap: "Bohrer.", desc_rcmt: "Rund.", desc_cbn: "Keramik.", desc_hardthread: "Hartgewinden.", desc_alu: "Alu.", desc_troch: "Trochoidal.", desc_threadmill: "Gewindefräser.", desc_5xd: "Tiefloch.", desc_ncspot: "Vollhartmetall 90°. Zentrieren und Anfasen. HA-Schaft. Unbeschichtet."
             },
             fi: {
                 all_desc: "Koko kuvasto", all_tagline: "Premium-työkalut", arctos_desc: "Tarkkuustyökalut", fenris_desc: "Ilmailu", back_home: "← Etusivu",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN", trademarks: "Industria Nordica Oy...", quote: "Tarjous", quote_basket: "Tarjouskori",
-                form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa",
+                form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys", form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa", tech_sizes: "Koot",
                 filter_worktype: "Työstömuoto", filter_tooltype: "Tyyppi", filter_material: "Materiaali", filter_intensity: "Intensiteetti", sub_turning: "Sorvaus", sub_milling: "Jyrsintä", sub_threading: "Kierteytys", sub_parting: "Katkaisu", sub_drilling: "Poraus", sub_clamping: "Pitimet",
                 type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin", iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
                 op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön", filtered_result: "(Suodatettu)",
                 desc_cnmg: "80° Rombinen.", desc_wnmg: "Trigon.", desc_dnmg: "55° Rombinen.", desc_snmg: "Neliö.", desc_apkt: "Varsijyrsintä.", desc_sekn: "Tasojyrsintä.", desc_4flute: "Yleisjyrsin.", desc_3xd: "Lyhyt pora.",
                 desc_pclnr: "Ulkosorvaus (Vipu). CNMG 1204.", desc_mwlnr: "Ulkosorvaus (Vipu). WNMG 0804.", desc_ser: "Ulkokierre (Ruuvi). 16ER.", desc_ssclcr: "Sisäsorvaus (Teräs). CCMT 09T3.",
                 desc_ssducr: "Sisäprofiili (Teräs). DCMT 11T3.", desc_weldon: "Weldon-istukka.", desc_er: "ER-holkki-istukka.", desc_dclnr: "Jet-jäähdytys (Korkeapaine).", desc_srdcn: "Päältäpuristus (Pyöreä).",
-                desc_esclcr: "Kovametallivarsi (Vaimennettu).", desc_sir: "Sisäkierre (Kovametalli).", desc_hydraulic: "Hydrauli-istukka.", desc_tap: "Kierretappi.", desc_rcmt: "Pyöreä.", desc_cbn: "Keramia.", desc_hardthread: "Kierteytys karkaistulle.", desc_alu: "Alu.", desc_troch: "Trookoidi.", desc_threadmill: "Kierrejyrsin.", desc_5xd: "Syväporaus."
+                desc_esclcr: "Kovametallivarsi (Vaimennettu).", desc_sir: "Sisäkierre (Kovametalli).", desc_hydraulic: "Hydrauli-istukka.", desc_tap: "Kierretappi.", desc_rcmt: "Pyöreä.", desc_cbn: "Keramia.", desc_hardthread: "Kierteytys karkaistulle.", desc_alu: "Alu.", desc_troch: "Trookoidi.", desc_threadmill: "Kierrejyrsin.", desc_5xd: "Syväporaus.", desc_ncspot: "Täyskovametalli 90°. Keskiöinti ja viiste. HA-varsi. Pinnoittamaton."
             }
         };
 
@@ -427,53 +427,54 @@
 
         function t(key) { return (i18n[currentLang] && i18n[currentLang][key]) ? i18n[currentLang][key] : key; }
 
-        /* --- UPDATED DATA --- */
+        /* --- UPDATED DATA WITH SIZES --- */
         const products = [
             // ARCTOS - INSERTS
-            { id:1, brand:'ARCTOS', name:'CNMG (80°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_cnmg', vc:'220-300 m/min', fn:'0.2-0.4 mm/r', ap:'1.0-4.0 mm' },
-            { id:2, brand:'ARCTOS', name:'WNMG (Trigon)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_wnmg', vc:'200-280 m/min', fn:'0.2-0.45 mm/r', ap:'1.0-4.0 mm' },
-            { id:3, brand:'ARCTOS', name:'DNMG (55°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_dnmg', vc:'240-320 m/min', fn:'0.1-0.3 mm/r', ap:'0.5-3.0 mm' },
-            { id:4, brand:'ARCTOS', name:'SNMG (Square)', subtype:'sub_turning', type:'type_insert', iso:['M','K'], op:['op_heavy'], desc:'desc_snmg', vc:'160-220 m/min', fn:'0.3-0.6 mm/r', ap:'2.0-6.0 mm' },
-            { id:5, brand:'ARCTOS', name:'CCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_ccmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm' },
-            { id:6, brand:'ARCTOS', name:'DCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_dcmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm' },
-            { id:7, brand:'ARCTOS', name:'16ER / 16IR', subtype:'sub_threading', type:'type_insert', iso:['P','M'], op:['op_medium'], desc:'desc_16er', vc:'120-180 m/min', fn:'Pitch dependent', ap:'-' },
-            { id:8, brand:'ARCTOS', name:'MGMN System', subtype:'sub_parting', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_mgmn', vc:'140-200 m/min', fn:'0.05-0.15 mm/r', ap:'-' },
-            { id:9, brand:'ARCTOS', name:'APKT 1003/1604', subtype:'sub_milling', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_apkt', vc:'180-260 m/min', fn:'0.1-0.2 mm/z', ap:'Max 10mm' },
-            { id:10, brand:'ARCTOS', name:'SEKN / SNMX', subtype:'sub_milling', type:'type_insert', iso:['P','K'], op:['op_roughing'], desc:'desc_sekn', vc:'150-220 m/min', fn:'0.2-0.35 mm/z', ap:'Max 6mm' },
+            { id:1, brand:'ARCTOS', name:'CNMG (80°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_cnmg', vc:'220-300 m/min', fn:'0.2-0.4 mm/r', ap:'1.0-4.0 mm', sizes: ['120408', '120412'] },
+            { id:2, brand:'ARCTOS', name:'WNMG (Trigon)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_roughing','op_medium'], desc:'desc_wnmg', vc:'200-280 m/min', fn:'0.2-0.45 mm/r', ap:'1.0-4.0 mm', sizes: ['080408', '080412'] },
+            { id:3, brand:'ARCTOS', name:'DNMG (55°)', subtype:'sub_turning', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_dnmg', vc:'240-320 m/min', fn:'0.1-0.3 mm/r', ap:'0.5-3.0 mm', sizes: ['150604', '150608'] },
+            { id:4, brand:'ARCTOS', name:'SNMG (Square)', subtype:'sub_turning', type:'type_insert', iso:['M','K'], op:['op_heavy'], desc:'desc_snmg', vc:'160-220 m/min', fn:'0.3-0.6 mm/r', ap:'2.0-6.0 mm', sizes: ['120412', '190616'] },
+            { id:5, brand:'ARCTOS', name:'CCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_ccmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm', sizes: ['060204', '09T304', '09T308', '120408'] },
+            { id:6, brand:'ARCTOS', name:'DCMT (Pos)', subtype:'sub_turning', type:'type_insert', iso:['P','M'], op:['op_finishing'], desc:'desc_dcmt', vc:'250-350 m/min', fn:'0.05-0.2 mm/r', ap:'0.2-1.5 mm', sizes: ['070204', '11T304'] },
+            { id:7, brand:'ARCTOS', name:'16ER / 16IR', subtype:'sub_threading', type:'type_insert', iso:['P','M'], op:['op_medium'], desc:'desc_16er', vc:'120-180 m/min', fn:'Pitch dependent', ap:'-', sizes: ['ISO 1.0', 'ISO 1.5', 'ISO 2.0', 'ISO 3.0', 'NPT 11.5'] },
+            { id:8, brand:'ARCTOS', name:'MGMN System', subtype:'sub_parting', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_mgmn', vc:'140-200 m/min', fn:'0.05-0.15 mm/r', ap:'-', sizes: ['300-M', '400-M'] },
+            { id:9, brand:'ARCTOS', name:'APKT 1003/1604', subtype:'sub_milling', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_apkt', vc:'180-260 m/min', fn:'0.1-0.2 mm/z', ap:'Max 10mm', sizes: ['1003 PDTR', '1604 PDTR'] },
+            { id:10, brand:'ARCTOS', name:'SEKN / SNMX', subtype:'sub_milling', type:'type_insert', iso:['P','K'], op:['op_roughing'], desc:'desc_sekn', vc:'150-220 m/min', fn:'0.2-0.35 mm/z', ap:'Max 6mm', sizes: ['1204 AFTN'] },
             
-            // ARCTOS - HOLDERS (UPDATED SUBTYPES)
-            { id:11, brand:'ARCTOS', name:'PCLNR / PCLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_pclnr', vc:'-', fn:'-', ap:'-' },
-            { id:12, brand:'ARCTOS', name:'MWLNR / MWLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_mwlnr', vc:'-', fn:'-', ap:'-' },
-            { id:13, brand:'ARCTOS', name:'SER / SEL', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_ser', vc:'-', fn:'-', ap:'-' },
-            { id:14, brand:'ARCTOS', name:'S-SCLCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssclcr', vc:'-', fn:'-', ap:'-' },
-            { id:15, brand:'ARCTOS', name:'S-SDUCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssducr', vc:'-', fn:'-', ap:'-' },
-            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_weldon', vc:'-', fn:'-', ap:'-' },
-            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_er', vc:'-', fn:'-', ap:'-' },
+            // ARCTOS - HOLDERS
+            { id:11, brand:'ARCTOS', name:'PCLNR / PCLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_pclnr', vc:'-', fn:'-', ap:'-', sizes: ['2525M12'] },
+            { id:12, brand:'ARCTOS', name:'MWLNR / MWLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_mwlnr', vc:'-', fn:'-', ap:'-', sizes: ['2525M08'] },
+            { id:13, brand:'ARCTOS', name:'SER / SEL', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_ser', vc:'-', fn:'-', ap:'-', sizes: ['2525M16'] },
+            { id:14, brand:'ARCTOS', name:'S-SCLCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssclcr', vc:'-', fn:'-', ap:'-', sizes: ['S20R (09)', 'S25T (09)'] },
+            { id:15, brand:'ARCTOS', name:'S-SDUCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssducr', vc:'-', fn:'-', ap:'-', sizes: ['S20R (11)'] },
+            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_weldon', vc:'-', fn:'-', ap:'-', sizes: ['SK40-Ø20', 'SK50-Ø32'] },
+            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_er', vc:'-', fn:'-', ap:'-', sizes: ['SK40-ER32', 'SK50-ER40'] },
 
             // ARCTOS - ROTATING
-            { id:18, brand:'ARCTOS', name:'4-Flute End Mill', subtype:'sub_milling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_4flute', vc:'80-120 m/min', fn:'0.03-0.08 mm/z', ap:'1.5xD' },
-            { id:19, brand:'ARCTOS', name:'3xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_3xd', vc:'70-100 m/min', fn:'0.1-0.25 mm/r', ap:'3xD' },
-            { id:20, brand:'ARCTOS', name:'Spiral Tap', subtype:'sub_threading', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_tap', vc:'10-20 m/min', fn:'-', ap:'-' },
+            { id:18, brand:'ARCTOS', name:'4-Flute End Mill', subtype:'sub_milling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_4flute', vc:'80-120 m/min', fn:'0.03-0.08 mm/z', ap:'1.5xD', sizes: ['Ø6', 'Ø8', 'Ø10', 'Ø12', 'Ø16', 'Ø20'] },
+            { id:19, brand:'ARCTOS', name:'3xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_3xd', vc:'70-100 m/min', fn:'0.1-0.25 mm/r', ap:'3xD', sizes: ['Ø6.0', 'Ø6.8', 'Ø8.0', 'Ø8.5', 'Ø10.0', 'Ø10.2', 'Ø12.0'] },
+            { id:20, brand:'ARCTOS', name:'Spiral Tap', subtype:'sub_threading', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_tap', vc:'10-20 m/min', fn:'-', ap:'-', sizes: ['M6', 'M8', 'M10', 'M12', 'M16'] },
+            { id:35, brand:'ARCTOS', name:'NC Spotting Drill 90°', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','N'], op:['op_drilling'], desc:'desc_ncspot', vc:'80-120 m/min', fn:'0.05-0.15 mm/r', ap:'-', sizes: ['Ø10', 'Ø12'] },
 
             // FENRIS - INSERTS
-            { id:21, brand:'FENRIS', name:'CNMG 16/19', subtype:'sub_turning', type:'type_insert', iso:['H','P'], op:['op_heavy'], desc:'desc_cnmg_h', vc:'100-160 m/min', fn:'0.3-0.8 mm/r', ap:'2.0-8.0 mm' },
-            { id:22, brand:'FENRIS', name:'RCMT / RPGT', subtype:'sub_turning', type:'type_insert', iso:['S'], op:['op_roughing'], desc:'desc_rcmt', vc:'40-70 m/min', fn:'0.1-0.3 mm/r', ap:'1.0-3.0 mm' },
-            { id:23, brand:'FENRIS', name:'Ceramic / CBN', subtype:'sub_turning', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_cbn', vc:'120-180 m/min', fn:'0.05-0.15 mm/r', ap:'0.1-0.5 mm' },
-            { id:24, brand:'FENRIS', name:'Hard-Thread', subtype:'sub_threading', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_hardthread', vc:'40-60 m/min', fn:'-', ap:'-' },
-            { id:25, brand:'FENRIS', name:'VCGT / VBMT', subtype:'sub_turning', type:'type_insert', iso:['S','M'], op:['op_finishing'], desc:'desc_vcgt', vc:'50-90 m/min', fn:'0.05-0.15 mm/r', ap:'0.2-1.5 mm' },
-            { id:26, brand:'FENRIS', name:'ALU-Series', subtype:'sub_turning', type:'type_insert', iso:['N'], op:['op_finishing'], desc:'desc_alu', vc:'400-800 m/min', fn:'0.1-0.4 mm/r', ap:'0.5-4.0 mm' },
+            { id:21, brand:'FENRIS', name:'CNMG 16/19', subtype:'sub_turning', type:'type_insert', iso:['H','P'], op:['op_heavy'], desc:'desc_cnmg_h', vc:'100-160 m/min', fn:'0.3-0.8 mm/r', ap:'2.0-8.0 mm', sizes: ['160612', '190616'] },
+            { id:22, brand:'FENRIS', name:'RCMT / RPGT', subtype:'sub_turning', type:'type_insert', iso:['S'], op:['op_roughing'], desc:'desc_rcmt', vc:'40-70 m/min', fn:'0.1-0.3 mm/r', ap:'1.0-3.0 mm', sizes: ['10T3 MO', '1204 MO'] },
+            { id:23, brand:'FENRIS', name:'Ceramic / CBN', subtype:'sub_turning', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_cbn', vc:'120-180 m/min', fn:'0.05-0.15 mm/r', ap:'0.1-0.5 mm', sizes: ['CNGA 120408', '16ER 1.5 CBN'] },
+            { id:24, brand:'FENRIS', name:'Hard-Thread', subtype:'sub_threading', type:'type_insert', iso:['H'], op:['op_finishing'], desc:'desc_hardthread', vc:'40-60 m/min', fn:'-', ap:'-', sizes: ['16ER 1.5'] },
+            { id:25, brand:'FENRIS', name:'VCGT / VBMT', subtype:'sub_turning', type:'type_insert', iso:['S','M'], op:['op_finishing'], desc:'desc_vcgt', vc:'50-90 m/min', fn:'0.05-0.15 mm/r', ap:'0.2-1.5 mm', sizes: ['160402', '160404'] },
+            { id:26, brand:'FENRIS', name:'ALU-Series', subtype:'sub_turning', type:'type_insert', iso:['N'], op:['op_finishing'], desc:'desc_alu', vc:'400-800 m/min', fn:'0.1-0.4 mm/r', ap:'0.5-4.0 mm', sizes: ['VCGT 160404'] },
 
-            // FENRIS - HOLDERS (UPDATED SUBTYPES)
-            { id:27, brand:'FENRIS', name:'DCLNR + Jet', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_dclnr', vc:'-', fn:'-', ap:'-' },
-            { id:28, brand:'FENRIS', name:'SRDCN (Round)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_srdcn', vc:'-', fn:'-', ap:'-' },
-            { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_esclcr', vc:'-', fn:'-', ap:'-' },
-            { id:30, brand:'FENRIS', name:'SIR / SIL (Carbide)', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_sir', vc:'-', fn:'-', ap:'-' },
-            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-' },
+            // FENRIS - HOLDERS
+            { id:27, brand:'FENRIS', name:'DCLNR + Jet', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_dclnr', vc:'-', fn:'-', ap:'-', sizes: ['2525 (12)'] },
+            { id:28, brand:'FENRIS', name:'SRDCN (Round)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_srdcn', vc:'-', fn:'-', ap:'-', sizes: ['2525M10'] },
+            { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_esclcr', vc:'-', fn:'-', ap:'-', sizes: ['E16R (09)', 'E20S (09)'] },
+            { id:30, brand:'FENRIS', name:'SIR / SIL (Carbide)', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_sir', vc:'-', fn:'-', ap:'-', sizes: ['E16R-SIR-16'] },
+            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-', sizes: ['SK40'] },
 
             // FENRIS - ROTATING
-            { id:32, brand:'FENRIS', name:'Trochoidal Mill', subtype:'sub_milling', type:'type_rotating', iso:['S','M'], op:['op_roughing'], desc:'desc_troch', vc:'80-140 m/min', fn:'High Feed', ap:'2xD' },
-            { id:33, brand:'FENRIS', name:'Thread Mill', subtype:'sub_threading', type:'type_rotating', iso:['S','M','H'], op:['op_medium'], desc:'desc_threadmill', vc:'60-100 m/min', fn:'0.02-0.05 mm/z', ap:'-' },
-            { id:34, brand:'FENRIS', name:'5xD & 8xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','S','H','N'], op:['op_medium'], desc:'desc_5xd', vc:'60-90 m/min', fn:'0.1-0.2 mm/r', ap:'8xD' }
+            { id:32, brand:'FENRIS', name:'Trochoidal Mill', subtype:'sub_milling', type:'type_rotating', iso:['S','M'], op:['op_roughing'], desc:'desc_troch', vc:'80-140 m/min', fn:'High Feed', ap:'2xD', sizes: ['Ø10', 'Ø12'] },
+            { id:33, brand:'FENRIS', name:'Thread Mill', subtype:'sub_threading', type:'type_rotating', iso:['S','M','H'], op:['op_medium'], desc:'desc_threadmill', vc:'60-100 m/min', fn:'0.02-0.05 mm/z', ap:'-', sizes: ['M10'] },
+            { id:34, brand:'FENRIS', name:'5xD & 8xD Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','S','H','N'], op:['op_medium'], desc:'desc_5xd', vc:'60-90 m/min', fn:'0.1-0.2 mm/r', ap:'8xD', sizes: ['Ø6.0', 'Ø8.0', 'Ø10.0'] }
         ];
 
         /* --- LOGIIKKA --- */
@@ -575,8 +576,13 @@
             });
         }
 
-        /* --- MODAL LOGIC --- */
+        /* --- MODAL LOGIC (UPDATED WITH SIZES) --- */
         function openProductDetails(p) {
+            let sizesHtml = '';
+            if (p.sizes && p.sizes.length > 0) {
+                sizesHtml = `<tr><td>${t('tech_sizes')}</td><td>${p.sizes.join(', ')}</td></tr>`;
+            }
+
             modalContent.innerHTML = `
                 <div class="modal-title">${p.name}</div>
                 <div style="margin-bottom:15px; color:#ccc;">${t(p.desc)}</div>
@@ -585,6 +591,7 @@
                     <tr><td>${t('tech_feed')}</td><td>${p.fn}</td></tr>
                     <tr><td>${t('tech_depth')}</td><td>${p.ap}</td></tr>
                     <tr><td>ISO</td><td>${p.iso.join(', ')}</td></tr>
+                    ${sizesHtml}
                 </table>
                 <button class="btn-action" onclick="addToCart(${p.id}); closeModal('productModal')">${t('btn_add')}</button>
                 <button class="btn-action btn-secondary">${t('btn_download')}</button>
