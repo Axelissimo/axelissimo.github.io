@@ -97,9 +97,9 @@
         .lang-option { color: #aaaaaa; cursor: pointer; }
         .lang-option.active, .lang-option:hover { color: #FFFFFF; text-decoration: underline; }
 
-        /* TARJOUSKORI-IKONI */
+        /* TARJOUSKORI-IKONI (Oletuksena piilossa: display: none) */
         .cart-btn {
-            display: none;
+            display: none; /* PIILOTETTU ETUSIVULLA */
             position: absolute;
             top: 18px; 
             right: 160px; 
@@ -301,7 +301,7 @@
         <div class="shop-layout">
             <div class="sidebar">
                 <div class="search-container">
-                    <input type="text" id="productSearch" class="search-input" placeholder="Search products..." onkeyup="filterProducts()">
+                    <input type="text" id="productSearch" class="search-input" placeholder="Search products (e.g. CNMG)..." onkeyup="filterProducts()">
                 </div>
 
                 <div class="filter-group">
@@ -311,8 +311,7 @@
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_drilling" onchange="filterProducts()"> <span data-i18n="sub_drilling">Drilling</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_threading" onchange="filterProducts()"> <span data-i18n="sub_threading">Threading</span></label>
                     <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_parting" onchange="filterProducts()"> <span data-i18n="sub_parting">Parting</span></label>
-                    <label class="filter-label"><input type="checkbox" class="filter-checkbox sub-filter" value="sub_clamping" onchange="filterProducts()"> <span data-i18n="sub_clamping">Holders</span></label>
-                </div>
+                    </div>
 
                 <div class="filter-group">
                     <div class="filter-title" data-i18n="filter_tooltype">Tool Type</div>
@@ -371,8 +370,6 @@
                 desc_cnmg: "80° Rhombic. Reliable General Turning.", desc_wnmg: "Trigon. Economy Choice.", desc_dnmg: "55° Rhombic. Profiling.", desc_snmg: "Square. Heavy Roughing.",
                 desc_apkt: "Shoulder Milling 90°.", desc_4flute: "Universal End Mill.", desc_3xd: "Short Drill (3xD).", desc_cnmg_h: "Heavy Duty Hardox.", desc_vcgt: "Sharp Edge / Polished.",
                 desc_ccmt: "Pos 80°. Internal.", desc_dcmt: "Pos 55°. Internal.", desc_16er: "Threading Inserts.", desc_mgmn: "Parting System.", desc_sekn: "Face Mill 45°.", desc_tap: "Spiral Tap.", 
-                
-                // Uudet käännökset (New Items)
                 desc_pclnr: "External Turning (Lever-Lock). Fits: CNMG 1204.",
                 desc_mwlnr: "External Turning (Lever-Lock). Fits: WNMG 0804.",
                 desc_ser: "External Threading (Screw-Lock). Fits: 16ER.",
@@ -405,7 +402,7 @@
                 form_name: "Name", form_email: "Email", form_company: "Firma", form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download",
                 filter_worktype: "Bearbeitung", filter_tooltype: "Typ", filter_material: "Werkstoff", filter_intensity: "Intensität", sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden", sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
                 type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter", iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
-                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Mittel", op_finishing: "Schlichten", arctos_tagline: "Nördlicher Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
+                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Mittel", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung", filtered_result: "(Gefiltert)",
                 desc_cnmg: "Rhombisch 80°.", desc_wnmg: "Trigon.", desc_dnmg: "Rhombisch 55°.", desc_snmg: "Quadratisch.", desc_apkt: "Eckfräsen.", desc_sekn: "Planfräsen.", desc_4flute: "Universal.", desc_3xd: "Kurzbohrer.",
                 desc_pclnr: "Außendrehen (Hebel). CNMG 1204.", desc_mwlnr: "Außendrehen (Hebel). WNMG 0804.", desc_ser: "Außengewinde (Schraube). 16ER.", desc_ssclcr: "Innendrehen (Stahl). CCMT 09T3.",
                 desc_ssducr: "Innenprofil (Stahl). DCMT 11T3.", desc_weldon: "Weldon-Futter.", desc_er: "ER-Spannzangenfutter.", desc_dclnr: "Jet-Kühlung (Hochdruck).", desc_srdcn: "Klemmhalter (Rund).",
@@ -444,14 +441,14 @@
             { id:9, brand:'ARCTOS', name:'APKT 1003/1604', subtype:'sub_milling', type:'type_insert', iso:['P','M','K'], op:['op_medium'], desc:'desc_apkt', vc:'180-260 m/min', fn:'0.1-0.2 mm/z', ap:'Max 10mm' },
             { id:10, brand:'ARCTOS', name:'SEKN / SNMX', subtype:'sub_milling', type:'type_insert', iso:['P','K'], op:['op_roughing'], desc:'desc_sekn', vc:'150-220 m/min', fn:'0.2-0.35 mm/z', ap:'Max 6mm' },
             
-            // ARCTOS - HOLDERS (UUSI)
+            // ARCTOS - HOLDERS (UPDATED SUBTYPES)
             { id:11, brand:'ARCTOS', name:'PCLNR / PCLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_pclnr', vc:'-', fn:'-', ap:'-' },
             { id:12, brand:'ARCTOS', name:'MWLNR / MWLNL', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_mwlnr', vc:'-', fn:'-', ap:'-' },
             { id:13, brand:'ARCTOS', name:'SER / SEL', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_ser', vc:'-', fn:'-', ap:'-' },
             { id:14, brand:'ARCTOS', name:'S-SCLCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssclcr', vc:'-', fn:'-', ap:'-' },
             { id:15, brand:'ARCTOS', name:'S-SDUCR (Steel)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_ssducr', vc:'-', fn:'-', ap:'-' },
-            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_clamping', type:'type_holder', iso:[], op:[], desc:'desc_weldon', vc:'-', fn:'-', ap:'-' },
-            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_clamping', type:'type_holder', iso:[], op:[], desc:'desc_er', vc:'-', fn:'-', ap:'-' },
+            { id:16, brand:'ARCTOS', name:'Weldon Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_weldon', vc:'-', fn:'-', ap:'-' },
+            { id:17, brand:'ARCTOS', name:'ER Collet Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_er', vc:'-', fn:'-', ap:'-' },
 
             // ARCTOS - ROTATING
             { id:18, brand:'ARCTOS', name:'4-Flute End Mill', subtype:'sub_milling', type:'type_rotating', iso:['P','M'], op:['op_medium'], desc:'desc_4flute', vc:'80-120 m/min', fn:'0.03-0.08 mm/z', ap:'1.5xD' },
@@ -466,12 +463,12 @@
             { id:25, brand:'FENRIS', name:'VCGT / VBMT', subtype:'sub_turning', type:'type_insert', iso:['S','M'], op:['op_finishing'], desc:'desc_vcgt', vc:'50-90 m/min', fn:'0.05-0.15 mm/r', ap:'0.2-1.5 mm' },
             { id:26, brand:'FENRIS', name:'ALU-Series', subtype:'sub_turning', type:'type_insert', iso:['N'], op:['op_finishing'], desc:'desc_alu', vc:'400-800 m/min', fn:'0.1-0.4 mm/r', ap:'0.5-4.0 mm' },
 
-            // FENRIS - HOLDERS (UUSI)
+            // FENRIS - HOLDERS (UPDATED SUBTYPES)
             { id:27, brand:'FENRIS', name:'DCLNR + Jet', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_dclnr', vc:'-', fn:'-', ap:'-' },
             { id:28, brand:'FENRIS', name:'SRDCN (Round)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_srdcn', vc:'-', fn:'-', ap:'-' },
             { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning', type:'type_holder', iso:[], op:[], desc:'desc_esclcr', vc:'-', fn:'-', ap:'-' },
             { id:30, brand:'FENRIS', name:'SIR / SIL (Carbide)', subtype:'sub_threading', type:'type_holder', iso:[], op:[], desc:'desc_sir', vc:'-', fn:'-', ap:'-' },
-            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_clamping', type:'type_holder', iso:[], op:[], desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-' },
+            { id:31, brand:'FENRIS', name:'Hydraulic Chuck', subtype:'sub_milling', type:'type_holder', iso:[], op:[], desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-' },
 
             // FENRIS - ROTATING
             { id:32, brand:'FENRIS', name:'Trochoidal Mill', subtype:'sub_milling', type:'type_rotating', iso:['S','M'], op:['op_roughing'], desc:'desc_troch', vc:'80-140 m/min', fn:'High Feed', ap:'2xD' },
@@ -549,10 +546,10 @@
                 if (subtypes.length && !subtypes.includes(p.subtype)) match = false;
                 if (types.length && !types.includes(p.type)) match = false;
                 if (isos.length) {
-                    if (!p.iso.length) { if(!types.includes('type_holder')) match = false; } // Pitimet näkyvät, jos ISO ei estä (tai jos ISO-filtteri tyhjä)
+                    if (!p.iso.length) { if(!types.includes('type_holder')) match = false; }
                     else if (!p.iso.some(c => isos.includes(c))) match = false;
                 }
-                // Pitimille (iso=[]) sallitaan näkyvyys jos ISO-filtteri on tyhjä. Jos ISO valittu, piilota pitimet.
+                // Pitimille sallitaan näkyvyys jos ISO-filtteri on tyhjä
                 if (isos.length > 0 && p.iso.length === 0) match = false;
 
                 if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
