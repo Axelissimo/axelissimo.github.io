@@ -30,7 +30,8 @@
             --accent: #FFFFFF;
             --text-muted: #aaaaaa;
             --border: rgba(255,255,255,0.1);
-            --highlight: #0085CA; /* Arctos Blue highlight */
+            --color-arctos: #0085CA; /* ARCTOS BLUE */
+            --color-fenris: #E60000; /* FENRIS RED */
         }
 
         html, body {
@@ -134,7 +135,8 @@
             padding-top: 80px; box-sizing: border-box;
         }
         .side-menu.active { left: 0; }
-        .side-menu a { display: block; padding: 20px 30px; border-bottom: 1px solid rgb(60, 60, 60); font-weight: 600; font-size: 14px; }
+        /* MUUTETTU: Valikon tekstit yhtenäisen valkoiset */
+        .side-menu a { display: block; padding: 20px 30px; border-bottom: 1px solid rgb(60, 60, 60); font-weight: 600; font-size: 14px; color: #fff; }
         .side-menu a:hover { background-color: rgb(60, 60, 60); }
         .side-menu .sub-text { display: block; font-weight: 400; font-size: 11px; color: #AAAAAA; margin-top: 5px; text-transform: uppercase; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2040; display: none; }
@@ -160,9 +162,20 @@
         .selector-label { display: block; font-size: 13px; text-transform: uppercase; color: #aaa; margin-bottom: 10px; }
         .tool-selector { width: 100%; padding: 15px; background: #2b2b2b; border: 1px solid #555; color: #fff; font-size: 16px; margin-bottom: 30px; cursor: pointer; }
         
-        .recommendation-card { background: rgba(0,133,202,0.1); border: 1px solid var(--highlight); padding: 25px; display: none; animation: fadeInLogo 0.5s ease; }
+        /* Recommendation Card - Dynamic Colors */
+        .recommendation-card { border: 1px solid #444; padding: 25px; display: none; animation: fadeInLogo 0.5s ease; transition: all 0.3s; }
         .recommendation-card.visible { display: block; }
-        .rec-header { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--highlight); margin-bottom: 10px; font-weight: 700; }
+        
+        .rec-header { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
+        
+        /* ARCTOS STYLE (Selection Tool) */
+        .style-arctos { background: rgba(0,133,202,0.1); border-color: var(--color-arctos); }
+        .style-arctos .rec-header { color: var(--color-arctos); }
+        
+        /* FENRIS STYLE (Selection Tool) */
+        .style-fenris { background: rgba(230,0,0,0.1); border-color: var(--color-fenris); }
+        .style-fenris .rec-header { color: var(--color-fenris); }
+
         .rec-product { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
         .rec-reason { font-style: italic; color: #ddd; margin-bottom: 20px; line-height: 1.5; font-size: 14px; }
         .rec-holder-info { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
@@ -198,15 +211,54 @@
 
         /* Product Grid */
         .product-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-content: start; }
-        .product-card { border: 1px solid var(--border); padding: 20px; background: rgba(255,255,255,0.02); transition: background 0.2s, transform 0.2s; cursor: pointer; position: relative; }
+        
+        .product-card { 
+            border: 1px solid var(--border); 
+            padding: 20px; 
+            background: rgba(255,255,255,0.02); 
+            transition: background 0.2s, transform 0.2s; 
+            cursor: pointer; 
+            position: relative; 
+            border-left: 3px solid transparent; /* Default border */
+        }
         .product-card:hover { background: rgba(255,255,255,0.05); transform: translateY(-2px); }
-        .prod-brand { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 5px; }
+        
+        /* Brand Colors in Grid */
+        .brand-arctos { border-left-color: var(--color-arctos); }
+        .brand-fenris { border-left-color: var(--color-fenris); }
+        
+        .prod-brand { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 1; margin-bottom: 5px; font-weight: 700; }
+        /* Text color matching brand */
+        .brand-arctos .prod-brand { color: var(--color-arctos); }
+        .brand-fenris .prod-brand { color: var(--color-fenris); }
+
         .prod-name { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
         .prod-desc { font-size: 12px; color: #ccc; margin-bottom: 15px; line-height: 1.4; }
         .prod-specs { font-size: 11px; color: #aaa; list-style: none; padding: 0; }
         .prod-specs li::before { content: "- "; }
         .quick-add-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: 1px solid #555; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; transition: all 0.2s; }
         .quick-add-btn:hover { background: #fff; color: #000; border-color: #fff; }
+
+        /* Cross-sell box (New Feature) */
+        .cross-sell-box {
+            grid-column: 1 / -1;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px dashed #666;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-cross {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .btn-cross:hover { background: #fff; color: #000; }
 
         /* ISO Colors */
         .iso-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
@@ -307,7 +359,7 @@
         <a href="#" onclick="openShop('ARCTOS')">ARCTOS<span class="sub-text" data-i18n="arctos_desc">Precision tooling</span></a>
         <a href="#" onclick="openShop('FENRIS')">FENRIS<span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span></a>
         <a href="#" onclick="openShop('ALL')">ALL PRODUCTS<span class="sub-text" data-i18n="all_desc">Complete Catalog</span></a>
-        <a href="#" onclick="openSelectionTool()" style="color: #0085CA;">SELECTION TOOL<span class="sub-text" data-i18n="tool_select_desc">Find the right insert</span></a>
+        <a href="#" onclick="openSelectionTool()">SELECTION TOOL<span class="sub-text" data-i18n="tool_select_desc">Find the right insert</span></a>
         
         <a href="#" onclick="closeShop()" style="border-top: 1px solid rgb(60,60,60); margin-top: 20px;"><span style="font-size: 12px; color: #fff;" data-i18n="back_home">← Back to Home</span></a>
     </nav>
@@ -450,6 +502,9 @@
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 
+                // Cross sell
+                not_found_here: "Not found in", check_in: "Check availability in",
+                
                 // Selection Tool Translation
                 tool_select_desc: "Find the right insert", tool_selector_title: "Tool Selection Guide", select_current: "Select Current Tool / Insert Type", select_placeholder: "-- Select from list --", our_recommendation: "Our Recommendation", holder_needed: "New Holder Required?", yes: "YES", recommended_holder: "Recommended Holder:", add_product_quote: "Add Product to Quote", add_holder_quote: "Add Holder to Quote",
                 current_tnmg: "TNMG (Triangle, 6 edges)", reason_tnmg: "Better. 80° corner is stronger than 60°. Same edges (6), better life.",
@@ -496,6 +551,9 @@
                 type_insert: "Plaquita", type_rotating: "Rotativo", type_holder: "Portaherramientas", iso_p: "Acero", iso_m: "Inox", iso_k: "Fundición", iso_h: "Templado", iso_s: "Titanio", iso_n: "Alu",
                 op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado", arctos_tagline: "Estándar Nórdico", fenris_tagline: "Rendimiento",
                 
+                // Cross sell
+                not_found_here: "No encontrado en", check_in: "Buscar disponibilidad en",
+
                 // Selection Tool Translation
                 tool_select_desc: "Guía de selección", tool_selector_title: "Guía de Selección", select_current: "Seleccionar Herramienta Actual", select_placeholder: "-- Seleccionar --", our_recommendation: "Recomendación", holder_needed: "¿Requiere porta?", yes: "SÍ", recommended_holder: "Porta recomendado:", add_product_quote: "Añadir Producto", add_holder_quote: "Añadir Porta",
                 current_tnmg: "TNMG (Triángulo, 6 filos)", reason_tnmg: "Mejor. La esquina de 80° es más fuerte que la de 60°. Mismos filos (6), mayor vida útil.",
@@ -530,6 +588,9 @@
                 type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter", iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss", iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
                 op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten", arctos_tagline: "Der Nördliche Standard", fenris_tagline: "Leistung",
                 
+                // Cross sell
+                not_found_here: "Nicht gefunden in", check_in: "Verfügbarkeit prüfen in",
+
                 // Selection Tool Translation
                 tool_select_desc: "Auswahlhilfe", tool_selector_title: "Werkzeugauswahl", select_current: "Aktuelles Werkzeug wählen", select_placeholder: "-- Wählen --", our_recommendation: "Unsere Empfehlung", holder_needed: "Neuer Halter?", yes: "JA", recommended_holder: "Empfohlener Halter:", add_product_quote: "Produkt hinzufügen", add_holder_quote: "Halter hinzufügen",
                 current_tnmg: "TNMG (Dreieck, 6 Schneiden)", reason_tnmg: "Besser. 80° Ecke ist stabiler als 60°. Gleiche Schneidenanzahl (6), bessere Standzeit.",
@@ -564,6 +625,9 @@
                 type_insert: "Kääntöpala", type_rotating: "Pyörivä", type_holder: "Pidin", iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta", iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
                 op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely", arctos_tagline: "Pohjoinen standardi", fenris_tagline: "Tinkimätön",
                 
+                // Cross sell
+                not_found_here: "Ei hakutuloksia: ", check_in: "Katso saatavuus sarjasta",
+
                 // Selection Tool Translation
                 tool_select_desc: "Valitse oikea terä", tool_selector_title: "Terän valintaopas", select_current: "Valitse nykyinen työkalu / pala", select_placeholder: "-- Valitse listasta --", our_recommendation: "Meidän suositus", holder_needed: "Vaatiiko uuden pitimen?", yes: "KYLLÄ", recommended_holder: "Suositeltu pidin:", add_product_quote: "Lisää tuote tarjoukseen", add_holder_quote: "Lisää pidin tarjoukseen",
                 current_tnmg: "TNMG (Kolmio, 6 särmää)", reason_tnmg: "Parempi. 80° kärkikulma on vahvempi kuin 60°. Sama määrä särmiä (6 kpl), parempi kesto.",
@@ -731,6 +795,15 @@
             currentRecHolder = data.holderId ? products.find(p => p.id === data.holderId) : null;
 
             if (currentRecProduct) {
+                // Dynamic styling based on brand
+                if (currentRecProduct.brand === 'FENRIS') {
+                    card.classList.add('style-fenris');
+                    card.classList.remove('style-arctos');
+                } else {
+                    card.classList.add('style-arctos');
+                    card.classList.remove('style-fenris');
+                }
+
                 document.getElementById('recProductName').innerText = `${currentRecProduct.brand} ${currentRecProduct.name}`;
                 document.getElementById('recReason').innerText = t('reason_' + key);
                 
@@ -768,31 +841,59 @@
 
             productGrid.innerHTML = '';
             
-            const filtered = products.filter(p => {
-                let match = true;
-                if (currentBrand !== 'ALL') {
-                    if (forceFenris) { if (p.brand !== 'FENRIS') match = false; }
-                    else { if (p.brand !== currentBrand) match = false; }
-                }
-                if (searchTerm && !p.name.toLowerCase().includes(searchTerm) && !t(p.desc).toLowerCase().includes(searchTerm)) match = false;
-                if (subtypes.length && !subtypes.includes(p.subtype)) match = false;
-                if (types.length && !types.includes(p.type)) match = false;
-                if (isos.length) {
-                    if (!p.iso.length) { if(!types.includes('type_holder')) match = false; }
-                    else if (!p.iso.some(c => isos.includes(c))) match = false;
-                }
-                if (isos.length > 0 && p.iso.length === 0) match = false;
+            // Helper function for filtering
+            const runFilter = (itemList, brandCheck, search, sub, typ, iso, op) => {
+                return itemList.filter(p => {
+                    let match = true;
+                    if (brandCheck !== 'ALL') {
+                        if (forceFenris && brandCheck === 'ARCTOS') { if (p.brand !== 'FENRIS') match = false; }
+                        else { if (p.brand !== brandCheck) match = false; }
+                    }
+                    if (search && !p.name.toLowerCase().includes(search) && !t(p.desc).toLowerCase().includes(search)) match = false;
+                    if (sub.length && !sub.includes(p.subtype)) match = false;
+                    if (typ.length && !typ.includes(p.type)) match = false;
+                    if (iso.length) {
+                        if (!p.iso.length) { if(!typ.includes('type_holder')) match = false; }
+                        else if (!p.iso.some(c => iso.includes(c))) match = false;
+                    }
+                    if (iso.length > 0 && p.iso.length === 0) match = false;
+                    if (op.length && (!p.op || !p.op.some(o => op.includes(o)))) match = false;
+                    return match;
+                });
+            };
 
-                if (ops.length && (!p.op || !p.op.some(o => ops.includes(o)))) match = false;
-                return match;
-            });
+            const filtered = runFilter(products, currentBrand, searchTerm, subtypes, types, isos, ops);
 
-            if (!filtered.length) { productGrid.innerHTML = '<div style="color:#888; grid-column:1/-1;">No products found.</div>'; return; }
+            if (!filtered.length) { 
+                let html = `<div style="color:#888; grid-column:1/-1;">${t('not_found_here')} ${currentBrand}.</div>`;
+                
+                // --- CROSS-SELL LOGIC ---
+                // If we are in a specific brand view (not ALL), check the OTHER brand
+                if (currentBrand === 'ARCTOS' || currentBrand === 'FENRIS') {
+                    const otherBrand = currentBrand === 'ARCTOS' ? 'FENRIS' : 'ARCTOS';
+                    const crossResults = runFilter(products, otherBrand, searchTerm, subtypes, types, isos, ops);
+                    
+                    if (crossResults.length > 0) {
+                        html += `
+                        <div class="cross-sell-box">
+                            <span style="color:#ddd; font-size:13px;">${t('check_in')} <strong>${otherBrand}</strong>? (${crossResults.length} items)</span>
+                            <button class="btn-cross" onclick="openShop('${otherBrand}')">GO TO ${otherBrand}</button>
+                        </div>`;
+                    }
+                }
+                
+                productGrid.innerHTML = html;
+                return; 
+            }
 
             filtered.forEach(p => {
                 let isoDots = p.iso.map(c => `<span class="iso-dot iso-${c.toLowerCase()}"></span>`).join('');
                 const card = document.createElement('div');
-                card.className = 'product-card';
+                
+                // Add brand specific class
+                const brandClass = p.brand === 'ARCTOS' ? 'brand-arctos' : 'brand-fenris';
+                card.className = `product-card ${brandClass}`;
+                
                 card.onclick = (e) => { 
                     if(e.target.classList.contains('quick-add-btn')) return;
                     openProductDetails(p); 
