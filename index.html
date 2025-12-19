@@ -135,7 +135,6 @@
             padding-top: 80px; box-sizing: border-box;
         }
         .side-menu.active { left: 0; }
-        /* MUUTETTU: Valikon tekstit yhtenäisen valkoiset */
         .side-menu a { display: block; padding: 20px 30px; border-bottom: 1px solid rgb(60, 60, 60); font-weight: 600; font-size: 14px; color: #fff; }
         .side-menu a:hover { background-color: rgb(60, 60, 60); }
         .side-menu .sub-text { display: block; font-weight: 400; font-size: 11px; color: #AAAAAA; margin-top: 5px; text-transform: uppercase; }
@@ -168,11 +167,11 @@
         
         .rec-header { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
         
-        /* ARCTOS STYLE (Selection Tool) */
+        /* ARCTOS STYLE */
         .style-arctos { background: rgba(0,133,202,0.1); border-color: var(--color-arctos); }
         .style-arctos .rec-header { color: var(--color-arctos); }
         
-        /* FENRIS STYLE (Selection Tool) */
+        /* FENRIS STYLE */
         .style-fenris { background: rgba(230,0,0,0.1); border-color: var(--color-fenris); }
         .style-fenris .rec-header { color: var(--color-fenris); }
 
@@ -244,13 +243,11 @@
             padding: 20px;
             background: rgba(255,255,255,0.08);
             border-left: 4px solid #fff;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             animation: fadeInLogo 0.5s ease;
         }
-        /* Dynamic color for notice based on recommended brand */
         .cross-sell-notice.ns-arctos { border-left-color: var(--color-arctos); }
         .cross-sell-notice.ns-fenris { border-left-color: var(--color-fenris); }
-        
         .cs-title { font-size: 14px; font-weight: 700; margin: 0; color: #fff; }
 
         /* ISO Colors */
@@ -832,6 +829,7 @@
 
             const forceFenris = (currentBrand === 'ARCTOS') && (isos.includes('H') || isos.includes('S') || isos.includes('N'));
 
+            // Clear Grid first
             productGrid.innerHTML = '';
             
             // Helper function for filtering
@@ -866,16 +864,15 @@
                     const crossResults = runFilter(products, otherBrand, searchTerm, subtypes, types, isos, ops);
                     
                     if (crossResults.length > 0) {
-                        // Create the warning message
+                        // Create the warning message element
                         let msg = t('cross_sell_notice').replace('{0}', currentBrand).replace('{1}', otherBrand);
                         const noticeClass = otherBrand === 'ARCTOS' ? 'ns-arctos' : 'ns-fenris';
                         
-                        let html = `
-                        <div class="cross-sell-notice ${noticeClass}">
-                            <h3 class="cs-title">${msg}</h3>
-                        </div>`;
+                        const noticeDiv = document.createElement('div');
+                        noticeDiv.className = `cross-sell-notice ${noticeClass}`;
+                        noticeDiv.innerHTML = `<h3 class="cs-title">${msg}</h3>`;
                         
-                        productGrid.innerHTML = html;
+                        productGrid.appendChild(noticeDiv);
 
                         // Render the other brand products immediately
                         crossResults.forEach(p => {
