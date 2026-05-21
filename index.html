@@ -510,23 +510,23 @@
     <script>
         /* --- MAPPING DATA FOR SELECTION TOOL --- */
         const selectionData = [
-            { key: 'tnmg',        prodId: 2,  holderId: 12, reqHolder: true  },
-            { key: 'cnmg_basic',  prodId: 1,  holderId: null, reqHolder: false },
-            { key: 'cnmg_hard',   prodId: 21, holderId: null, reqHolder: false },
-            { key: 'vnmg',        prodId: 3,  holderId: 36, reqHolder: true  },
-            { key: 'knux',        prodId: 1,  holderId: 11, reqHolder: true  },
-            { key: 'snmg',        prodId: 4,  holderId: null, reqHolder: false },
-            { key: 'tpmt',        prodId: 5,  holderId: 14, reqHolder: true  },
-            { key: 'dcmt',        prodId: 6,  holderId: null, reqHolder: false },
-            { key: 'dcmt_alu',    prodId: 25, holderId: null, reqHolder: false },
-            { key: 'hard_turn',   prodId: 23, holderId: 28, reqHolder: true  },
-            { key: 'apkt',        prodId: 9,  holderId: null, reqHolder: false },
-            { key: 'r390',        prodId: 9,  holderId: 16, reqHolder: true  },
-            { key: 'hss_drill',   prodId: 19, holderId: 31, reqHolder: true  },
-            { key: 'hss_tap',     prodId: 20, holderId: null, reqHolder: false },
-            { key: 'tap_hard',    prodId: 33, holderId: 16, reqHolder: true  },
-            { key: 'face_mill',   prodId: 10, holderId: null, reqHolder: false },
-            { key: 'high_feed',   prodId: 22, holderId: 28, reqHolder: true  }
+            { key: 'tnmg',        prodId: 2,  holderId: 12, reqHolder: true  }, // TNMG → WNMG + MWLNR
+            { key: 'cnmg_basic',  prodId: 1,  holderId: 11, reqHolder: true  }, // CNMG basic → CNMG + PCLNR
+            { key: 'cnmg_hard',   prodId: 21, holderId: 11, reqHolder: true  }, // CNMG heavy → CNMG 16/19 + PCLNR
+            { key: 'vnmg',        prodId: 3,  holderId: 36, reqHolder: true  }, // VNMG → DNMG + PDJNR
+            { key: 'knux',        prodId: 1,  holderId: 11, reqHolder: true  }, // KNUX → CNMG + PCLNR
+            { key: 'snmg',        prodId: 4,  holderId: null, reqHolder: false }, // SNMG → SNMG (same holder)
+            { key: 'tpmt',        prodId: 5,  holderId: 14, reqHolder: true  }, // TPMT → CCMT + S-SCLCR
+            { key: 'dcmt',        prodId: 6,  holderId: 15, reqHolder: true  }, // DCMT steel → DCMT + S-SDUCR
+            { key: 'dcmt_alu',    prodId: 25, holderId: 36, reqHolder: true  }, // DCMT alu → VCGT + PDJNR
+            { key: 'hard_turn',   prodId: 23, holderId: 28, reqHolder: true  }, // Carbide hard → CBN + SRDCN
+            { key: 'apkt',        prodId: 9,  holderId: null, reqHolder: false }, // APKT → APKT (same holder)
+            { key: 'r390',        prodId: 9,  holderId: 16, reqHolder: true  }, // R390 → APKT + Weldon
+            { key: 'hss_drill',   prodId: 19, holderId: 17, reqHolder: true  }, // HSS drill → 3xD + ER Collet
+            { key: 'hss_tap',     prodId: 20, holderId: null, reqHolder: false }, // HSS tap → Spiral Tap
+            { key: 'tap_hard',    prodId: 33, holderId: 17, reqHolder: true  }, // Hard tap → Thread Mill + ER Collet
+            { key: 'face_mill',   prodId: 10, holderId: null, reqHolder: false }, // Face mill → SEKN
+            { key: 'high_feed',   prodId: 22, holderId: 28, reqHolder: true  }  // High feed → RCMT + SRDCN
         ];
 
         /* --- FULL DICTIONARY --- */
@@ -606,7 +606,7 @@
                 all_desc: "Catálogo Completo",
                 all_tagline: "Herramientas premium",
                 arctos_desc: "Herramientas de precisión",
-                fenris_desc: "Aeroespacial",
+                fenris_desc: "Aeroespacial y defensa",
                 back_home: "← Volver",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy",
@@ -623,8 +623,8 @@
                 iso_p: "Acero", iso_m: "Inox", iso_k: "Fundición",
                 iso_h: "Templado", iso_s: "Titanio", iso_n: "Alu",
                 op_heavy: "Pesado", op_roughing: "Desbaste", op_medium: "Medio", op_finishing: "Acabado",
-                arctos_tagline: "Estándar Nórdico",
-                fenris_tagline: "Rendimiento",
+                arctos_tagline: "El Estándar Nórdico – Rendimiento Industrial de Confianza",
+                fenris_tagline: "Rendimiento sin Compromiso – Para Materiales Duros y Exóticos",
                 not_found_here: "No encontrado en",
                 cross_sell_notice: "No encontrado en la serie {0}. Vea estos productos de la serie {1}:",
                 tool_select_desc: "Guía de selección", tool_selector_title: "Guía de Selección",
@@ -678,7 +678,7 @@
                 all_desc: "Gesamtkatalog",
                 all_tagline: "Premium-Werkzeuge",
                 arctos_desc: "Präzisionswerkzeuge",
-                fenris_desc: "Luftfahrt",
+                fenris_desc: "Luft- & Raumfahrt / Verteidigung",
                 back_home: "← Zurück",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH und Industria Nordica SRL sind eingetragene Warenzeichen der Industria Nordica Oy",
@@ -689,14 +689,14 @@
                 tech_depth: "Schnitttiefe (ap)", tech_grade: "Sorte",
                 tech_sizes: "Größen", select_size: "Größe wählen",
                 filter_worktype: "Bearbeitung", filter_tooltype: "Typ", filter_material: "Werkstoff", filter_intensity: "Intensität",
-                sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewinden",
+                sub_turning: "Drehen", sub_milling: "Fräsen", sub_threading: "Gewindeschneiden",
                 sub_parting: "Abstechen", sub_drilling: "Bohren", sub_clamping: "Spannen",
                 type_insert: "Wendeplatte", type_rotating: "Rotierend", type_holder: "Halter",
                 iso_p: "Stahl", iso_m: "Rostfrei", iso_k: "Guss",
                 iso_h: "Gehärtet", iso_s: "Titan", iso_n: "Alu",
-                op_heavy: "Schwer", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten",
-                arctos_tagline: "Der Nördliche Standard",
-                fenris_tagline: "Leistung",
+                op_heavy: "Schwerzerspanung", op_roughing: "Schruppen", op_medium: "Allgemein", op_finishing: "Schlichten",
+                arctos_tagline: "Der Nördliche Standard – Zuverlässige Industrieleistung",
+                fenris_tagline: "Kompromisslose Leistung – Für harte und exotische Werkstoffe",
                 not_found_here: "Nicht gefunden in",
                 cross_sell_notice: "Nicht in der {0}-Serie gefunden. Sehen Sie sich diese {1}-Produkte an:",
                 tool_select_desc: "Auswahlhilfe", tool_selector_title: "Werkzeugauswahl",
@@ -748,9 +748,9 @@
 
             fi: {
                 all_desc: "Koko kuvasto",
-                all_tagline: "Premium-työkalut",
+                all_tagline: "Premium-työkalut kaikkiin sovelluksiin",
                 arctos_desc: "Tarkkuustyökalut",
-                fenris_desc: "Ilmailu",
+                fenris_desc: "Ilmailu & puolustus",
                 back_home: "← Etusivu",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
                 trademarks: "Industria Nordica Ltd, Industria Nordica GmbH ja Industria Nordica SRL ovat Industria Nordica Oy:n rekisteröityjä tavaramerkkejä",
@@ -767,8 +767,8 @@
                 iso_p: "Teräs", iso_m: "RST", iso_k: "Valurauta",
                 iso_h: "Karkaistu", iso_s: "Titaani", iso_n: "Alumiini",
                 op_heavy: "Raskas", op_roughing: "Rouhinta", op_medium: "Keski", op_finishing: "Viimeistely",
-                arctos_tagline: "Pohjoinen standardi",
-                fenris_tagline: "Tinkimätön",
+                arctos_tagline: "Pohjoinen standardi – Luotettavaa teollisuussuorituskykyä",
+                fenris_tagline: "Tinkimätön suorituskyky – Koviin ja erikoismateriaaleihin",
                 not_found_here: "Ei löydy sarjasta",
                 cross_sell_notice: "Ei löydy {0}-sarjasta. Katso nämä vastaavat {1}-tuotteet:",
                 tool_select_desc: "Valitse oikea terä", tool_selector_title: "Terän valintaopas",
@@ -796,7 +796,7 @@
                 desc_cnmg: "80° Rombinen.", desc_wnmg: "Trigon.", desc_dnmg: "55° Rombinen.", desc_snmg: "Neliö.",
                 desc_apkt: "Varsijyrsintä.", desc_sekn: "Tasojyrsintä 45°.", desc_4flute: "Yleisjyrsin.", desc_3xd: "Lyhyt pora.",
                 desc_cnmg_h: "Raskas Hardox.", desc_vcgt: "Terävä särmä / Kiillotettu.",
-                desc_ccmt: "Positiivinen 80°. Sisäsorvaus.", desc_dcmt: "Positiivinen 55°. Sisäsorvaus.",
+                desc_ccmt: "Positiivinen 80°. Sisäsorvaus.", desc_dcmt: "Positiivinen 55°. Profilointi / sisäsorvaus.",
                 desc_16er: "Kierteytyspalat.", desc_mgmn: "Katkaisujärjestelmä.",
                 desc_tap: "Kierretappi.",
                 desc_pclnr: "Ulkosorvaus (Vipu). CNMG 1204.",
@@ -855,6 +855,8 @@
             { id:19, brand:'ARCTOS', name:'3xD Drill',         subtype:'sub_drilling',  type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_3xd',     vc:'70-100 m/min',  fn:'0.1-0.25 mm/r', ap:'3xD',         sizes:['Ø6.0','Ø6.8','Ø8.0','Ø8.5','Ø10.0','Ø10.2','Ø12.0'] },
             { id:20, brand:'ARCTOS', name:'Spiral Tap',        subtype:'sub_threading', type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_tap',     vc:'10-20 m/min',   fn:'-',             ap:'-',           sizes:['M6','M8','M10','M12','M16'] },
             { id:35, brand:'ARCTOS', name:'NC Spotting Drill', subtype:'sub_drilling',  type:'type_rotating', iso:['P','M','K','N'],   op:['op_drilling'],               desc:'desc_ncspot',  vc:'80-120 m/min',  fn:'0.05-0.15 mm/r', ap:'-',          sizes:['Ø10','Ø12'] },
+            { id:38, brand:'ARCTOS', name:'CCMT Large (12–16)', subtype:'sub_turning',  type:'type_insert',   iso:['P','M'],           op:['op_medium','op_finishing'],  desc:'desc_ccmt',    vc:'220-320 m/min', fn:'0.05-0.25 mm/r', ap:'0.3-2.5 mm', sizes:['120404','120408','16T304','16T308'] },
+            { id:39, brand:'ARCTOS', name:'3xD Drill (Small)', subtype:'sub_drilling',  type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_3xd',     vc:'60-90 m/min',   fn:'0.05-0.12 mm/r', ap:'3xD',        sizes:['Ø4.0','Ø4.5','Ø5.0','Ø5.5'] },
             // FENRIS - INSERTS
             { id:21, brand:'FENRIS', name:'CNMG 16/19',        subtype:'sub_turning',   type:'type_insert',   iso:['H','P'],           op:['op_heavy'],                  desc:'desc_cnmg_h',  vc:'100-160 m/min', fn:'0.3-0.8 mm/r',  ap:'2.0-8.0 mm',  sizes:['160612','190616'] },
             { id:22, brand:'FENRIS', name:'RCMT / RPGT',       subtype:'sub_turning',   type:'type_insert',   iso:['S'],               op:['op_roughing'],               desc:'desc_rcmt',    vc:'40-70 m/min',   fn:'0.1-0.3 mm/r',  ap:'1.0-3.0 mm',  sizes:['10T3 MO','1204 MO'] },
