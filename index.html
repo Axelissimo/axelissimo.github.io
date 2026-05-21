@@ -17,6 +17,8 @@
     <meta property="og:image:height" content="700">
     
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="googlebot" content="noindex, nofollow">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -272,6 +274,65 @@
         .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 10px 0; font-size: 13px; }
         .cart-remove { color: #E60000; cursor: pointer; margin-left: 10px; }
 
+        /* --- SALASANAMODAALI --- */
+        .pw-overlay {
+            display: none;
+            position: fixed;
+            z-index: 4000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            justify-content: center;
+            align-items: center;
+        }
+        .pw-overlay.open { display: flex; }
+        .pw-box {
+            background: rgb(40,40,40);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 40px;
+            width: 90%;
+            max-width: 360px;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+        .pw-logo { width: 50px; margin-bottom: 24px; }
+        .pw-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #aaa; margin-bottom: 24px; }
+        .pw-input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            font-size: 15px;
+            text-align: center;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            box-sizing: border-box;
+            margin-bottom: 14px;
+        }
+        .pw-input:focus { outline: none; border-color: #888; }
+        .pw-btn {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .pw-btn:hover { background: #ddd; }
+        .pw-error {
+            color: #E60000;
+            font-size: 12px;
+            margin-top: 12px;
+            min-height: 16px;
+        }
+
         /* --- MOBIILI --- */
         @media (max-width: 768px) {
             #shop-view, #selection-view { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
@@ -292,6 +353,24 @@
 <body>
 
     <div class="overlay" id="navOverlay"></div>
+
+    <!-- SALASANAMODAALI -->
+    <div class="pw-overlay" id="pwOverlay">
+        <div class="pw-box">
+            <img src="signet.png" alt="Industria Nordica" class="pw-logo">
+            <div class="pw-title">Restricted Access</div>
+            <input
+                type="password"
+                id="pwInput"
+                class="pw-input"
+                placeholder="••••••••"
+                onkeydown="if(event.key==='Enter') checkPassword()"
+                autocomplete="off"
+            >
+            <button class="pw-btn" onclick="checkPassword()">Enter</button>
+            <div class="pw-error" id="pwError"></div>
+        </div>
+    </div>
     
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
@@ -424,7 +503,7 @@
         </div>
         <div class="shop-footer">
             <div data-i18n="copyright">Copyright © 2025 INDUSTRIA NORDICA OY ALL RIGHTS RESERVED</div>
-            <div data-i18n="trademarks">Industria Nordica Ltd...</div>
+            <div data-i18n="trademarks">Industria Nordica Ltd, Industria Nordica GmbH and Industria Nordica SRL are registered trademarks of Industria Nordica Oy</div>
         </div>
     </div>
 
@@ -530,7 +609,7 @@
                 fenris_desc: "Aeroespacial",
                 back_home: "← Volver",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY TODOS LOS DERECHOS RESERVADOS",
-                trademarks: "Industria Nordica Ltd...",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH e Industria Nordica SRL son marcas registradas de Industria Nordica Oy",
                 quote: "Cotizar", quote_basket: "Cesta",
                 form_name: "Nombre", form_email: "Email", form_company: "Empresa",
                 form_id: "VAT ID", btn_send: "Enviar", btn_add: "Añadir", btn_download: "Descargar",
@@ -602,7 +681,7 @@
                 fenris_desc: "Luftfahrt",
                 back_home: "← Zurück",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY ALLE RECHTE VORBEHALTEN",
-                trademarks: "Industria Nordica Ltd...",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH und Industria Nordica SRL sind eingetragene Warenzeichen der Industria Nordica Oy",
                 quote: "Angebot", quote_basket: "Korb",
                 form_name: "Name", form_email: "Email", form_company: "Firma",
                 form_id: "USt-IdNr.", btn_send: "Senden", btn_add: "Hinzufügen", btn_download: "Download",
@@ -674,7 +753,7 @@
                 fenris_desc: "Ilmailu",
                 back_home: "← Etusivu",
                 copyright: "Copyright © 2025 INDUSTRIA NORDICA OY KAIKKI OIKEUDET PIDÄTETÄÄN",
-                trademarks: "Industria Nordica Oy...",
+                trademarks: "Industria Nordica Ltd, Industria Nordica GmbH ja Industria Nordica SRL ovat Industria Nordica Oy:n rekisteröityjä tavaramerkkejä",
                 quote: "Tarjous", quote_basket: "Tarjouskori",
                 form_name: "Nimi", form_email: "Sähköposti", form_company: "Yritys",
                 form_id: "Y-tunnus", btn_send: "Lähetä", btn_add: "Lisää", btn_download: "Lataa",
@@ -775,8 +854,7 @@
             { id:18, brand:'ARCTOS', name:'4-Flute End Mill',  subtype:'sub_milling',   type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_4flute',  vc:'80-120 m/min',  fn:'0.03-0.08 mm/z', ap:'1.5xD',      sizes:['Ø6','Ø8','Ø10','Ø12','Ø16','Ø20'] },
             { id:19, brand:'ARCTOS', name:'3xD Drill',         subtype:'sub_drilling',  type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_3xd',     vc:'70-100 m/min',  fn:'0.1-0.25 mm/r', ap:'3xD',         sizes:['Ø6.0','Ø6.8','Ø8.0','Ø8.5','Ø10.0','Ø10.2','Ø12.0'] },
             { id:20, brand:'ARCTOS', name:'Spiral Tap',        subtype:'sub_threading', type:'type_rotating', iso:['P','M'],           op:['op_medium'],                 desc:'desc_tap',     vc:'10-20 m/min',   fn:'-',             ap:'-',           sizes:['M6','M8','M10','M12','M16'] },
-            { id:35, brand:'ARCTOS', name:'NC Spotting Drill', subtype:'sub_drilling', type:'type_rotating', iso:['P','M','K','N'], op:['op_drilling'],              desc:'desc_ncspot',  vc:'80-120 m/min',  fn:'0.05-0.15 mm/r', ap:'-',          sizes:['Ø10','Ø12'] },
-            
+            { id:35, brand:'ARCTOS', name:'NC Spotting Drill', subtype:'sub_drilling',  type:'type_rotating', iso:['P','M','K','N'],   op:['op_drilling'],               desc:'desc_ncspot',  vc:'80-120 m/min',  fn:'0.05-0.15 mm/r', ap:'-',          sizes:['Ø10','Ø12'] },
             // FENRIS - INSERTS
             { id:21, brand:'FENRIS', name:'CNMG 16/19',        subtype:'sub_turning',   type:'type_insert',   iso:['H','P'],           op:['op_heavy'],                  desc:'desc_cnmg_h',  vc:'100-160 m/min', fn:'0.3-0.8 mm/r',  ap:'2.0-8.0 mm',  sizes:['160612','190616'] },
             { id:22, brand:'FENRIS', name:'RCMT / RPGT',       subtype:'sub_turning',   type:'type_insert',   iso:['S'],               op:['op_roughing'],               desc:'desc_rcmt',    vc:'40-70 m/min',   fn:'0.1-0.3 mm/r',  ap:'1.0-3.0 mm',  sizes:['10T3 MO','1204 MO'] },
@@ -788,7 +866,7 @@
             { id:27, brand:'FENRIS', name:'DCLNR + Jet',       subtype:'sub_turning',   type:'type_holder',   iso:[],                  op:[],                            desc:'desc_dclnr',   vc:'-', fn:'-', ap:'-', sizes:['2525M12-JET'] },
             { id:28, brand:'FENRIS', name:'SRDCN (Round)',     subtype:'sub_turning',   type:'type_holder',   iso:[],                  op:[],                            desc:'desc_srdcn',   vc:'-', fn:'-', ap:'-', sizes:['2525M10 (For 10T3)','2525M12 (For 1204)'] },
             { id:29, brand:'FENRIS', name:'E-SCLCR (Carbide)', subtype:'sub_turning',  type:'type_holder',   iso:[],                  op:[],                            desc:'desc_esclcr',  vc:'-', fn:'-', ap:'-', sizes:['E16R-09','E20S-09'] },
-            { id:30, brand:'FENRIS', name:'SIR (Carbide)',     subtype:'sub_threading', type:'type_holder', iso:[],                 op:[],                            desc:'desc_sir',     vc:'-', fn:'-', ap:'-', sizes:['E16R-SIR-16'] },
+            { id:30, brand:'FENRIS', name:'SIR (Carbide)',     subtype:'sub_threading', type:'type_holder',   iso:[],                  op:[],                            desc:'desc_sir',     vc:'-', fn:'-', ap:'-', sizes:['E16R-SIR-16'] },
             { id:31, brand:'FENRIS', name:'Hydraulic Chuck',   subtype:'sub_milling',   type:'type_holder',   iso:[],                  op:[],                            desc:'desc_hydraulic', vc:'-', fn:'-', ap:'-', sizes:['SK40','SK50'] },
             // FENRIS - ROTATING
             { id:32, brand:'FENRIS', name:'Trochoidal Mill',   subtype:'sub_milling',   type:'type_rotating', iso:['S','M'],           op:['op_roughing'],               desc:'desc_troch',   vc:'80-140 m/min',  fn:'High Feed',     ap:'2xD',         sizes:['Ø10','Ø12','Ø16'] },
@@ -815,13 +893,62 @@
         const toolSelect    = document.getElementById('currentToolSelect');
 
         let currentBrand = 'ALL';
+        let isAuthenticated = (sessionStorage.getItem('in_auth') === '1');
+
+        /* --- SALASANALOGIIKKA --- */
+        const PW_HASH = '4a4b4c8b44f5d5e3b5c4b1a9e6f7d8c2a3b4e5f6a7b8c9d0e1f2a3b4c5d6e7f8';
+
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const chr = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + chr;
+                hash |= 0;
+            }
+            return Math.abs(hash).toString(16).padStart(8, '0');
+        }
+
+        function checkPassword() {
+            const val = document.getElementById('pwInput').value;
+            if (val === 'simohayha') {
+                isAuthenticated = true;
+                sessionStorage.setItem('in_auth', '1');
+                document.getElementById('pwOverlay').classList.remove('open');
+                document.getElementById('pwInput').value = '';
+                document.getElementById('pwError').textContent = '';
+                openMenuAfterAuth();
+            } else {
+                document.getElementById('pwError').textContent = 'Incorrect password.';
+                document.getElementById('pwInput').value = '';
+                document.getElementById('pwInput').focus();
+            }
+        }
+
+        let pendingMenuAction = null;
 
         function toggleMenu() {
+            if (!isAuthenticated) {
+                document.getElementById('pwOverlay').classList.add('open');
+                document.getElementById('pwInput').focus();
+                pendingMenuAction = 'menu';
+                return;
+            }
             sideMenu.classList.toggle('active');
             navOverlay.classList.toggle('active');
             hamburgerBtn.classList.toggle('open');
         }
-        navOverlay.addEventListener('click', toggleMenu);
+
+        function openMenuAfterAuth() {
+            sideMenu.classList.add('active');
+            navOverlay.classList.add('active');
+            hamburgerBtn.classList.add('open');
+        }
+
+        navOverlay.addEventListener('click', () => {
+            sideMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+            hamburgerBtn.classList.remove('open');
+        });
 
         function openShop(brand) {
             currentBrand = brand;
@@ -1057,6 +1184,11 @@
         }
 
         function openCart() {
+            if (!isAuthenticated) {
+                document.getElementById('pwOverlay').classList.add('open');
+                document.getElementById('pwInput').focus();
+                return;
+            }
             updateCartUI();
             rfqModal.classList.add('open');
         }
