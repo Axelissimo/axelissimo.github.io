@@ -139,6 +139,40 @@
         .side-menu a { display: block; padding: 20px 30px; border-bottom: 1px solid rgb(60, 60, 60); font-weight: 600; font-size: 14px; color: #fff; }
         .side-menu a:hover { background-color: rgb(60, 60, 60); }
         .side-menu .sub-text { display: block; font-weight: 400; font-size: 11px; color: #AAAAAA; margin-top: 5px; text-transform: uppercase; }
+
+        /* --- ALAMENU --- */
+        .menu-group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 1px solid rgb(60, 60, 60);
+            font-weight: 700;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+        .menu-group-header:hover { background-color: rgb(60, 60, 60); }
+        .menu-group-header .menu-arrow { font-size: 10px; transition: transform 0.25s ease; color: #aaa; }
+        .menu-group-header.open .menu-arrow { transform: rotate(180deg); }
+        .menu-group-label { display: flex; flex-direction: column; }
+        .menu-group-label .sub-text { font-weight: 400; font-size: 11px; color: #AAAAAA; margin-top: 5px; text-transform: uppercase; }
+        .menu-sub {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgb(33, 33, 33);
+        }
+        .menu-sub.open { max-height: 400px; }
+        .menu-sub a {
+            padding: 14px 30px 14px 44px;
+            font-size: 13px;
+            font-weight: 600;
+            border-bottom: 1px solid rgb(45, 45, 45);
+            color: #ddd;
+        }
+        .menu-sub a:hover { background-color: rgb(50, 50, 50); color: #fff; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2040; display: none; }
         .overlay.active { display: block; }
 
@@ -413,10 +447,22 @@
     </div>
 
     <nav class="side-menu" id="sideMenu">
-        <a href="#" onclick="openShop('ARCTOS')">ARCTOS<span class="sub-text" data-i18n="arctos_desc">Precision tooling</span></a>
-        <a href="#" onclick="openShop('FENRIS')">FENRIS<span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span></a>
-        <a href="#" onclick="openShop('ALL')">ALL PRODUCTS<span class="sub-text" data-i18n="all_desc">Complete Catalog</span></a>
-        <a href="#" onclick="openSelectionTool()">SELECTION TOOL<span class="sub-text" data-i18n="tool_select_desc">Find the right insert</span></a>
+
+        <!-- MACHINING GROUP -->
+        <div class="menu-group-header" id="machiningHeader" onclick="toggleSubmenu()">
+            <div class="menu-group-label">
+                <span data-i18n="menu_machining">MACHINING</span>
+                <span class="sub-text" data-i18n="menu_machining_desc">Tooling catalog & selection</span>
+            </div>
+            <span class="menu-arrow">▼</span>
+        </div>
+        <div class="menu-sub" id="machiningSub">
+            <a href="#" onclick="openShop('ARCTOS')">ARCTOS<span class="sub-text" data-i18n="arctos_desc">Precision tooling</span></a>
+            <a href="#" onclick="openShop('FENRIS')">FENRIS<span class="sub-text" data-i18n="fenris_desc">Aerospace & defence tooling</span></a>
+            <a href="#" onclick="openShop('ALL')">ALL PRODUCTS<span class="sub-text" data-i18n="all_desc">Complete Catalog</span></a>
+            <a href="#" onclick="openSelectionTool()">SELECTION TOOL<span class="sub-text" data-i18n="tool_select_desc">Find the right insert</span></a>
+        </div>
+
         <a href="#" onclick="closeShop()" style="border-top: 1px solid rgb(60,60,60); margin-top: 20px;"><span style="font-size: 12px; color: #fff;" data-i18n="back_home">← Back to Home</span></a>
     </nav>
     
@@ -554,6 +600,8 @@
                 arctos_tagline: "The Northern Standard – Reliable Industrial Performance",
                 fenris_tagline: "Uncompromising Performance – For Hard & Exotic Materials",
                 not_found_here: "No products found in",
+                menu_machining: "MACHINING",
+                menu_machining_desc: "Tooling catalog & selection",
                 cross_sell_notice: "Product not found in {0} series. Check these matching {1} products:",
                 tool_select_desc: "Find the right insert", tool_selector_title: "Tool Selection Guide",
                 select_current: "Select Current Tool / Insert Type", select_placeholder: "-- Select from list --",
@@ -626,6 +674,8 @@
                 arctos_tagline: "El Estándar Nórdico – Rendimiento Industrial de Confianza",
                 fenris_tagline: "Rendimiento sin Compromiso – Para Materiales Duros y Exóticos",
                 not_found_here: "No encontrado en",
+                menu_machining: "MECANIZADO",
+                menu_machining_desc: "Catálogo y selección de herramientas",
                 cross_sell_notice: "No encontrado en la serie {0}. Vea estos productos de la serie {1}:",
                 tool_select_desc: "Guía de selección", tool_selector_title: "Guía de Selección",
                 select_current: "Seleccionar Herramienta Actual", select_placeholder: "-- Seleccionar --",
@@ -698,6 +748,8 @@
                 arctos_tagline: "Der Nördliche Standard – Zuverlässige Industrieleistung",
                 fenris_tagline: "Kompromisslose Leistung – Für harte und exotische Werkstoffe",
                 not_found_here: "Nicht gefunden in",
+                menu_machining: "ZERSPANUNG",
+                menu_machining_desc: "Werkzeugkatalog & Auswahl",
                 cross_sell_notice: "Nicht in der {0}-Serie gefunden. Sehen Sie sich diese {1}-Produkte an:",
                 tool_select_desc: "Auswahlhilfe", tool_selector_title: "Werkzeugauswahl",
                 select_current: "Aktuelles Werkzeug wählen", select_placeholder: "-- Wählen --",
@@ -770,6 +822,8 @@
                 arctos_tagline: "Pohjoinen standardi – Luotettavaa teollisuussuorituskykyä",
                 fenris_tagline: "Tinkimätön suorituskyky – Koviin ja erikoismateriaaleihin",
                 not_found_here: "Ei löydy sarjasta",
+                menu_machining: "KONEISTUS",
+                menu_machining_desc: "Tuotekuvasto & valintaopas",
                 cross_sell_notice: "Ei löydy {0}-sarjasta. Katso nämä vastaavat {1}-tuotteet:",
                 tool_select_desc: "Valitse oikea terä", tool_selector_title: "Terän valintaopas",
                 select_current: "Valitse nykyinen työkalu / pala", select_placeholder: "-- Valitse listasta --",
@@ -927,6 +981,13 @@
         }
 
         let pendingMenuAction = null;
+
+        function toggleSubmenu() {
+            const header = document.getElementById('machiningHeader');
+            const sub    = document.getElementById('machiningSub');
+            header.classList.toggle('open');
+            sub.classList.toggle('open');
+        }
 
         function toggleMenu() {
             if (!isAuthenticated) {
